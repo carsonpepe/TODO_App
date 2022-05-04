@@ -1,0 +1,28 @@
+.header{
+    background-color: darkgray;
+    border-bottom: 2px solid;
+}
+
+.header_contents{
+    padding: 10px;
+    max-width:fit-content;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    
+
+}
+
+
+.header_button{
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+    text-align: right;
+    position: relative;
+    left: 185%;
+}
+
+.header_button:hover{
+    box-shadow: 0 4px 8px 0 royalblue;
+}
