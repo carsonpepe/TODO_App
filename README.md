@@ -11,7 +11,8 @@ In depth Style Guide: https://airbnb.io/javascript/react/#basic-rules
 
 Instalation Instructions, using VScode:
 1. Install "Prettier" Extension: esbenp.prettier-vscode use default settings
+   follow installation instructions, skipping "prettier resolution", as it has been done already,
+   settings should be overwritten by the
 2. Install "ESLint" extension: dbaeumer.vscode-eslint
-3. Install "Prettier ESLint" Extension: rvest.vs-code-prettier-eslint
-4. Follow https://create-react-app.dev/docs/setting-up-your-editor/#formatting-code-automatically
- tutorial for enabling automatic code formatting, starting from "
+3. Follow https://create-react-app.dev/docs/setting-up-your-editor/#formatting-code-automatically
+ tutorial for enabling automatic code formatting, starting from "Formatting code automatically"
