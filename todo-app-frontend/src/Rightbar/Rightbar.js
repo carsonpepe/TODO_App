@@ -28,7 +28,17 @@ function Rightbar(props){
 
 
 function RightbarPlanned(props){
+    
+
     const planned = props.todoList.map((row, index) => {
+
+
+        let data = <p><b>Date</b>: {row.date}</p>;
+        if(row.category != null){
+            data = <p><b>Category</b>: {row.category} <b>Date</b>: {row.date}</p>;
+        }
+        
+
         if(row.date){
             return (
                 <div class="todo_item">
@@ -37,7 +47,7 @@ function RightbarPlanned(props){
                     </div>
                     <div class="rows 0-g">
                         <div class="col-md-12">
-                            <p><b>Category</b>: {row.category} <b>Date</b>: {row.date}</p>
+                            {data}
                         </div>
 
                     </div>
@@ -58,6 +68,13 @@ function RightbarPlanned(props){
 
 function RightbarUnplanned(props){
     const planned = props.todoList.map((row, index) => {
+
+        let data = <div></div>;
+        if(row.category != null){
+            data = <p><b>Category</b>: {row.category}</p>;
+        }
+
+
         if(!row.date){
             return (
                 <div class="todo_item">
@@ -66,7 +83,7 @@ function RightbarUnplanned(props){
                     </div>
                     <div class="rows 0-g">
                         <div class="col-md-12">
-                            <p><b>Category:</b> {row.category}</p>
+                            {data}
                         </div>
                     </div>
                 </div>

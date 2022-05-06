@@ -3,6 +3,7 @@ import CenterBody from './Center-body/CenterBody';
 import Header from './Header/Header'
 import Leftbar from './Leftbar/Leftbar';
 import Rightbar from './Rightbar/Rightbar';
+import './MyApp.css'
 
 const cats = [
     {
@@ -26,7 +27,7 @@ const cats = [
 const todos = [
     {
         description: "Buy 2% milk",
-        category: "Groceries",
+        category: null,
         date: "05/03/2022",
         complete: false
     },
@@ -60,6 +61,18 @@ const todos = [
         date: null,
         complete: false
     },
+    {
+        description: "Go running",
+        category: null,
+        date: null,
+        complete: true
+    },
+    {
+        description: "Surf at Pismo",
+        category: "Workout",
+        date: "05/07/2022",
+        complete: false
+    },
 ];
 
 
@@ -67,7 +80,7 @@ const todos = [
 function MyApp(){
 
     return (
-        <div>
+        <div class="myapp">
             <Header/>
             <div class="row g-0">
                 <div class="col-md-2">
