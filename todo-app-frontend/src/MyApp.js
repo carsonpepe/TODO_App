@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import CenterBody from './Center-body/CenterBody';
 import Header from './Header/Header'
 import Leftbar from './Leftbar/Leftbar';
@@ -76,20 +76,40 @@ const todos = [
 ];
 
 
+const PLANNER_VIEW_TYPE = 2;
+
+
+
+
 
 function MyApp(){
 
+    const [centerView, setView] = useState(
+        {
+            viewType: PLANNER_VIEW_TYPE,
+            categoryType: null,
+        }
+     );
+    
+    function changeViewState(centerView){
+        setView(
+            {viewType: centerView.viewType, categoryType: centerView.viewType}
+        );
+    }
+    
+
+
     return (
-        <div class="myapp">
-            <Header/>
-            <div class="row g-0">
-                <div class="col-md-2">
-                    <Leftbar catList={cats}/>
+        <div key="myapp" className="myapp">
+            <Header handleCenterView={changeViewState}/>
+            <div className="row g-0">
+                <div key="leftbar" className="col-md-2">
+                    <Leftbar catList={cats} handleCenterView={changeViewState}/>
                 </div>
-                <div class="col-md-6">
-                    <CenterBody/>
+                <div key="centerbody" className="col-md-6">
+                    <CenterBody viewState={centerView}/>
                 </div>
-                <div class="col-md-4">
+                <div key="rightbar" className="col-md-4">
                     <Rightbar todoList={todos}/>
                 </div>
             </div>
