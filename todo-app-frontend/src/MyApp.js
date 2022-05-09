@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react';
 import CenterBody from './Center-body/CenterBody';
 import Header from './Header/Header'
 import Leftbar from './Leftbar/Leftbar';
 import Rightbar from './Rightbar/Rightbar';
+import useToken from './useToken';
+
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Dashboard from './components/Dashboard/Dashboard';
+import Preferences from './components/Preferences/Preferences';
+import Login from './components/Login/Login';
 
 const cats = [
     {
@@ -62,25 +68,38 @@ const todos = [
     },
 ];
 
+function setToken(userToken) {
+    sessionStorage.setItem('token', JSON.stringify(userToken));
+}
+
+function getToken() {
+    const tokenString = sessionStorage.getItem('token');
+  const userToken = JSON.parse(tokenString);
+  return userToken?.token
+}
+
 
 
 function MyApp(){
+    const { token, setToken } = useToken();
+    if(!token) {
+        return <Login setToken={setToken} />
+    }
 
     return (
-        <div>
-            <Header/>
-            <div class="row g-0">
-                <div class="col-md-2">
-                    <Leftbar catList={cats}/>
-                </div>
-                <div class="col-md-6">
-                    <CenterBody/>
-                </div>
-                <div class="col-md-4">
-                    <Rightbar todoList={todos}/>
-                </div>
-            </div>
-        </div>
+    <div className="wrapper">
+      <h1>Application</h1>
+        <BrowserRouter>
+            <Switch>
+                <Route path="/dashboard">
+                    <Dashboard />
+                </Route>
+                <Route path="/preferences">
+                    <Preferences />
+                </Route>
+            </Switch>
+        </BrowserRouter>
+    </div>
     );
 
 }
