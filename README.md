@@ -16,3 +16,11 @@ Instalation Instructions, using VScode:
 2. Install "ESLint" extension: dbaeumer.vscode-eslint
 3. Follow https://create-react-app.dev/docs/setting-up-your-editor/#formatting-code-automatically
  tutorial for enabling automatic code formatting, starting from "Formatting code automatically"
+ 
+ # For the Developers
+ ### Workflow
+ When you want to work on a new work item:
+ 1. Create a new _remote_ branch with a descriptive title (e.g. backend-pepe-add-todo)
+ 2. Then, create a local branch on your computer with the same branch name
+ 3. Work on the new feature/user story/work item in your local repository. Now, when you 'git add', 'git commit', and 'git push', these will ONLY update your remote repository.
+ 4. 
