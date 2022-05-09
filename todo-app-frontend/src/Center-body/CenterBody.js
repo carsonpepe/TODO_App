@@ -1,12 +1,14 @@
 import React from 'react'
 import './CenterBody.css'
 
-function CenterBody(){
+function CenterBody(props){
+
+
 
     return (
         
-        <div class="centerbody">
-            <p>Center Body</p>
+        <div className="centerbody">
+            <p>{props.viewState.viewType}</p>
         </div>
         
     );

@@ -5,17 +5,17 @@ function Rightbar(props){
 
     return (
         
-        <div class="rightbar">
+        <div className="rightbar">
 
-            <div class="rightbar_header">
+            <div key="header" className="rightbar_header">
                 <p>TODO List</p>
             </div>
-            <div class="rightbar_subheader">
+            <div key="subheader_general" className="rightbar_subheader">
                 <p>General List</p>
             </div>
             <RightbarUnplanned todoList={props.todoList}/>
             <hr></hr>
-            <div class="rightbar_subheader">
+            <div key="subheader_planned" className="rightbar_subheader">
                 <p>Planned List</p>
             </div>
             <RightbarPlanned todoList={props.todoList}/>
@@ -28,16 +28,26 @@ function Rightbar(props){
 
 
 function RightbarPlanned(props){
+    
+
     const planned = props.todoList.map((row, index) => {
+
+
+        let data = <p><b>Date</b>: {row.date}</p>;
+        if(row.category != null){
+            data = <p><b>Category</b>: {row.category} <b>Date</b>: {row.date}</p>;
+        }
+        
+
         if(row.date){
             return (
-                <div class="todo_item">
-                    <div class="row">
+                <div className="todo_item">
+                    <div className="row">
                         <p>{row.description}</p>
                     </div>
-                    <div class="rows 0-g">
-                        <div class="col-md-12">
-                            <p><b>Category</b>: {row.category} <b>Date</b>: {row.date}</p>
+                    <div className="rows 0-g">
+                        <div className="col-md-12">
+                            {data}
                         </div>
 
                     </div>
@@ -58,15 +68,22 @@ function RightbarPlanned(props){
 
 function RightbarUnplanned(props){
     const planned = props.todoList.map((row, index) => {
+
+        let data = <div></div>;
+        if(row.category != null){
+            data = <p><b>Category</b>: {row.category}</p>;
+        }
+
+
         if(!row.date){
             return (
-                <div class="todo_item">
-                    <div class="row">
+                <div className="todo_item">
+                    <div className="row">
                         <p>{row.description}</p>
                     </div>
-                    <div class="rows 0-g">
-                        <div class="col-md-12">
-                            <p><b>Category:</b> {row.category}</p>
+                    <div className="rows 0-g">
+                        <div className="col-md-12">
+                            {data}
                         </div>
                     </div>
                 </div>
