@@ -33,7 +33,7 @@ function Leftbar(props){
             }
             return (
                 
-                <button  className="button-59">{row.name} value={CATEGORY_VIEW_TYPE} name={row.name} onClick={handleButtonPress}</button>
+                <button  className="button-59" value={CATEGORY_VIEW_TYPE} name={row.name} onClick={handleButtonPress}>{row.name}</button>
                
             );
         });
@@ -62,34 +62,5 @@ function Leftbar(props){
     );
 
 }
-
-
-
-// function LeftbarBody(props){
-   
-
-//     const categories = props.catList.map((row, index) => {
-        
-//         if(row.color){
-//             return (
-//                 <button role="button" className="button-59" style={{backgroundColor: row.color}} onClick={handleButtonPress(props, CATEGORY_VIEW_TYPE, row.name)}>{row.name}</button>
-//             );
-//         }
-//         return (
-            
-//             <button role="button" className="button-59">{row.name} onClick={handleButtonPress(props, CATEGORY_VIEW_TYPE, row.name)}</button>
-           
-//         );
-//     });
-
-//     return (
-//         <div>
-//             <button type="button" className="button-59" onClick={handleButtonPress(props, PLANNER_VIEW_TYPE, null)}>Planner</button>
-//             {categories}
-//         </div>
-//     );
-
-    
-// }
 
 export default Leftbar;
