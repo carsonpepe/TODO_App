@@ -1,6 +1,8 @@
 import React from 'react'
 import './CenterBody.css'
 import Settings from './Settings/Settings';
+import Planner from './Planner/Planner';
+import Categories from './Categories/Categories';
 
 function CenterBody(props){
 
@@ -15,9 +17,11 @@ function CenterBody(props){
         }else if(currentState == 1){
             return <div><p>1</p></div>;
         }else if(currentState == 2){
-            return <div><p>2</p></div>;
-        }else{
-            return <div><p>3</p></div>;
+            return <Planner/>;
+        }else if(currentState == 3){
+            return <Categories/>;
+        }else {
+            return <Planner/>;
         }
 
          
