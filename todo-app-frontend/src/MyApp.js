@@ -93,7 +93,7 @@ function MyApp(){
     
     function changeViewState(centerView){
         setView(
-            {viewType: centerView.viewType, categoryType: centerView.viewType}
+            {viewType: centerView.viewType, categoryType: centerView.categoryType}
         );
     }
     

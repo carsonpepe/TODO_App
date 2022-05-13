@@ -1,0 +1,16 @@
+.newtodo{
+    height: 90vh;
+    width: auto;
+    overflow-y: scroll;
+    top:auto;
+    bottom: 0;
+}
+
+.newtodo_icon{
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+    text-align: left;
+    position: relative;
+    left: 100%;
+}

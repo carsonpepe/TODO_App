@@ -33,7 +33,7 @@ function Leftbar(props){
             }
             return (
                 
-                <button  className="button-59">{row.name} value={CATEGORY_VIEW_TYPE} name={row.name} onClick={handleButtonPress}</button>
+                <button className="button-59" value={CATEGORY_VIEW_TYPE} name={row.name} onClick={handleButtonPress}>{row.name}</button>
                
             );
         });
