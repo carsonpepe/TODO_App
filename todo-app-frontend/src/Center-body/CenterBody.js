@@ -3,6 +3,12 @@ import './CenterBody.css'
 import Settings from './Settings/Settings';
 import Planner from './Planner/Planner';
 import Categories from './Categories/Categories';
+import NewTodo from './New-todo/NewTodo'
+
+const SETTINGS_VIEW = 0;
+const ADD_VIEW = 1;
+const PLANNER_VIEW = 2;
+const CATEGORY_VIEW = 3;
 
 function CenterBody(props){
 
@@ -12,13 +18,14 @@ function CenterBody(props){
     
     function getView(currentState){
         
-        if(currentState == 0){
+        if(currentState == SETTING_VIEW){
             return <Settings/>;
-        }else if(currentState == 1){
-            return <div><p>1</p></div>;
-        }else if(currentState == 2){
+        }else if(currentState == ADD_VIEW){
+            // Need to add props (handleSubmit={function}) to NewTodo that comply with backend
+            return <NewTodo/>;
+        }else if(currentState == PLANNER_VIEW){
             return <Planner/>;
-        }else if(currentState == 3){
+        }else if(currentState == CATEGORY_VIEW){
             return <Categories/>;
         }else {
             return <Planner/>;
@@ -26,12 +33,12 @@ function CenterBody(props){
 
          
     }
-    const view = getView(state);
+
 
     return (
-        
-        <div>
-            {view}
+ 
+        <div className="centerbody">
+            {getView(state)}
         </div>
         
     );
