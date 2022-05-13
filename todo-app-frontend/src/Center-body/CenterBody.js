@@ -18,7 +18,7 @@ function CenterBody(props){
     
     function getView(currentState){
         
-        if(currentState == SETTING_VIEW){
+        if(currentState == SETTINGS_VIEW){
             return <Settings/>;
         }else if(currentState == ADD_VIEW){
             // Need to add props (handleSubmit={function}) to NewTodo that comply with backend
