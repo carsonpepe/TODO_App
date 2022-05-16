@@ -28,7 +28,7 @@ Instalation Instructions, using VScode:
 ### Database
 In /todo-app-backend folder, create a .env file with this:
 
-'''
+```
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = "mongodb+srv://username:<password>@dodopro.xf4oe.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
@@ -37,5 +37,5 @@ client.connect(err => {
   // perform actions on the collection object
   client.close();
 });
-'''
+```
    
