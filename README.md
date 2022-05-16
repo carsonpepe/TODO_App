@@ -24,3 +24,16 @@ Instalation Instructions, using VScode:
  2. Then, create a local branch on your computer with the same branch name
  3. Work on the new feature/user story/work item in your local repository. Now, when you 'git add', 'git commit', and 'git push', these will ONLY update your remote repository.
  4. 
+
+### Database
+In /todo-app-backend folder, create a .env file with this:
+'''
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://username:<password>@dodopro.xf4oe.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
+'''
