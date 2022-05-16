@@ -5,7 +5,7 @@ import Leftbar from './Leftbar/Leftbar';
 import Rightbar from './Rightbar/Rightbar';
 import useToken from './useToken';
 
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Dashboard from './components/Dashboard/Dashboard';
 import Preferences from './components/Preferences/Preferences';
 import Login from './components/Login/Login';
@@ -90,14 +90,14 @@ function MyApp(){
     <div className="wrapper">
       <h1>Application</h1>
         <BrowserRouter>
-            <Switch>
+            <Routes>
                 <Route path="/dashboard">
                     <Dashboard />
                 </Route>
                 <Route path="/preferences">
                     <Preferences />
                 </Route>
-            </Switch>
+            </Routes>
         </BrowserRouter>
     </div>
     );
