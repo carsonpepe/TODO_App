@@ -13,7 +13,7 @@ function NewTodo(props){
     );
 
     function handleChange(event) {
-        const { name, value } = event.currentTarget;
+        const { name, value } = event.target;
         if (name === "title") {
             setNewTodo(
                 {
