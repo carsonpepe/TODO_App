@@ -13,8 +13,9 @@ function NewTodo(props){
     );
 
     function handleChange(event) {
-        const { fieldName, value } = event.target;
-        if (fieldName === "title") {
+        const { name, value } = event.target;
+        if (name === "title") {
+            console.log("Made it in title change")
             setNewTodo(
                 {
                     title: value, 
@@ -23,7 +24,7 @@ function NewTodo(props){
                     category: newTodo['category'],
                 }
             );
-        } else if (fieldName === "description") {
+        } else if (name === "description") {
             setNewTodo(
                 {
                     title: newTodo['title'], 
@@ -32,7 +33,7 @@ function NewTodo(props){
                     category: newTodo['category'],
                 }
             );
-        } else if (fieldName === "date") {
+        } else if (name === "date") {
             setNewTodo(
                 {
                     title: newTodo['title'], 
@@ -54,15 +55,12 @@ function NewTodo(props){
     }
 
     function submitNewTodo() {
-        props.handleSubmit(newTodo);
+        //props.handleSubmit(newTodo);
         setNewTodo({title: '', description: '', date: '', category: ''});
     }
 
     return (
         <form>
-            <div className="newtodo_icon">
-                <input type="image" src={add} alt="add" width="35" height="35"></input>
-            </div>
             <label htmlFor="title">Title</label>
             <input
             type="text"
