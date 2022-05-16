@@ -49,7 +49,6 @@ function Leftbar(props){
     function LeftbarBody(props){
    
         const categories = props.catList.map((row, index) => {
-            console.log(row);   
             if(row.color){
                 return (
                     <button className="button-59" style={{backgroundColor: row.color}} value={CATEGORY_VIEW_TYPE} name={row.name} onClick={handleButtonPress}>{row.name}</button>
