@@ -15,7 +15,6 @@ function NewTodo(props){
     function handleChange(event) {
         const { name, value } = event.target;
         if (name === "title") {
-            console.log("Made it in title change")
             setNewTodo(
                 {
                     title: value, 

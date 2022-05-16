@@ -37,7 +37,8 @@ function CenterBody(props){
 
     return (
  
-        <div className="centerbody">
+        // <div className="centerbody">
+        <div>
             {getView(state)}
         </div>
         

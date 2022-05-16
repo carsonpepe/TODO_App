@@ -1,5 +1,6 @@
 import React from 'react'
 import './Rightbar.css'
+import { format } from 'date-fns'
 
 function Rightbar(){
 
@@ -8,7 +9,7 @@ function Rightbar(){
             {
                 description: "Buy 2% milk",
                 category: null,
-                date: "05/03/2022",
+                date: (new Date(2022, 3, 5)),
                 complete: false
             },
             {
@@ -20,13 +21,13 @@ function Rightbar(){
             {
                 description: "Finish sprint 1 [csc307]",
                 category: "School",
-                date: "05/11/2022",
+                date: new Date(2022, 11, 5),
                 complete: false
             },
             {
                 description: "Buy salad",
                 category: "Groceries",
-                date: "05/04/2022",
+                date: new Date(2022, 3, 5),
                 complete: false
             },
             {
@@ -50,7 +51,7 @@ function Rightbar(){
             {
                 description: "Surf at Pismo",
                 category: "Workout",
-                date: "05/07/2022",
+                date: new Date(2022, 7, 5),
                 complete: false
             },
         ];
@@ -84,18 +85,15 @@ function Rightbar(){
 
 
 function RightbarPlanned(props){
-    
 
-    const planned = props.todoList.map((row, index) => {
-
-
-        let data = <p><b>Date</b>: {row.date}</p>;
-        if(row.category != null){
-            data = <p><b>Category</b>: {row.category} <b>Date</b>: {row.date}</p>;
-        }
-        
+    const planned = props.todoList.map((row, index) => { 
 
         if(row.date){
+            let data = <p><b>Date</b>: {format(row.date, 'MM/dd/yyyy')}</p>;
+            if(row.category != null){
+                data = <p><b>Category</b>: {row.category} <b>Date</b>: {format(row.date, 'MM/dd/yyyy')}</p>;
+            }
+
             return (
                 <div className="todo_item">
                     <div className="row">
