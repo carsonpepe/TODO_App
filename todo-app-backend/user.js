@@ -38,3 +38,4 @@ class User{
     display(){}
 
 }
+export default User;
