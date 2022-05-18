@@ -2,6 +2,15 @@ const express = require('express');
 const app = express();
 const port = 5000;
 const cors = require('cors');
+const dotenv = require('dotenv');
+const mongoose = require('mongoose');
+
+// import User from "./user";
+// import Settings from "./settings";
+
+app.use(cors());
+app.use(express.json());
+
 const users = { 
     users_list :
     [
@@ -33,9 +42,7 @@ const users = {
     ]
  }
 
- app.use(cors());
 
-app.use(express.json());
 
 app.get('/users', (req, res) => {
     const name = req.query.name;
@@ -123,6 +130,6 @@ function findUserByJobAndName(name, job) {
     user['name'] === name && user['job'] === job);
 }
 
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
 });      

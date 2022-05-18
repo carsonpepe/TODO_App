@@ -10,3 +10,5 @@ class Settings{
 
     updateNotificationTimes(times){}
 }
+
+export default Settings;
