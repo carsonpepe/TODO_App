@@ -1,6 +1,23 @@
-import toDoItem from "./todo_item";
+import mongoose from 'mongoose';
+const mongoose = require("mongoose");
 
-class User{
+const UserSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    todoItems: [mongoose.model('TodoItem').schema],
+    notifications: [mongoose.model('TodoItem').schema],
+    categories: [CategorySchema],
+    settings: mongoose.model('Settings').schema,
+
+});
+
+module.exports = mongoose.model("User", UserSchema);
+
+
+/* class User{
     constructor(){
         accountID;
         displayName;
@@ -37,4 +54,4 @@ class User{
 
     display(){}
 
-}
+} */

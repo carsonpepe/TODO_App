@@ -1,8 +1,17 @@
 const express = require('express');
+const mongoose = require("mongoose");
+
+const services = require("./models/services")
+
 const app = express();
 const port = 5000;
+
 const cors = require('cors');
-const users = { 
+
+app.use(cors());
+app.use(express.json());
+
+/* const users = { 
     users_list :
     [
        { 
@@ -31,31 +40,9 @@ const users = {
           job: new Map([[1,2]]),
        }
     ]
- }
+ } */
 
- app.use(cors());
-
-app.use(express.json());
-
-app.get('/users', (req, res) => {
-    const name = req.query.name;
-    const job = req.query.job;
-    if(name != undefined && job != undefined){
-        let result = findUserByJobAndName(name,job);
-        result = {users_list: result};
-        res.send(result);
-    }
-    else if (name != undefined){
-        let result = findUserByName(name);
-        result = {users_list: result};
-        res.send(result);
-    }
-    else{
-        res.send(users);
-    }
-});
-
-app.get('/users/:id', (req, res) => {
+app.get('/users/:id', async (req, res) => {
     const id = req.params['id']; //or req.params.id
     let result = findUserById(id);
     if (result === undefined || result.length == 0)
@@ -66,63 +53,52 @@ app.get('/users/:id', (req, res) => {
     }
 });
 
-app.post('/users', (req, res) => {
-    
-    console.log("app.post");
+app.delete('/users/:id', async (req, res) => {
+    const id = req.params['id']; //or req.params.id
+    if (deleteUserById(id)) res.status(204).end();
+    else res.status(404).send("Resource not found.");
+});
 
+async function deleteUserById(id) {
+    try {
+        if (await services.findByIdAndDelete(id)) return true;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+}
+
+app.post('/users', async (req, res) => {
+    //console.log("app.post");
     const userToAdd = req.body;
-    addUser(userToAdd);
-    userToAdd.id = makeId();
-    res.status(201).send(userToAdd);
+    const savedUser = await services.addUser(userToAdd);
+    if (savedUser) res.status(201).send(savedUser);
+    else res.status(500).end();
 });
 
-app.delete('/users', (req, res) => {
-    const userToDelete = req.body;
-    deleteUser(userToDelete);
-    res.status(204).end();
+app.patch("/users/:id", async (req, res) => {
+    const id = req.params["id"];
+    const updatedUser = req.body;
+    const result = await updateUser(id, updatedUser);
+    if (result === 204) res.status(204).end();
+    else if (result === 404) res.status(404).send("Resource not found.");
+    else if (result === 500)
+        res.status(500).send("An error ocurred in the server.");
 });
 
-app.delete('/users/:id', (req, res) => {
-    const id = req.params['id']; //or req.params.id
-    let result = findUserById(id);
-    if (result === undefined || result.length == 0)
-        res.status(404).send('Resource not found.');
-    else {
-        deleteUser(result);
-        res.status(204).end();
+async function updateUser(id, updatedUser) {
+    try {
+        const result = await services.findByIdAndUpdate(id, updatedUser);
+        if (result) return 204;
+        else return 404;
+    } catch (error) {
+        console.log(error);
+        return 500;
     }
-});
-
-
-function makeId(){
-    var c = require("crypto");
-    var id = c.randomBytes(3).toString('hex');
-    return id;
 }
 
-
-function addUser(user){
-    users['users_list'].push(user);
-    
-}
-function deleteUser(user){
-    const index = users['users_list'].indexOf(user);
-    users['users_list'].splice(index, 1);
-}
-
-function findUserById(id) {
-    return users['users_list'].find( (user) => user['id'] === id);
-}
-
-const findUserByName = (name) => { 
-    return users['users_list'].filter( (user) => user['name'] === name); 
-}
-
-function findUserByJobAndName(name, job) {
-    return users['users_list'].find( (user) => 
-    user['name'] === name && user['job'] === job);
-}
-
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
+app.listen(process.env.PORT || port, () => {
+    if (processs.env.PORT)
+        console.log(`REST API is listening on port: ${process.env.PORT}.`);
+    else console.log(`Example app listening at http://localhost:${port}`);
 });      
