@@ -77,7 +77,7 @@ function Planner({
     return (
         <div className="planner">
             <Fragment>
-                <div className="height600" {...props}>
+                <div className="height500" {...props}>
                     <Calendar
                         components={components}
                         events={todos}
