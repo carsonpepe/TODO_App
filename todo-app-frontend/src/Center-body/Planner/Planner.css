@@ -1,0 +1,15 @@
+.planner{
+    height: 90vh;
+    width: auto;
+    overflow-y: scroll;
+    top:auto;
+    bottom: 0;
+    background-color: darkgray;
+    overflow:auto;
+    
+}
+
+.height500{
+    height: 500px;
+    background-color: whitesmoke;
+}
