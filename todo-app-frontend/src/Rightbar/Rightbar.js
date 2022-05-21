@@ -1,6 +1,6 @@
 import React from 'react'
 import './Rightbar.css'
-import { format } from 'date-fns'
+import moment from 'moment'
 
 function Rightbar(){
 
@@ -9,7 +9,7 @@ function Rightbar(){
             {
                 description: "Buy 2% milk",
                 category: null,
-                date: (new Date(2022, 3, 5)),
+                date: moment('2022/05/03'),
                 complete: false
             },
             {
@@ -21,13 +21,13 @@ function Rightbar(){
             {
                 description: "Finish sprint 1 [csc307]",
                 category: "School",
-                date: new Date(2022, 11, 5),
+                date: moment('2022/05/11'),
                 complete: false
             },
             {
                 description: "Buy salad",
                 category: "Groceries",
-                date: new Date(2022, 3, 5),
+                date: moment('2022/05/03'),
                 complete: false
             },
             {
@@ -51,7 +51,7 @@ function Rightbar(){
             {
                 description: "Surf at Pismo",
                 category: "Workout",
-                date: new Date(2022, 7, 5),
+                date: moment('2022/05/07'),
                 complete: false
             },
         ];
@@ -89,9 +89,9 @@ function RightbarPlanned(props){
     const planned = props.todoList.map((row, index) => { 
 
         if(row.date){
-            let data = <p><b>Date</b>: {format(row.date, 'MM/dd/yyyy')}</p>;
+            let data = <p><b>Date</b>: {row.date.format('MM/DD/yyyy')}</p>;
             if(row.category != null){
-                data = <p><b>Category</b>: {row.category} <b>Date</b>: {format(row.date, 'MM/dd/yyyy')}</p>;
+                data = <p><b>Category</b>: {row.category} <b>Date</b>: {row.date.format('MM/DD/yyyy')}</p>;
             }
 
             return (
