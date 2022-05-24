@@ -29,13 +29,10 @@ Instalation Instructions, using VScode:
 In /todo-app-backend folder, create a .env file with this:
 
 ```
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://username:<password>@dodopro.xf4oe.mongodb.net/?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
-});
+MONGO_USER=powerpang
+MONGO_PWD=PFp2eUnWoVkvICMh
+MONGO_DB=DODOpro
+MONGO_CLUSTER=dodopro.xf4oe.mongodb.net
 ```
+Then, in /todo-app-backend/.gitignore, add `.env` to the file and save.
    
