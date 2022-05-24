@@ -1,5 +1,3 @@
-import Category from "./category";
-import mongoose from 'mongoose';
 const mongoose = require("mongoose");
 
 const TodoSchema = new mongoose.Schema({
@@ -37,28 +35,4 @@ const TodoSchema = new mongoose.Schema({
     notificationTimes: [Date],
 });
 
-module.exports = mongoose.model("TodoItem", TodoSchema);
-
-/* class toDoItem{
-    constructor(){
-        dateAdded;
-        categoryName; 
-        planDateTime;
-        isDone;
-        notifyUsers;
-        notification;
-        description;
-    }
-
-    setDateTime(date){
-        planDateTime = date;
-    }
-
-    setCategory(name){
-        categoryName = name;
-        Category.categoryName = name;
-    }
-
-    
-} 
-export default toDoItem; */
+module.exports = TodoSchema;

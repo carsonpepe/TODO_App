@@ -5,11 +5,24 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-mongoose.connect("mongodb://localhost:27017/users", {
-    useNewUrlParser: true, //useFindAndModify: false,
-    useUnifiedTopology: true,
-    })
-    .catch((error) => console.log(error));
+mongoose.set("debug", true);
+
+mongoose
+    .connect(
+        "mongodb+srv://" +
+        process.env.MONGO_USER +
+        ":" + 
+        process.env.MONGO_PWD +
+        "@" + 
+        process.env.MONGO_CLUSTER +
+        "/" + 
+        process.env.MONGO_DB + 
+        "?retryWrites=true&w=majority",
+        {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        }
+    ).catch((error) => console.log(error));
 
 // Todo Services
 async function addTodo(id, todoItem) {
@@ -24,6 +37,7 @@ async function addTodo(id, todoItem) {
         return false;
     }
 }
+
 /* async function findTodosByCategory(id, category) {
     const currentUser = findUserById(id);
 
@@ -52,6 +66,11 @@ async function addUser(user) {
     }
 }
 
+async function deleteUser(id) {
+    return await userModel.findByIdAndDelete(id);
+}
+
 exports.addTodo = addTodo;
 exports.findUserById = findUserById;
 exports.addUser = addUser;
+exports.deleteUser = deleteUser;

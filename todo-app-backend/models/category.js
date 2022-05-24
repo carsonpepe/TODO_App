@@ -1,4 +1,3 @@
-import mongoose from 'mongoose';
 const mongoose = require("mongoose");
 
 const CategorySchema = new mongoose.Schema({
@@ -8,26 +7,10 @@ const CategorySchema = new mongoose.Schema({
         trim: true,
     },
     color: {
-        type: String,   // subject to change to some Color type
+        type: String,   // subject to change to some sort of Color datatype
         default: "White",
         trim: true,
     },
 })
 
-module.exports = mongoose.model("Category", CategorySchema);
-
-/* class Category{
-    constructor(){
-        color;
-        categoryName;
-        displayIndex;
-        indexOfToDo = {};
-    }
-
-
-    changeColorTo(color){
-        this.color = color;
-    }
-
-}
-export default Category; */
+module.exports = CategorySchema;

@@ -1,5 +1,7 @@
-import mongoose from 'mongoose';
 const mongoose = require("mongoose");
+const TodoSchema = require("./todo_item");
+const CategorySchema = require("./category");
+const SettingsSchema = require("./settings");
 
 const UserSchema = new mongoose.Schema({
     name: {
@@ -8,56 +10,16 @@ const UserSchema = new mongoose.Schema({
         trim: true,
     },
     todoItems: {
-        type: [mongoose.model('TodoItem').schema],
+        type: [TodoSchema],
         required: false,
     },
     notifications: {
-        type: [mongoose.model('TodoItem').schema],
+        type: [TodoSchema],
         default: [],
     },
     categories: [CategorySchema],
-    settings: mongoose.model('Settings').schema,
+    settings: SettingsSchema,
 
 });
 
 module.exports = mongoose.model("User", UserSchema);
-
-
-/* class User{
-    constructor(){
-        accountID;
-        displayName;
-        TODOS = new Map();
-        recycleBin = new Map();
-        categories = new Map();
-    }
-
-
-    hash(item){
-        return item['dateAdded'];
-    }
-
-    setCategoryColor(color){}
-
-    deleteTodoItem(itemKey){
-        TODOS.delete(itemKey)
-        recycleBin.set(itemKey,TODOS.get(itemKey));
-    }
-
-    //
-    addTodoItem(item){
-        TODOS.set(hash(item),item);
-    }
-
-    setPlanTime(itemKey, time){
-        TODOS.set(
-            itemKey,
-            {...TODOS.get(itemKey), planDateTime: time},
-        );
-    }
-
-    changeSidebarOrder(orderingList){}
-
-    display(){}
-
-} */

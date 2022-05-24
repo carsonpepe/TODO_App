@@ -1,4 +1,3 @@
-import mongoose from 'mongoose';
 const mongoose = require("mongoose");
 
 const SettingsSchema = new mongoose.Schema({
@@ -6,17 +5,4 @@ const SettingsSchema = new mongoose.Schema({
     theme: Boolean,
 })
 
-module.exports = mongoose.model("Settings", SettingsSchema);
-
-/* class Settings{
-    constructor(){
-        notificationDefaults = {};
-        deletionPeriod;
-        theme;
-        notificationTimes = {};
-    }
-
-    updateNotificationTimes(times){}
-}
- */
-
+module.exports = SettingsSchema;

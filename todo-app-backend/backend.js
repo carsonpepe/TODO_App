@@ -61,7 +61,7 @@ app.delete('/users/:id', async (req, res) => {
 
 async function deleteUserById(id) {
     try {
-        if (await services.findByIdAndDelete(id)) return true;
+        if (await services.deleteUser(id)) return true;
     } catch (error) {
         console.log(error);
         return false;
@@ -72,7 +72,7 @@ app.post('/users', async (req, res) => {
     //console.log("app.post");
     const userToAdd = req.body;
     const savedUser = await services.addUser(userToAdd);
-    if (savedUser) res.status(201).send(savedUser);
+    if (savedUser) res.status(120).send(savedUser);
     else res.status(500).end();
 });
 
@@ -98,7 +98,7 @@ async function updateUser(id, updatedUser) {
 }
 
 app.listen(process.env.PORT || port, () => {
-    if (processs.env.PORT)
+    if (process.env.PORT)
         console.log(`REST API is listening on port: ${process.env.PORT}.`);
     else console.log(`Example app listening at http://localhost:${port}`);
 });      
