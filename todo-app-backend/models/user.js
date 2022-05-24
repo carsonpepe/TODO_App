@@ -7,8 +7,14 @@ const UserSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
-    todoItems: [mongoose.model('TodoItem').schema],
-    notifications: [mongoose.model('TodoItem').schema],
+    todoItems: {
+        type: [mongoose.model('TodoItem').schema],
+        required: false,
+    },
+    notifications: {
+        type: [mongoose.model('TodoItem').schema],
+        default: [],
+    },
     categories: [CategorySchema],
     settings: mongoose.model('Settings').schema,
 

@@ -15,8 +15,8 @@ mongoose.connect("mongodb://localhost:27017/users", {
 async function addTodo(id, todoItem) {
     try {
         const currentUser = findUserById(id);
-        const todoToAdd = new todoModel(todoItem);
-        currentUser.todoItems.push(todoToAdd);
+        const newTodo = new todoModel(todoItem);
+        currentUser.todoItems.push(newTodo);
         const savedTodo = await currentUser.save()
         return savedTodo;
     } catch (error) {
@@ -24,11 +24,11 @@ async function addTodo(id, todoItem) {
         return false;
     }
 }
-async function findTodosByCategory(id, category) {
+/* async function findTodosByCategory(id, category) {
     const currentUser = findUserById(id);
-    
+
     return await todoModel.find({})
-}
+} */
     
 
 // User Services
