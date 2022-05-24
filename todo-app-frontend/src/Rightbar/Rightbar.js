@@ -1,6 +1,6 @@
-import React from 'react'
-import './Rightbar.css'
-import { format } from 'date-fns'
+import React from 'react';
+import './Rightbar.css';
+import { format } from 'date-fns';
 
 function Rightbar(){
 

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const userModel = require("./user");
-const todoModel = require("./todo_item")
+const todoModel = require("./todo_item");
 const dotenv = require("dotenv");
 
 dotenv.config();
