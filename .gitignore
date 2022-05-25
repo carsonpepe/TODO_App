@@ -11,6 +11,8 @@
 # production
 /build
 
+/todo-app-frontend/src/.env 
+
 # misc
 .DS_Store
 .env.local
