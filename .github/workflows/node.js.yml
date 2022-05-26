@@ -38,4 +38,4 @@ jobs:
         heroku_api_key: ${{secrets.api_key}}
         heroku_app_name: "dodo-pro-backend"
         heroku_email: "philipang515@gmail.com"
-        appdir: "backend"
+        appdir: "todo-app-backend"
