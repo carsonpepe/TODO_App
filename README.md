@@ -20,22 +20,22 @@ Instalation Instructions, using VScode:
  # For the Developers
  ### Workflow
  When you want to work on a new work item:
- 1. Create a new _remote_ branch with a descriptive title (e.g. backend-pepe-add-todo)
- 2. Then, create a local branch on your computer with the same branch name
- 3. Work on the new feature/user story/work item in your local repository. Now, when you 'git add', 'git commit', and 'git push', these will ONLY update your remote repository.
- 4. 
+ 1. Click into that work item and on the right hand side, select 'create branch'.
+ 2. Give your new remote branch a descriptive title, such as 'pepe-add-todo-frontend'.
+ 3. On your local, run `git pull` or `git fetch`. This will make your new remote branch visible. 
+ 4. Then, run `git branch pepe-add-todo-frontend`, where the branch name matches the remote branch's name that you just created. This new local branch should automatically be tracking from your remote branch with the same name. 
+ 6. Now, when you 'git add', 'git commit', and 'git push', these will ONLY update your remote repository.
+ 7. After a push, you can open github and there will be an option at the top displaying that you just pushed changes to your remote branch, with a button that allows you to create a pull request from that branch. If you're done with your work item, have tested your changes in your branch locally (the same changes that you pushed to your remote), and are ready to have your code review, make a pull request for it.
+ 8. After people have reviewed it, resolve any merge conflicts and then merge it to the main branch. This step is very intuitive with git's UI.
 
 ### Database
 In /todo-app-backend folder, create a .env file with this:
 
 ```
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://username:<password>@dodopro.xf4oe.mongodb.net/?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
-});
+MONGO_USER=powerpang
+MONGO_PWD=PFp2eUnWoVkvICMh
+MONGO_DB=DODOpro
+MONGO_CLUSTER=dodopro.xf4oe.mongodb.net
 ```
+Then, in /todo-app-backend/.gitignore, add `.env` to the file and save.
    
