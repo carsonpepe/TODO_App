@@ -62,37 +62,64 @@ function NewTodo(props){
     }
 
     return (
-        <form>
-            <label htmlFor="title">Title</label>
-            <input
-            type="text"
-            name="title"
-            id="title"
-            value={newTodo.title}
-            onChange={handleChange} />
-            <label htmlFor="decription">Description (OPTIONAL)</label>
-            <input
-            type="text"
-            name="description"
-            id="description"
-            value={newTodo.description}
-            onChange={handleChange} />
-            <label htmlFor="date">Date (OPTIONAL)</label>
-            <input
-            type="text"
-            name="date"
-            id="date"
-            value={newTodo.date}
-            onChange={handleChange} />
-            <label htmlFor="category">Category (OPTIONAL)</label>
-            <input
-            type="text"
-            name="category"
-            id="category"
-            value={newTodo.category}
-            onChange={handleChange} />
-            <input type="button" value="Create" onClick={submitNewTodo} />
-        </form>
+        <div className='newtodo'>
+            <form className='form-style-9'>
+                <ul>
+                    <li>
+                        {/* <label htmlFor="title">Title</label> */}
+                        <input
+                            className="field-style field-full align-none" 
+                            placeholder="Title*"
+                            required
+                            type="text"
+                            name="title"
+                            id="title"
+                            value={newTodo.title}
+                            onChange={handleChange} 
+                        />
+                    </li>
+                    <li>
+                        {/* <label htmlFor="decription">Description (OPTIONAL)</label> */}
+                        <textarea
+                            className='field-style field-full align-none'
+                            placeholder="Description"
+                            type="text"
+                            name="description"
+                            id="description"
+                            value={newTodo.description}
+                            onChange={handleChange} 
+                        />
+                    </li>
+                    <li>
+                        {/* <label htmlFor="date">Date (OPTIONAL)</label> */}
+                        <input
+                            className='field-style field-split align-left'
+                            placeholder="Date"
+                            type="date"
+                            name="date"
+                            id="date"
+                            value={newTodo.date}
+                            onChange={handleChange} 
+                        />
+                        {/* <label htmlFor="category">Category (OPTIONAL)</label> */}
+                        <input
+                            className='field-style field-split align-right'
+                            placeholder="Category"
+                            type="text"
+                            name="category"
+                            id="category"
+                            value={newTodo.category}
+                            onChange={handleChange} 
+                        />
+                    </li>
+                    <li>
+                        <button className='button-58 field-full' value="Create" onClick={submitNewTodo}>Create</button> 
+                    </li>
+                </ul>
+
+                
+            </form>
+        </div>
     );
 }
 
