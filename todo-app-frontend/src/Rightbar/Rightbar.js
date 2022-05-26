@@ -46,13 +46,13 @@ function Rightbar(){
                 description: "Go running",
                 category: null,
                 date: null,
-                complete: true
+                complete: false
             },
             {
                 description: "Surf at Pismo",
                 category: "Workout",
                 date: moment('2022/05/07'),
-                complete: false
+                complete: true
             },
         ];
 
@@ -76,6 +76,11 @@ function Rightbar(){
                 <p>Planned List</p>
             </div>
             <RightbarPlanned todoList={todos}/>
+            <hr></hr>
+            <div key="subheader_completed" className="rightbar_subheader">
+                <p>Completed List</p>
+            </div>
+            <RightbarCompleted todoList={todos}/>
         </div>
         
     );
@@ -86,24 +91,38 @@ function Rightbar(){
 
 function RightbarPlanned(props){
 
+    
+
     const planned = props.todoList.map((row, index) => { 
 
-        if(row.date){
+
+        if(row.date && !row.complete){
             let data = <p><b>Date</b>: {row.date.format('MM/DD/yyyy')}</p>;
             if(row.category != null){
-                data = <p><b>Category</b>: {row.category} <b>Date</b>: {row.date.format('MM/DD/yyyy')}</p>;
+                data = (
+                    <div className='row 0-g'>
+                        <div className='col-md-6'>
+                            <p><b>Category</b>: {row.category}</p>
+                        </div>
+                        <div className='col-md-6'>
+                            <p><b>Date</b>: {row.date.format('MM/DD/yyyy')}</p>
+                        </div>
+                    </div>
+                );
             }
 
             return (
                 <div className="todo_item">
-                    <div className="row">
-                        <p>{row.description}</p>
-                    </div>
-                    <div className="rows 0-g">
-                        <div className="col-md-12">
-                            {data}
+                    <div className="row 0-g">
+                        <div className='col-md-6'>
+                            <p>{row.description}</p>
                         </div>
-
+                        <div className='col-md-6'>
+                            <input type="checkbox" className='checkbox' id={index}/>
+                        </div>
+                    </div>
+                    <div>
+                        {data}
                     </div>
                 </div>
             );
@@ -128,12 +147,18 @@ function RightbarUnplanned(props){
             data = <p><b>Category</b>: {row.category}</p>;
         }
 
+      
 
-        if(!row.date){
+        if(!row.date && !row.complete){
             return (
                 <div className="todo_item">
-                    <div className="row">
-                        <p>{row.description}</p>
+                    <div className="row 0-g">
+                        <div className='col-md-6'>
+                            <p>{row.description}</p>
+                        </div>
+                        <div className='col-md-6'>
+                            <input type="checkbox" className='checkbox' id={index}/>
+                        </div>
                     </div>
                     <div className="rows 0-g">
                         <div className="col-md-12">
@@ -151,6 +176,77 @@ function RightbarUnplanned(props){
     return (
         <div>
             {planned}
+        </div>
+    );
+}
+
+function RightbarCompleted(props){
+    const completed = props.todoList.map((row, index) => {
+        if(row.complete){
+            if(row.date){
+                let data = <p><b>Date</b>: {row.date.format('MM/DD/yyyy')}</p>;
+                if(row.category != null){
+                    data = (
+                        <div className='row 0-g'>
+                            <div className='col-md-6'>
+                                <p><b>Category</b>: {row.category}</p>
+                            </div>
+                            <div className='col-md-6'>
+                                <p><b>Date</b>: {row.date.format('MM/DD/yyyy')}</p>
+                            </div>
+                        </div>
+                    );
+                }
+
+                return (
+                    <div className="todo_item gray_out">
+                        <div className="row 0-g">
+                            <div className='col-md-6'>
+                                <p>{row.description}</p>
+                            </div>
+                            <div className='col-md-6'>
+                                <input type="checkbox" className='checkbox' id={index} checked="true"/>
+                            </div>
+                        </div>
+                        <div>
+                            {data}
+                        </div>
+                    </div>
+                );
+            }else{
+                let data = <div></div>;
+                if(row.category != null){
+                    data = <p><b>Category</b>: {row.category}</p>;
+                }
+                return (
+                    <div className="todo_item gray_out">
+                        <div className="row 0-g">
+                            <div className='col-md-6'>
+                                <p>{row.description}</p>
+                            </div>
+                            <div className='col-md-6'>
+                                <input type="checkbox" className='checkbox' id={index} checked="true"/>
+                            </div>
+                        </div>
+                        <div className="rows 0-g">
+                            <div className="col-md-12">
+                                {data}
+                            </div>
+                        </div>
+                    </div>
+                );
+
+            }
+        }else{
+            return (
+                <div></div>
+            );
+        }
+    });
+
+    return (
+        <div>
+            {completed}
         </div>
     );
 }

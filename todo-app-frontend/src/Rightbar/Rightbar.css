@@ -36,6 +36,29 @@
     transition: all .3s;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
+.todo_item.gray_out{
+    background-color: darkgray;
+}
+
+.gray_out {
+    background-color: whitesmoke;
+}
+
+/* .input[id^="toggle"] ~.todo_item{
+    height: 80px;
+    width: 95%;
+    margin: 10px;
+    background-color: darkgray;
+    font-family: Inter,sans-serif;
+    text-align: center;
+    justify-content: center;
+    letter-spacing: -.8px;
+    cursor: pointer;
+    padding: 5px 5px;
+    transition: all .3s;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+} */
+
 .todo_item:hover{
     box-shadow: #06f 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
@@ -53,3 +76,5 @@
     border: 6px solid transparent;
     background-clip: content-box;
 }
+
+
