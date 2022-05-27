@@ -1,6 +1,6 @@
-import React from 'react'
-import './Rightbar.css'
-import moment from 'moment'
+import React from 'react';
+import './Rightbar.css';
+import moment from 'moment';
 
 function Rightbar(){
 

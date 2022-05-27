@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import './NewTodo.css'
 
-
 function NewTodo(props){
 
 
@@ -46,10 +45,14 @@ function NewTodo(props){
 
     const [newTodo, setNewTodo] = useState(
         {
+            _id: "",
             title: "",
             description: "",
             date: "",
             category: "",
+            completed: false,
+            notifToggle: false,
+            notifTimes: [],
         }
     );
 
