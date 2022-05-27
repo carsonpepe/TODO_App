@@ -1,5 +1,5 @@
 
-.newtodo{
+.newcat{
     height: 90vh;
     width: auto;
     overflow-y: scroll;
@@ -7,15 +7,18 @@
     bottom: 0;
 	background-color: lightgray;
 }
-
-/* .newtodo_icon{
-    width: 35px;
-    height: 35px;
-    border-radius: 5px;
-    text-align: left;
-    position: relative;
-    left: 100%;
-} */
+input[type="color"] {
+	-webkit-appearance: none;
+	border: none;
+	width: 32px;
+	height: 32px;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+	border: none;
+}
 
 .form-style-9{
 	max-width: 450px;
@@ -55,13 +58,16 @@
 .form-style-9 ul li .field-split{
 	width: 49%;
 }
+.form-style-9 ul li .field-75{
+	width: 74%;
+}
 .form-style-9 ul li .field-full{
 	width: 100%;
 }
 .form-style-9 ul li input.align-left{
 	float:left;
 }
-.form-style-9 ul li select.align-right{
+.form-style-9 ul li input.align-right{
 	float:right;
 }
 .form-style-9 ul li textarea{

@@ -13,6 +13,9 @@
 
 }
 
+img{
+    border-radius: 50%;;
+}
 
 .header_button{
     width: 35px;
@@ -20,9 +23,67 @@
     border-radius: 5px;
     text-align: right;
     position: relative;
-    left: 185%;
+    left: 135%;
 }
 
 .header_button:hover{
     box-shadow: 0 4px 8px 0 royalblue;
+}
+
+.logout{
+    position:relative;
+    left: 985%;
+}
+
+.logo{
+    position: relative;
+    left: 5%;
+}
+
+
+/* CSS */
+.button-59_ {
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    color: #000;
+    cursor: pointer;
+    display: inline-flex;
+    fill: #000;
+    font-family: Inter,sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    height: 24px;
+    justify-content: center;
+    letter-spacing: -.8px;
+    line-height: 24px;
+    /* min-width: 140px; */
+    outline: 0;
+    padding: 0 17px;
+    text-align: center;
+    text-decoration: none;
+    transition: all .3s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 50px;
+    margin-top: 5px;
+    margin-left: 5%;
+}
+
+.button-59_:focus {
+    color: #171e29;
+}
+
+.button-59_:hover {
+    border-color: #06f;
+    color: #06f;
+    fill: #06f;
+}
+
+.button-59_:active {
+    border-color: #06f;
+    color: #06f;
+    fill: #06f;
 }

@@ -4,11 +4,15 @@ import Settings from './Settings/Settings';
 import Planner from './Planner/Planner';
 import Categories from './Categories/Categories';
 import NewTodo from './New-todo/NewTodo'
+import Archive from './Archive/Archive';
+import NewCategory from './New-Category/NewCategory';
 
 const SETTINGS_VIEW = 0;
 const ADD_VIEW = 1;
 const PLANNER_VIEW = 2;
-const CATEGORY_VIEW = 3;
+const ARCHIVE_VIEW = 3;
+const CATEGORY_VIEW = 4;
+const ADD_CATEGORY_VIEW = 5;
 
 function CenterBody(props){
 
@@ -16,7 +20,7 @@ function CenterBody(props){
     const categoryType = props.viewState.categoryType;
 
     
-    function getView(currentState){
+    function getView(currentState, currentCat){
         
         if(currentState == SETTINGS_VIEW){
             return <Settings/>;
@@ -25,8 +29,12 @@ function CenterBody(props){
             return <NewTodo/>;
         }else if(currentState == PLANNER_VIEW){
             return <Planner/>;
+        }else if(currentState == ARCHIVE_VIEW) {
+            return <Archive/>;
         }else if(currentState == CATEGORY_VIEW){
-            return <Categories/>;
+            return <Categories categoryName={currentCat}/>;
+        }else if(currentState == ADD_CATEGORY_VIEW){
+            return <NewCategory/>
         }else {
             return <Planner/>;
         }
@@ -39,7 +47,7 @@ function CenterBody(props){
  
         // <div className="centerbody">
         <div>
-            {getView(state)}
+            {getView(state, categoryType)}
         </div>
         
     );
