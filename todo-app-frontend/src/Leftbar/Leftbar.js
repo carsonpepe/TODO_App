@@ -1,8 +1,10 @@
 import React, {useState} from 'react'
 import './Leftbar.css'
 
-const CATEGORY_VIEW_TYPE = 3;
+const CATEGORY_VIEW_TYPE = 4;
 const PLANNER_VIEW_TYPE = 2;
+const ARCHIVE_VIEW = 3;
+const ADD_CATEGORY_VIEW = 5;
 
 function Leftbar(props){
     const [centerView, setView] = useState(
@@ -64,7 +66,9 @@ function Leftbar(props){
         return (
             <div>
                 <button className="button-59" value={PLANNER_VIEW_TYPE} name={null} onClick={handleButtonPress}>Planner</button>
+                <button className="button-59" style={{backgroundColor: "#9A98C3"}} value={ARCHIVE_VIEW} name={null} onClick={handleButtonPress}>Archive</button>
                 {categories}
+                <button className="button-59" style={{backgroundColor: "#B6CAD6"}} value={ADD_CATEGORY_VIEW} name={null} onClick={handleButtonPress}><i>Add Category</i></button>
             </div>
         );
         
