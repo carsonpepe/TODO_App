@@ -5,6 +5,7 @@ import Planner from './Planner/Planner';
 import Categories from './Categories/Categories';
 import NewTodo from './New-todo/NewTodo'
 import Archive from './Archive/Archive';
+import NewCategory from './New-Category/NewCategory';
 
 const SETTINGS_VIEW = 0;
 const ADD_VIEW = 1;
@@ -33,7 +34,7 @@ function CenterBody(props){
         }else if(currentState == CATEGORY_VIEW){
             return <Categories categoryName={currentCat}/>;
         }else if(currentState == ADD_CATEGORY_VIEW){
-            console.log("add cat");
+            return <NewCategory/>
         }else {
             return <Planner/>;
         }

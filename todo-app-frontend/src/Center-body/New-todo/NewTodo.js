@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './NewTodo.css'
-import add from '../../resources/images/add.png'
+
 
 function NewTodo(props){
     const [newTodo, setNewTodo] = useState(
@@ -60,6 +60,7 @@ function NewTodo(props){
 
     return (
         <div className='newtodo'>
+            <h4>Add New TODO</h4>
             <form className='form-style-9'>
                 <ul>
                     <li>
