@@ -87,10 +87,12 @@ function Categories(props){
     function CategoriesHeader(){
         return (
             <thead>
-                <th>Title</th>
-                <th>Completed?</th>
-                <th>Date</th>
-                <th>Id</th>
+                <tr>
+                    <th>Title</th>
+                    <th>Completed?</th>
+                    <th>Date</th>
+                    <th>Id</th>
+                </tr>
             </thead>
         );
     }

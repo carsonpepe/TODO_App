@@ -39,10 +39,12 @@ function Archive(){
     function ArchiveHeader(){
         return (
             <thead>
-                <th>Title</th>
-                <th>Category</th>
-                <th>Date</th>
-                <th>Id</th>
+                <tr>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                    <th>Id</th>
+                </tr>
             </thead>
         );
     }
