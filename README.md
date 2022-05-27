@@ -29,13 +29,4 @@ Instalation Instructions, using VScode:
  8. After people have reviewed it, resolve any merge conflicts and then merge it to the main branch. This step is very intuitive with git's UI.
 
 ### Database
-In /todo-app-backend folder, create a .env file with this:
-
-```
-MONGO_USER=powerpang
-MONGO_PWD=PFp2eUnWoVkvICMh
-MONGO_DB=DODOpro
-MONGO_CLUSTER=dodopro.xf4oe.mongodb.net
-```
-Then, in /todo-app-backend/.gitignore, add `.env` to the file and save.
-   
+In /todo-app-backend folder, download .env file that contains MONGODB cridentials. (Find this file in our discord chat).   
