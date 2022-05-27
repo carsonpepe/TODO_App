@@ -8,14 +8,14 @@
 	background-color: lightgray;
 }
 
-.newtodo_icon{
+/* .newtodo_icon{
     width: 35px;
     height: 35px;
     border-radius: 5px;
     text-align: left;
     position: relative;
     left: 100%;
-}
+} */
 
 .form-style-9{
 	max-width: 450px;
@@ -61,7 +61,7 @@
 .form-style-9 ul li input.align-left{
 	float:left;
 }
-.form-style-9 ul li input.align-right{
+.form-style-9 ul li select.align-right{
 	float:right;
 }
 .form-style-9 ul li textarea{

@@ -3,6 +3,47 @@ import './NewTodo.css'
 
 
 function NewTodo(props){
+
+
+    function getCats(){
+        /*make api call hear and give adata to categories*/
+        const cats = [
+            {
+                name: "Groceries",
+                color: "blue"
+            },
+            {
+                name: "Workout",
+                color: "red"
+            },
+            {
+                name: "School",
+                color: "green"
+            },
+            {
+                name: "Job",
+                color: "pink"
+            },
+        ];
+
+        let names = [];
+
+        for(let i = 0; i < cats.length; i++){
+            names.push(cats[i].name);
+        }
+        names.push(null);
+
+        return names;
+    }
+
+    let categories = getCats();
+
+    let dropdown = categories,
+        MakeItem = function(X) {
+            return <option>{X}</option>
+        };
+
+
     const [newTodo, setNewTodo] = useState(
         {
             title: "",
@@ -100,7 +141,7 @@ function NewTodo(props){
                             onChange={handleChange} 
                         />
                         {/* <label htmlFor="category">Category (OPTIONAL)</label> */}
-                        <input
+                        {/* <input
                             className='field-style field-split align-right'
                             placeholder="Category"
                             type="text"
@@ -108,7 +149,10 @@ function NewTodo(props){
                             id="category"
                             value={newTodo.category}
                             onChange={handleChange} 
-                        />
+                        /> */}
+                        <select className='field-style field-split align-right'>
+                            {dropdown.map(MakeItem)}
+                        </select>
                     </li>
                     <li>
                         <button className='button-58 field-full' value="Create" onClick={submitNewTodo}>Create</button> 
