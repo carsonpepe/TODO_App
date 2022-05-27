@@ -205,7 +205,7 @@ function RightbarCompleted(props){
                                 <p>{row.description}</p>
                             </div>
                             <div className='col-md-6'>
-                                <input type="checkbox" className='checkbox' id={index} checked/>
+                                <input type="checkbox" className='checkbox' id={index} checked onClick="this.checked=!this.checked;"/>
                             </div>
                         </div>
                         <div>
@@ -225,7 +225,7 @@ function RightbarCompleted(props){
                                 <p>{row.description}</p>
                             </div>
                             <div className='col-md-6'>
-                                <input type="checkbox" className='checkbox' id={index} checked/>
+                                <input type="checkbox" className='checkbox' id={index} checked onClick="this.checked=!this.checked;"/>
                             </div>
                         </div>
                         <div className="rows 0-g">
