@@ -43,7 +43,29 @@ async function addTodo(id, todoItem) {
 
     return await todoModel.find({})
 } */
+
+async function markCompleted(id, todo_id){
+    const currentUser = findUserById(id);
+    currentUser.todoItems.findByIdAndUpdate(todo_id, {completed: true});
+    const savedTodo = await currentUser.save();
+    return savedTodo;
+}
+
+async function markUncomplete(id, todo_id){
+    const currentUser = findUserById(id);
+    currentUser.todoItems.findByIdAndUpdate(todo_id, {completed: false});
+    const savedTodo = await currentUser.save();
+    return savedTodo;
+}
     
+async function removeCompleted(id){
+    const currentUser = findUserById(id);
+    // return await currentUser.todoItems.deleteMany({completed: { $eq: true}});
+    currentUser.todoItems.deleteMany({completed: { $eq: true}});
+    const savedTodo = await currentUser.save();
+    return savedTodo;
+}
+
 
 // User Services
 async function findUserById(id) {
