@@ -98,7 +98,7 @@ function NewTodo(props){
     }
 
     function submitNewTodo() {
-        //props.handleSubmit(newTodo);
+        props.handleSubmit(newTodo);
         setNewTodo({title: '', description: '', date: '', category: ''});
     }
 
@@ -143,16 +143,6 @@ function NewTodo(props){
                             value={newTodo.date}
                             onChange={handleChange} 
                         />
-                        {/* <label htmlFor="category">Category (OPTIONAL)</label> */}
-                        {/* <input
-                            className='field-style field-split align-right'
-                            placeholder="Category"
-                            type="text"
-                            name="category"
-                            id="category"
-                            value={newTodo.category}
-                            onChange={handleChange} 
-                        /> */}
                         <select className='field-style field-split align-right'>
                             {dropdown.map(MakeItem)}
                         </select>

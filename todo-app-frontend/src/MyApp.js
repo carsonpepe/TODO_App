@@ -178,10 +178,10 @@ function MyApp(){
                     <Leftbar handleCenterView={changeViewState} categoryData={categories}/>
                 </div>
                 <div key="centerbody" className="col-md-6">
-                    <CenterBody viewState={centerView} todoData={todos} updateCategories={updateListCategories} updateTodos={updateListTODO}/>
+                    <CenterBody viewState={centerView} todoData={todos} categoryData={categories} updateCategories={updateListCategories} updateTodos={updateListTODO}/>
                 </div>
                 <div key="rightbar" className="col-md-4">
-                    <Rightbar categoryData={categories} todoData={todos} deleteTODO={removeOneTODO}/>
+                    <Rightbar todoData={todos} deleteTODO={removeOneTODO}/>
                 </div>
             </div>
         </div>
