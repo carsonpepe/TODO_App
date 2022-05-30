@@ -44,6 +44,13 @@ async function addTodo(id, todoItem) {
     return await todoModel.find({})
 } */
 
+async function findTodosByCategory(id, category_name) {
+    const currentUser = findUserById(id);
+    currentUser.find({category: category_name});
+    const savedTodo = await currentUser.save();
+    return savedTodo;
+}
+
 async function markCompleted(id, todo_id){
     const currentUser = findUserById(id);
     currentUser.todoItems.findByIdAndUpdate(todo_id, {completed: true});
@@ -62,6 +69,42 @@ async function removeCompleted(id){
     const currentUser = findUserById(id);
     // return await currentUser.todoItems.deleteMany({completed: { $eq: true}});
     currentUser.todoItems.deleteMany({completed: { $eq: true}});
+    const savedTodo = await currentUser.save();
+    return savedTodo;
+}
+
+async function changeDescription(id, todo_id, new_description){
+    const currentUser = findUserById(id);
+    currentUser.findByIdAndUpdate(todo_id, {description: new_description});
+    const savedTodo = await currentUser.save();
+    return savedTodo;
+}
+
+async function changeTitle(id, todo_id, new_title){
+    const currentUser = findUserById(id);
+    currentUser.findByIdAndUpdate(todo_id, {title: new_title});
+    const savedTodo = await currentUser.save();
+    return savedTodo;
+}
+
+async function turnNotificationsOn(id,todo_id){
+    const currentUser = findUserById(id);
+    currentUser.todoItems.findByIdAndUpdate(todo_id, {notificationToggle: true});
+    const savedTodo = await currentUser.save();
+    return savedTodo;
+}
+
+async function turnNotificationsOff(id,todo_id){
+    const currentUser = findUserById(id);
+    currentUser.todoItems.findByIdAndUpdate(todo_id, {notificationToggle: false});
+    const savedTodo = await currentUser.save();
+    return savedTodo;
+}
+
+async function changeCategory(id, todo_id, new_category){
+    // maybe a check to see if the category exists?
+    const currentUser = findUserById(id);
+    currentUser.findByIdAndUpdate(todo_id, {category: new_category});
     const savedTodo = await currentUser.save();
     return savedTodo;
 }
