@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
     res.send("Hello World!");
 });
 
-/* const users = { 
+ const users = { 
     users_list :
     [
        { 
@@ -44,7 +44,7 @@ app.get("/", (req, res) => {
           job: new Map([[1,2]]),
        }
     ]
- } */
+ } 
 
 app.get('/users/:id', async (req, res) => {
     const id = req.params['id']; //or req.params.id
