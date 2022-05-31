@@ -14,10 +14,10 @@ mongoose
         ":" + 
         process.env.MONGO_PWD +
         "@" + 
+        process.env.MONGO_DB +
+        "." +
         process.env.MONGO_CLUSTER +
-        "/" + 
-        process.env.MONGO_DB + 
-        "?retryWrites=true&w=majority",
+        "/?retryWrites=true&w=majority",
         {
             useNewUrlParser: true,
             useUnifiedTopology: true,
