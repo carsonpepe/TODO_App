@@ -25,18 +25,17 @@ function CenterBody(props){
         if(currentState == SETTINGS_VIEW){
             return <Settings/>;
         }else if(currentState == ADD_VIEW){
-            // Need to add props (handleSubmit={function}) to NewTodo that comply with backend
-            return <NewTodo/>;
+            return <NewTodo handleSubmit={props.updateTodos} categoryData={props.categoryData}/>;
         }else if(currentState == PLANNER_VIEW){
-            return <Planner/>;
+            return <Planner todoData={props.todoData}/>;
         }else if(currentState == ARCHIVE_VIEW) {
-            return <Archive/>;
+            return <Archive todoData={props.todoData}/>;
         }else if(currentState == CATEGORY_VIEW){
-            return <Categories categoryName={currentCat}/>;
+            return <Categories categoryName={currentCat} todoData={props.todoData} />;
         }else if(currentState == ADD_CATEGORY_VIEW){
-            return <NewCategory/>
+            return <NewCategory handleSubmit={props.updateCategories}/>
         }else {
-            return <Planner/>;
+            return <Planner todoData={props.todoData}/>;
         }
 
          
@@ -45,7 +44,7 @@ function CenterBody(props){
 
     return (
  
-        // <div className="centerbody">
+        
         <div>
             {getView(state, categoryType)}
         </div>

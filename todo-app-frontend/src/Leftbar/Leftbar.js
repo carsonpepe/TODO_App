@@ -38,6 +38,7 @@ function Leftbar(props){
         return cats;
     }
     const categories = getCats();
+    // const categories = props.categoryData;
 
     function handleButtonPress(event){
         const {value, name} = event.currentTarget;
