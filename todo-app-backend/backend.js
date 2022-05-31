@@ -11,36 +11,9 @@ const cors = require('cors');
 app.use(cors());
 app.use(express.json());
 
-/* const users = { 
-    users_list :
-    [
-       { 
-          id : 'xyz789',
-          name : 'Charlie',
-          job: new Map([[1,2]]),
-       },
-       {
-          id : 'abc123', 
-          name: 'Mac',
-          job: new Map([[1,2]]),
-       },
-       {
-          id : 'ppp222', 
-          name: 'Mac',
-          job: new Map([[1,2]]),
-       }, 
-       {
-          id: 'yat999', 
-          name: 'Dee',
-          job: new Map([[1,2]]),
-       },
-       {
-          id: 'zap555', 
-          name: 'Dennis',
-          job: new Map([[1,2]]),
-       }
-    ]
- } */
+app.get("/", (req, res) => {
+    res.send("Hello World!");
+});
 
 app.get('/users/:id', async (req, res) => {
     const id = req.params['id']; //or req.params.id
@@ -72,7 +45,7 @@ app.post('/users', async (req, res) => {
     //console.log("app.post");
     const userToAdd = req.body;
     const savedUser = await services.addUser(userToAdd);
-    if (savedUser) res.status(120).send(savedUser);
+    if (savedUser) res.status(201).send(savedUser);
     else res.status(500).end();
 });
 
