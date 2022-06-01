@@ -11,7 +11,7 @@ import axios from 'axios';
 
 var data = JSON.stringify({
     "collection": "users",
-    "database": "test",
+    "database": "DODOpro",
     "dataSource": "DODOpro",
     "projection": {
         "_id": 1
