@@ -9,7 +9,8 @@ import Home from './Home/Home';
 import './MyApp.css';
 
 
-const API_BASE_URL = "https://dodo-pro-backend.herokuapp.com";
+//const API_BASE_URL = "https://dodo-pro-backend.herokuapp.com";
+const API_BASE_URL= "https://data.mongodb-api.com/app/data-wbrjr/endpoint/data/v1";
 
 const PLANNER_VIEW_TYPE = 2;
 
