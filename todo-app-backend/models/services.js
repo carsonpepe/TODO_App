@@ -28,8 +28,8 @@ mongoose
 // function to add a new user to the backend
 async function addUser(user) {
     try {
-        //const userExists = getUserbyUsername(user);
-        const userExists = false;
+        const userExists = getUserbyUsername(user);
+        //const userExists = false;
         if (userExists) {
             //this means the suers is already int he database, not a new user
             return false;
@@ -47,8 +47,9 @@ async function addUser(user) {
 
 //returns a user based on the provided username
 async function getUserbyUsername(user){
+    const name = user.params["name"];
     try {
-        userModel.findOne({name: user["name"]}, function (err, docs) {
+        userModel.findOne({name: name}, function (err, docs) {
             if (err) {
                 console.log(err);
                 return false;
