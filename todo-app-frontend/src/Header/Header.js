@@ -17,7 +17,7 @@ function Header(props){
             props.handleCenterView({viewType: value, categoryType: null});
         }
         else {
-            props.handlePageView(value);
+            props.handlePageView({pageState: value, userID: ""});
         }
         
     }

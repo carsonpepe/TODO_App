@@ -1,13 +1,22 @@
 import React, {useEffect, useState} from 'react';
-import CenterBody from './Center-body/CenterBody';
-import Header from './Header/Header';
-import Leftbar from './Leftbar/Leftbar';
-import Rightbar from './Rightbar/Rightbar';
 import axios from 'axios';
+
+import Credentials from './Credentials/Credentials';
+import Login from './Credentials/Login/Login';
+import SignUp from './Credentials/Sign-up/SignUp';
+import Home from './Home/Home';
+
 import './MyApp.css';
 
+const API_BASE_URL = "https://dodo-pro-backend.herokuapp.com/";
 
 const PLANNER_VIEW_TYPE = 2;
+
+const CREDENTIALS_PAGE_STATE = 0;
+const LOGIN_PAGE_STATE = 1;
+const SIGN_UP_PAGE_STATE = 2;
+const HOME_PAGE_STATE = 3;
+
 const API_BASE = 'base';
 const API_USER = 'user';
 
@@ -16,11 +25,37 @@ function MyApp(){
 
     const [todos, setTodos] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [centerView, setView] = useState(
+        {
+            viewType: PLANNER_VIEW_TYPE,
+            categoryType: null,
+        }
+    );
+    const [currentPage, setCurrentPage] = useState(
+        {
+            pageState: CREDENTIALS_PAGE_STATE,
+            userID: "",
+        }
+    );
 
+    function getPage(currentPageState, userID){
+        
+        if(currentPageState == CREDENTIALS_PAGE_STATE){
+            return <Credentials handlePageView={changeCurrentPage}/>;
+        }else if(currentPageState == LOGIN_PAGE_STATE){
+            return <Login userLogin={userLogin} handlePageView={changeCurrentPage}/>;
+        }else if(currentPageState == SIGN_UP_PAGE_STATE){
+            return <SignUp submitNewUser={submitNewUser} handlePageView={changeCurrentPage}/>;
+        }else if(currentPageState == HOME_PAGE_STATE) {
+            return <Home userID={userID} categories={categories} todos={todos} handlePageView={changeCurrentPage} removeOneTODO={removeOneTODO} updateListCategories={updateListCategories} updateListTODO={updateListTODO}/>;
+        }else {
+            return <Credentials handlePageView={changeCurrentPage}/>;
+        }   
+    }
 
     async function fetchAllTODO(){
         try {
-            const response = await axios.get(/*api call to get all */);
+            const response = await axios.get(API_BASE_URL + ":userid/");
             return /** data */;
         } catch (error){
             console.log(error);
@@ -30,7 +65,7 @@ function MyApp(){
 
     async function fetchAllCategories(){
         try {
-            const response = await axios.get(/*api call to get all */);
+            const response = await axios.get(API_BASE_URL + "");
             return /** data */;
         } catch (error){
             console.log(error);
@@ -38,10 +73,30 @@ function MyApp(){
         }
     }
 
+    async function makeGetCallUSER(username){
+        
+        try {
+            const response = await axios.get(API_BASE_URL + "");
+            return /** data */;
+        } catch (error) {
+            console.log(error);
+            return false;
+        }
+    }
+
+    async function makePostCallUSER(user){
+        try {
+            const response = await axios.post(API_BASE_URL + "", user);
+            return /** data */;
+        } catch (error){
+            console.log(error);
+            return false;
+        }
+    }
 
     async function makePostCallTODO(todo){
         try {
-            const response = await axios.post(/*api call to post */"", todo);
+            const response = await axios.post(API_BASE_URL + "", todo);
             return /** data */;
         } catch (error){
             console.log(error);
@@ -50,7 +105,7 @@ function MyApp(){
     }
     async function makePostCallCategory(category){
         try {
-            const response = await axios.post(/*api call to post */"", category);
+            const response = await axios.post(API_BASE_URL + "", category);
             return /** data */;
         } catch (error){
             console.log(error);
@@ -61,7 +116,7 @@ function MyApp(){
     /**double check this */
     async function makePutCall(todo){
         try {
-            const response = await axios.post(/*api call to post */"", todo);
+            const response = await axios.post(API_BASE_URL + "", todo);
             return /** data */;
         } catch (error){
             console.log(error);
@@ -72,7 +127,7 @@ function MyApp(){
     async function makeDeleteCallTODO(todo){
         try{
        
-          const response = await axios.delete(''/**api call to delete */ + todo._id);
+          const response = await axios.delete(API_BASE_URL + todo._id);
           return response;
         }
         catch (error) {
@@ -83,13 +138,43 @@ function MyApp(){
     async function makeDeleteCallCategories(category){
         try{
        
-          const response = await axios.delete(''/**api call to delete */ + category._id);
+          const response = await axios.delete(API_BASE_URL + category._id);
           return response;
         }
         catch (error) {
           console.log(error);
           return false;
         }
+    }
+
+    function submitNewUser(newUser){
+        makePostCallUSER(newUser).then(result => {
+            if (result && result.status === 200) {
+                const _id = result.body._id;
+                return _id;
+            }
+        })
+    }
+
+    function userLogin(user){
+        const username = user["name"];
+        makeGetCallUSER(username).then(result => {
+            setCurrentPage(
+                {
+                    pageState: HOME_PAGE_STATE,
+                    userID: "",
+                }
+            );
+            if (result && result.status === 200) {
+                const _id = result.body._id;
+                setCurrentPage(
+                    {
+                        pageState: HOME_PAGE_STATE,
+                        userID: _id,
+                    }
+                );
+            }
+        })
     }
 
     function removeOneTODO(index){
@@ -155,12 +240,7 @@ function MyApp(){
 
     
 
-    const [centerView, setView] = useState(
-        {
-            viewType: PLANNER_VIEW_TYPE,
-            categoryType: null,
-        }
-     );
+
     
     function changeViewState(centerView){
         setView(
@@ -168,29 +248,17 @@ function MyApp(){
         );
     }
     
-    const [currentPage, setCurrentPage] = useState(0);
+
 
     function changeCurrentPage(currentPageState) {
         setCurrentPage(currentPageState);
     }
 
-
-
     return (
-        <div key="myapp" className="myapp">
-            <Header handleCenterView={changeViewState} handlePageView={changeCurrentPage}/>
-            <div className="row g-0">
-                <div key="leftbar" className="col-md-2">
-                    <Leftbar handleCenterView={changeViewState} categoryData={categories}/>
-                </div>
-                <div key="centerbody" className="col-md-6">
-                    <CenterBody viewState={centerView} todoData={todos} categoryData={categories} updateCategories={updateListCategories} updateTodos={updateListTODO}/>
-                </div>
-                <div key="rightbar" className="col-md-4">
-                    <Rightbar todoData={todos} deleteTODO={removeOneTODO}/>
-                </div>
-            </div>
+        <div>
+            {getPage(currentPage.pageState, currentPage.userID)}
         </div>
+        
     );
 
 }

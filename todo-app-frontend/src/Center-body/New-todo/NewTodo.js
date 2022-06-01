@@ -158,4 +158,4 @@ function NewTodo(props){
     );
 }
 
-export default NewTodo
+export default NewTodo;

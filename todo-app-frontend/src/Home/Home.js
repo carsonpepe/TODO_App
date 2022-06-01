@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from 'react';
 
-import CenterBody from './Center-body/CenterBody';
-import Header from './Header/Header';
-import Leftbar from './Leftbar/Leftbar';
-import Rightbar from './Rightbar/Rightbar';
+import CenterBody from '../Center-body/CenterBody';
+import Header from '../Header/Header';
+import Leftbar from '../Leftbar/Leftbar';
+import Rightbar from '../Rightbar/Rightbar';
 
 import './Home.css';
 
 const PLANNER_VIEW_TYPE = 2;
 
-function Home() {
+function Home(props) {
     const [centerView, setView] = useState(
         {
             viewType: PLANNER_VIEW_TYPE,
@@ -25,16 +25,16 @@ function Home() {
 
     return (
         <div key="myapp" className="myapp">
-            <Header handleCenterView={changeHomeViewState}/>
+            <Header handleCenterView={changeHomeViewState} handlePageView={props.handlePageView}/>
             <div className="row g-0">
                 <div key="leftbar" className="col-md-2">
-                    <Leftbar handleCenterView={changeHomeViewState} categoryData={categories}/>
+                    <Leftbar handleCenterView={changeHomeViewState} categoryData={props.categories}/>
                 </div>
                 <div key="centerbody" className="col-md-6">
-                    <CenterBody viewState={centerView} todoData={todos} categoryData={categories} updateCategories={updateListCategories} updateTodos={updateListTODO}/>
+                    <CenterBody viewState={centerView} todoData={props.todos} categoryData={props.categories} updateCategories={props.updateListCategories} updateTodos={props.updateListTODO}/>
                 </div>
                 <div key="rightbar" className="col-md-4">
-                    <Rightbar todoData={todos} deleteTODO={removeOneTODO}/>
+                    <Rightbar todoData={props.todos} deleteTODO={props.removeOneTODO}/>
                 </div>
             </div>
         </div>
