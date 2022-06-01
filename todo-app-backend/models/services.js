@@ -49,8 +49,9 @@ async function addUser(user) {
 
 //returns a user based on the provided username
 async function getUserbyUsername(user){
+    console.log(user["name"]);
     try {
-        userModel.findOne({name: user["name"]}, function (err, docs) {
+        userModel.find({name: user["name"]}, function (err, docs) {
             if (err) {
                 console.log(err);
                 return false;
