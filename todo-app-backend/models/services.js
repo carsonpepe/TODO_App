@@ -28,16 +28,9 @@ mongoose
 // function to add a new user to the backend
 async function addUser(user) {
     try {
-        const userExists = getUserbyUsername(user);
-        //const userExists = false;
-        if (userExists) {
-            //this means the suers is already int he database, not a new user
-            return false;
-        } else {
-            const userToAdd = new userModel(user);
-            const savedUser = await userToAdd.save();
-            return savedUser;
-        }
+        const userToAdd = new userModel(user);
+        const savedUser = await userToAdd.save();
+        return savedUser;
 
     } catch (error) {
         console.log(error);
