@@ -7,23 +7,21 @@ import logo from '../resources/images/dodo.jpg'
 const SETTINGS_VIEW_TYPE = 0;
 const ADD_VIEW_TYPE = 1;
 
-function Header(props){
+const CREDENTIALS_PAGE_STATE = 0;
 
-    const [centerView, setView] = useState(
-        {
-            viewType: null,
-            categoryType: null,
-        }
-     );
+function Header(props){
 
     function handleButtonPress(event){
         const {value, name} = event.currentTarget;
-        setView(
-            {viewType: value, categoryType: name}
-        );
-        props.handleCenterView(centerView);
+        if (name == "center"){
+            props.handleCenterView({viewType: value, categoryType: null});
+        }
+        else {
+            props.handlePageView({pageState: value, userID: ""});
+        }
         
     }
+
 
     return (
         <div className="header">
@@ -31,13 +29,13 @@ function Header(props){
                 <h1>DODO Pro</h1>
                 <img className='logo' src={logo} alt="logo" width="44" height="50"/>
                 <div className="header_button">
-                    <input type="image" src={add} alt="add" width="35" height="35" value={ADD_VIEW_TYPE} name={null} onClick={handleButtonPress}></input>
+                    <input type="image" src={add} alt="add" width="35" height="35" value={ADD_VIEW_TYPE} name="center" onClick={handleButtonPress}></input>
                 </div>
                 <div className="header_button">
-                    <input type="image" src={settings} alt="settings" width="35" height="35" value={SETTINGS_VIEW_TYPE} name={null} onClick={handleButtonPress}></input>
+                    <input type="image" src={settings} alt="settings" width="35" height="35" value={SETTINGS_VIEW_TYPE} name="center" onClick={handleButtonPress}></input>
                 </div>
                 <div>
-                    <button className="logout button-59_">Logout</button>
+                    <button className="logout button-59_" value={CREDENTIALS_PAGE_STATE} name="page" onClick={handleButtonPress}>Logout</button>
                 </div>
              
 
