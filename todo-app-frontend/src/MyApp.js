@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-//import axios from 'axios';
+import axios from 'axios';
 
 import Credentials from './Credentials/Credentials';
 import Login from './Credentials/Login/Login';
@@ -8,7 +8,7 @@ import Home from './Home/Home';
 
 import './MyApp.css';
 
-var axios = require('axios');
+//var axios = require('axios');
 var data = JSON.stringify({
     "collection": "users",
     "database": "DODOpro",
