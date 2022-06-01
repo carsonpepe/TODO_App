@@ -7,13 +7,6 @@ const ARCHIVE_VIEW = 3;
 const ADD_CATEGORY_VIEW = 5;
 
 function Leftbar(props){
-    const [centerView, setView] = useState(
-        {
-            viewType: null,
-            categoryType: null,
-        }
-     );
-
      
     function getCats(){
         /*make api call hear and give adata to categories*/
@@ -42,10 +35,7 @@ function Leftbar(props){
 
     function handleButtonPress(event){
         const {value, name} = event.currentTarget;
-        setView(
-            {viewType: value, categoryType: name}
-        );
-        props.handleCenterView(centerView);
+        props.handleCenterView({viewType: value, categoryType: name});
         
     }
 

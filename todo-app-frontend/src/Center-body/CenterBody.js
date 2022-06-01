@@ -1,5 +1,7 @@
-import React from 'react'
-import './CenterBody.css'
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import './CenterBody.css';
+
 import Settings from './Settings/Settings';
 import Planner from './Planner/Planner';
 import Categories from './Categories/Categories';
@@ -42,14 +44,44 @@ function CenterBody(props){
     }
 
 
+/*     return (        
+        <div>
+            <BrowserRouter>
+                <Routes>
+                    <Route exact
+                        path='/settings'
+                        element={<Settings />}>
+                    </Route>
+                    <Route exact
+                        path='/addTodo'
+                        element={<NewTodo handleSubmit={props.updateTodos} categoryData={props.categoryData}/>}>
+                    </Route>
+                    <Route exact
+                        path='/planner'
+                        element={<Planner todoData={props.todoData} />}>
+                    </Route>
+                    <Route exact
+                        path='/archive'
+                        element={<Archive todoData={props.todoData} />}>
+                    </Route>
+                    <Route exact
+                        path='/categories'
+                        element={<Categories categoryName={props.viewState.categoryType} todoData={props.todoData} />}>
+                    </Route>
+                    <Route exact
+                        path='/newCategory'
+                        element={<NewCategory handleSubmit={props.updateCategories} />}>
+                    </Route>
+                </Routes>
+            </BrowserRouter>
+        </div>  
+    ); */
+
     return (
- 
-        
         <div>
             {getView(state, categoryType)}
         </div>
-        
-    );
+    )
 
 }
 

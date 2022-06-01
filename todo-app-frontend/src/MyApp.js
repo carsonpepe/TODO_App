@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState} from 'react';
 import CenterBody from './Center-body/CenterBody';
-import Header from './Header/Header'
+import Header from './Header/Header';
 import Leftbar from './Leftbar/Leftbar';
 import Rightbar from './Rightbar/Rightbar';
 import axios from 'axios';
-import './MyApp.css'
+import './MyApp.css';
 
 
 const PLANNER_VIEW_TYPE = 2;
@@ -168,11 +168,17 @@ function MyApp(){
         );
     }
     
+    const [currentPage, setCurrentPage] = useState(0);
+
+    function changeCurrentPage(currentPageState) {
+        setCurrentPage(currentPageState);
+    }
+
 
 
     return (
         <div key="myapp" className="myapp">
-            <Header handleCenterView={changeViewState}/>
+            <Header handleCenterView={changeViewState} handlePageView={changeCurrentPage}/>
             <div className="row g-0">
                 <div key="leftbar" className="col-md-2">
                     <Leftbar handleCenterView={changeViewState} categoryData={categories}/>
