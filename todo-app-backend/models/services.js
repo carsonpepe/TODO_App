@@ -24,6 +24,43 @@ mongoose
         }
     ).catch((error) => console.log(error));
 
+
+// function to add a new user to the backend
+async function addUser(user) {
+    try {
+        const userExists = getUserbyUsername(user);
+        if (userExists) {
+            //this means the suers is already int he database, not a new user
+            return false;
+        } else {
+            const userToAdd = new userModel(user);
+            const savedUser = await userToAdd.save();
+            return savedUser;
+        }
+
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+}
+
+//returns a user based on the provided username
+async function getUserbyUsername(user){
+    try {
+        userModel.findOne({name: user["name"]}, function (err, docs) {
+            if (err) {
+                console.log(err);
+                return false;
+            } else {
+                return docs;
+            }
+        })
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+}
+
 // Todo Services
 async function addTodo(id, todoItem) {
     try {
@@ -120,16 +157,6 @@ async function findUserById(id) {
     }
 }
 
-async function addUser(user) {
-    try {
-        const userToAdd = new userModel(user);
-        const savedUser = await userToAdd.save();
-        return savedUser;
-    } catch (error) {
-        console.log(error);
-        return false;
-    }
-}
 
 async function deleteUser(id) {
     return await userModel.findByIdAndDelete(id);

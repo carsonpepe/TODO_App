@@ -2,7 +2,7 @@ import React from 'react';
 import './Rightbar.css';
 import moment from 'moment';
 
-function Rightbar(){
+function Rightbar(props){
 
     function getTodos(){
         const todos = [
@@ -58,7 +58,8 @@ function Rightbar(){
 
         return todos;
     }
-    const todos = getTodos();
+    //const todos = getTodos();
+    const todos = props.todoData;
 
     return (
         

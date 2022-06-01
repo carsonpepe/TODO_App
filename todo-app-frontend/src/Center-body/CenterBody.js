@@ -29,53 +29,19 @@ function CenterBody(props){
         }else if(currentState == ADD_VIEW){
             return <NewTodo handleSubmit={props.updateTodos} categoryData={props.categoryData}/>;
         }else if(currentState == PLANNER_VIEW){
-            return <Planner todoData={props.todoData}/>;
+            return <Planner tododata={props.todoData}/>;
         }else if(currentState == ARCHIVE_VIEW) {
-            return <Archive todoData={props.todoData}/>;
+            return <Archive tododata={props.todoData}/>;
         }else if(currentState == CATEGORY_VIEW){
             return <Categories categoryName={currentCat} todoData={props.todoData} />;
         }else if(currentState == ADD_CATEGORY_VIEW){
             return <NewCategory handleSubmit={props.updateCategories}/>
         }else {
-            return <Planner todoData={props.todoData}/>;
+            return <Planner tododata={props.todoData}/>;
         }
 
          
     }
-
-
-/*     return (        
-        <div>
-            <BrowserRouter>
-                <Routes>
-                    <Route exact
-                        path='/settings'
-                        element={<Settings />}>
-                    </Route>
-                    <Route exact
-                        path='/addTodo'
-                        element={<NewTodo handleSubmit={props.updateTodos} categoryData={props.categoryData}/>}>
-                    </Route>
-                    <Route exact
-                        path='/planner'
-                        element={<Planner todoData={props.todoData} />}>
-                    </Route>
-                    <Route exact
-                        path='/archive'
-                        element={<Archive todoData={props.todoData} />}>
-                    </Route>
-                    <Route exact
-                        path='/categories'
-                        element={<Categories categoryName={props.viewState.categoryType} todoData={props.todoData} />}>
-                    </Route>
-                    <Route exact
-                        path='/newCategory'
-                        element={<NewCategory handleSubmit={props.updateCategories} />}>
-                    </Route>
-                </Routes>
-            </BrowserRouter>
-        </div>  
-    ); */
 
     return (
         <div>

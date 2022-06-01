@@ -12,6 +12,7 @@ const UserSchema = new mongoose.Schema({
     todoItems: {
         type: [TodoSchema],
         required: false,
+        default: [],
     },
     notifications: {
         type: [TodoSchema],

@@ -23,6 +23,21 @@ function Home(props) {
         );
     }
 
+    useEffect(() => {
+        props.fetchAllTODO().then(result => {
+            if(result){
+                props.setTodos(result);
+            }
+        });
+
+        props.fetchAllCategories().then(result => {
+            if(result){
+                props.setCategories(result);
+            }
+        });
+
+    }, [] );
+
     return (
         <div key="myapp" className="myapp">
             <Header handleCenterView={changeHomeViewState} handlePageView={props.handlePageView}/>

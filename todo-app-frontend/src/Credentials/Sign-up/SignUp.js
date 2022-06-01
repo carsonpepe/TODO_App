@@ -8,12 +8,11 @@ const HOME_PAGE_STATE = 3;
 function SignUp(props) {
     const [newUser, setNewUser] = useState(
         {
-            _id: "",
             name: "",
-            todoItems: [],
-            notifications: [],
-            categories: [],
-            settings: null,
+            todoItems: undefined,
+            notifications: undefined,
+            categories: undefined,
+            settings: undefined,
         }
     );
 
@@ -22,7 +21,6 @@ function SignUp(props) {
         if (name === "username") {
             setNewUser(
                 {
-                    _id: newUser['_id'],
                     name: value,
                     todoItems: newUser['todoItems'],
                     notifications: newUser['notifications'],
@@ -34,21 +32,14 @@ function SignUp(props) {
     }
 
     function signInNewUser() {
-        const result = props.submitNewUser(newUser);
-        props.setCurrentPage(
-            {
-                pageState: HOME_PAGE_STATE,
-                userID: "",
-            }
-        );
+        props.submitNewUser(newUser);
         setNewUser(
             {
-                _id: "",
                 name: "",
-                todoItems: [],
-                notifications: [],
-                categories: [],
-                settings: null,
+                todoItems: undefined,
+                notifications: undefined,
+                categories: undefined,
+                settings: undefined,
             }
         );
         
