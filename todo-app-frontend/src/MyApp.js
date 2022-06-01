@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
 import Credentials from './Credentials/Credentials';
 import Login from './Credentials/Login/Login';
@@ -8,10 +7,11 @@ import Home from './Home/Home';
 
 import './MyApp.css';
 
-//var axios = require('axios');
+import axios from 'axios';
+
 var data = JSON.stringify({
     "collection": "users",
-    "database": "DODOpro",
+    "database": "test",
     "dataSource": "DODOpro",
     "projection": {
         "_id": 1
@@ -24,6 +24,7 @@ var config = {
     headers: {
         'Content-Type': 'application/json',
         'Access-Control-Request-Headers': '*',
+        'Acess-Control-Allow-Origin': '*',
         'api-key': 'ybbpxSiR2NAB8bMdsRoSsLfdthTzhAA71YE80YCdwauVfw8Y6K0rGgRU0HQ3EANg'
     },
     data : data
