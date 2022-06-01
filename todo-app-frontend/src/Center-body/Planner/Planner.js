@@ -19,7 +19,7 @@ const ColoredDateCellWrapper = ({children}) =>
 
 function Planner({
     localizer = mLocalizer,
-    ...props
+    props
 }){
     
 
@@ -59,7 +59,8 @@ function Planner({
 
         return todos;
     }
-    const todos = getTodos();
+    //const todos = getTodos();
+    const todos = props.getDatedTodos();
 
     const {components, views} = useMemo(
         () => ({
@@ -70,9 +71,6 @@ function Planner({
         }),
         []
     )
-
-
-    
 
     return (
         <div className="planner">

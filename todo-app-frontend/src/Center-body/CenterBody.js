@@ -1,5 +1,4 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './CenterBody.css';
 
 import Settings from './Settings/Settings';
@@ -25,17 +24,17 @@ function CenterBody(props){
     function getView(currentState, currentCat){
         
         if(currentState == SETTINGS_VIEW){
-            return <Settings/>;
+            return <Settings getSettings={props.getSettings}/>;
         }else if(currentState == ADD_VIEW){
-            return <NewTodo handleSubmit={props.updateTodos} categoryData={props.categoryData}/>;
+            return <NewTodo categoryData={props.categoryData} addTodoItem={props.addTodoItem}/>;
         }else if(currentState == PLANNER_VIEW){
-            return <Planner tododata={props.todoData}/>;
+            return <Planner getDatedTodos={props.getDatedTodos}/>;
         }else if(currentState == ARCHIVE_VIEW) {
             return <Archive tododata={props.todoData}/>;
         }else if(currentState == CATEGORY_VIEW){
             return <Categories categoryName={currentCat} todoData={props.todoData} />;
         }else if(currentState == ADD_CATEGORY_VIEW){
-            return <NewCategory handleSubmit={props.updateCategories}/>
+            return <NewCategory addNewCategory={props.addNewCategory}/>
         }else {
             return <Planner tododata={props.todoData}/>;
         }

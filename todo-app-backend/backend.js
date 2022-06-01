@@ -15,14 +15,48 @@ app.get("/", (req, res) => {
     res.send("Hello World!");
 });
 
+app.get('/users', async (req, res) => {
+    const name = req.query.name;
+    if (name != undefined){
+        const result = await services.getUserByUsername(name);
+        if (result === undefined || result.length == 0)
+            res.status(404).send('Resource not found.');
+        else {
+            res.send(result);
+        }
+    }
+});
+
+
 app.get('/users/:id', async (req, res) => {
-    const id = req.params['id']; //or req.params.id
-    let result = findUserById(id);
+    const id = req.params['id'];
+    let result = services.findUserById(id);
     if (result === undefined || result.length == 0)
         res.status(404).send('Resource not found.');
     else {
-        result = {users_list: result};
-        res.send(result);
+        res.status(200).send(result);
+    }
+});
+
+app.get('/users/:id/todoItems', async (req, res) => {
+    // NOT DONE
+    const id = req.params['id'];
+    let result = services.findUserById(id);
+    if (result === undefined || result.length == 0)
+        res.status(404).send('Resource not found.');
+    else {
+        res.status(200).send(result);
+    }
+});
+
+app.get('/users/:id/settings', async (req, res) => {
+    // NOT DONE
+    const id = req.params['id'];
+    let result = services.findUserById(id);
+    if (result === undefined || result.length == 0)
+        res.status(404).send('Resource not found.');
+    else {
+        res.status(200).send(result);
     }
 });
 

@@ -2,7 +2,10 @@ const mongoose = require("mongoose");
 
 const SettingsSchema = new mongoose.Schema({
     deletionPeriod: Number,
-    theme: Boolean,
+    theme: {
+        type: Boolean,
+        default: true,
+    }
 })
 
 module.exports = SettingsSchema;

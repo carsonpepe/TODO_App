@@ -33,7 +33,7 @@ function Login(props) {
     }
 
     function loginUser() {
-        const result = props.userLogin(user);
+        props.userLogin(user);
         setUser(
             {
                 name: "",

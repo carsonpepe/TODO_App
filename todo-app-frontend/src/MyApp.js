@@ -33,7 +33,7 @@ function MyApp(){
         }
     );
 
-    function getPage(currentPageState, userID){
+    function getPage(currentPageState){
         
         if(currentPageState == CREDENTIALS_PAGE_STATE){
             return <Credentials handlePageView={changeCurrentPage}/>;
@@ -43,17 +43,18 @@ function MyApp(){
             return <SignUp submitNewUser={submitNewUser}/>;
         }else if(currentPageState == HOME_PAGE_STATE) {
             return (<Home 
-                userID={userID} 
                 categories={categories} 
                 todos={todos} 
                 handlePageView={changeCurrentPage} 
                 removeOneTODO={removeOneTODO} 
-                updateListCategories={updateListCategories} 
-                updateListTODO={updateListTODO}
+                updateListCategories={addNewCategory} 
                 fetchAllTODO={fetchAllTODO}
                 setTodos={setTodos}
                 fetchAllCategories={fetchAllCategories}
-                setCategories={setCategories}/>
+                setCategories={setCategories}
+                addTodoItem={addTodoItem}
+                getDatedTodos={makeGetCallDatedTodos}
+                getSettings={makeGetCallSettings}/>
             );
         }else {
             return <Credentials handlePageView={changeCurrentPage}/>;
@@ -62,7 +63,7 @@ function MyApp(){
 
     async function fetchAllTODO(){
         try {
-            const response = await axios.get(API_BASE_URL + `/:${currentPage.userID}/todoItems`);
+            const response = await axios.get(API_BASE_URL + `/users/:${currentPage.userID}/todoItems`);
             return response;
         } catch (error){
             console.log(error);
@@ -72,7 +73,7 @@ function MyApp(){
 
     async function fetchAllCategories(){
         try {
-            const response = await axios.get(API_BASE_URL + `/:${currentPage.userID}/categories`);
+            const response = await axios.get(API_BASE_URL + `/users/:${currentPage.userID}/categories`);
             return response;
         } catch (error){
             console.log(error);
@@ -80,11 +81,29 @@ function MyApp(){
         }
     }
 
-    async function makeGetCallUSER(username){
-        
+    async function makeGetCallSettings(){
         try {
-            const response = await axios.get(API_BASE_URL + "");
-            return /** data */;
+            const response = await axios.get(API_BASE_URL + `/users/:${currentPage.userID}/settings`);
+            return response;
+        } catch (error) {
+            console.log(error);
+            return false;
+        }
+    }
+
+    async function makeGetCallUSER(username){ 
+        try {
+            const response = await axios.get(API_BASE_URL + `/users?name=${username}`);
+            return response;
+        } catch (error) {
+            console.log(error);
+            return false;
+        }
+    }
+
+    async function makeGetCallDatedTodos(){
+        try {
+            const response = await axios.get(API_BASE_URL + `/users/:${currentPage.userID}/todoItems?date!=false`);
         } catch (error) {
             console.log(error);
             return false;
@@ -103,8 +122,8 @@ function MyApp(){
 
     async function makePostCallTODO(todo){
         try {
-            const response = await axios.post(API_BASE_URL + "", todo);
-            return response.data;
+            const response = await axios.post(API_BASE_URL + `/users/:${currentPage.userID}/todoItems`, todo);
+            return response;
         } catch (error){
             console.log(error);
             return false;
@@ -112,19 +131,8 @@ function MyApp(){
     }
     async function makePostCallCategory(category){
         try {
-            const response = await axios.post(API_BASE_URL + "", category);
-            return /** data */;
-        } catch (error){
-            console.log(error);
-            return false;
-        }
-    }
-
-    /**double check this */
-    async function makePutCall(todo){
-        try {
-            const response = await axios.post(API_BASE_URL + "", todo);
-            return /** data */;
+            const response = await axios.post(API_BASE_URL + `/users/:${currentPage.userID}/categories`, category);
+            return response;
         } catch (error){
             console.log(error);
             return false;
@@ -133,24 +141,35 @@ function MyApp(){
 
     async function makeDeleteCallTODO(todo){
         try{
-       
-          const response = await axios.delete(API_BASE_URL + todo._id);
-          return response;
+            const todoID = todo["_id"];
+            const response = await axios.delete(API_BASE_URL + `/users/:${currentPage.userID}/todoItems?=${todoID}`);
+            return response;
         }
         catch (error) {
-          console.log(error);
-          return false;
+            console.log(error);
+            return false;
         }
     }
     async function makeDeleteCallCategories(category){
         try{
-       
-          const response = await axios.delete(API_BASE_URL + category._id);
-          return response;
+            const categoryID = category["_id"];
+            const response = await axios.delete(API_BASE_URL + `/users/:${currentPage.userID}/categories?=${categoryID}`);
+            return response;
         }
         catch (error) {
-          console.log(error);
-          return false;
+            console.log(error);
+            return false;
+        }
+    }
+
+    async function makeGetCallArchives(){
+        try{
+            const response = await axios.get(API_BASE_URL + `/users/:${currentPage.userID}/todoItems/completed?=true`);
+            return response;
+        }
+        catch (error) {
+            console.log(error);
+            return false;
         }
     }
 
@@ -166,10 +185,8 @@ function MyApp(){
                         userID: _id,
                     }
                 )
-            }
-            else {
+            } else {
                 console.log(result.status);
-                return false;
             }
         })
     }
@@ -177,20 +194,27 @@ function MyApp(){
     function userLogin(user){
         const username = user["name"];
         makeGetCallUSER(username).then(result => {
-            setCurrentPage(
-                {
-                    pageState: HOME_PAGE_STATE,
-                    userID: "",
-                }
-            );
             if (result && result.status === 200) {
-                const _id = result.body._id;
+                const _id = result.data._id;
                 setCurrentPage(
                     {
                         pageState: HOME_PAGE_STATE,
                         userID: _id,
                     }
                 );
+            } else {
+                console.log(result.status);
+            }
+        })
+    }
+
+    function addTodoItem(todoItem) {
+        makePostCallTODO(todoItem).then(result => {
+            if (result && result.status === 200) {
+                return result.data;
+            } else {
+                console.log(result);
+                return false;
             }
         })
     }
@@ -223,16 +247,7 @@ function MyApp(){
         })
     }
 
-    function updateListTODO(todo){
-        makePostCallTODO(todo).then(result => {
-            if(result && result.status === 201){
-                todo = result.data;
-                setTodos([...todos, todo]);
-            }
-        });
-    }
-
-    function updateListCategories(category){
+    function addNewCategory(category){
         makePostCallCategory(category).then(result => {
             if(result && result.status === 201){
                 category = result.data;
@@ -248,7 +263,7 @@ function MyApp(){
 
     return (
         <div>
-            {getPage(currentPage.pageState, currentPage.userID)}
+            {getPage(currentPage.pageState)}
         </div>
         
     );

@@ -16,6 +16,7 @@ const TodoSchema = new mongoose.Schema({
         // --> "doc.markModified('pathToDate');" THEN save
         type: Date, 
         required: false,
+        default: false,
     },
     category: {
         type: String,

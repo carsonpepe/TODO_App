@@ -46,7 +46,15 @@ function Home(props) {
                     <Leftbar handleCenterView={changeHomeViewState} categoryData={props.categories}/>
                 </div>
                 <div key="centerbody" className="col-md-6">
-                    <CenterBody viewState={centerView} todoData={props.todos} categoryData={props.categories} updateCategories={props.updateListCategories} updateTodos={props.updateListTODO}/>
+                    <CenterBody 
+                        viewState={centerView} 
+                        todoData={props.todos} 
+                        categoryData={props.categories} 
+                        updateCategories={props.updateListCategories} 
+                        addTodoItem={props.addTodoItem}
+                        getDatedTodos={props.getDatedTodos}
+                        getSettings={props.getSettings}
+                        addNewCategory={props.addNewCategory}/>
                 </div>
                 <div key="rightbar" className="col-md-4">
                     <Rightbar todoData={props.todos} deleteTODO={props.removeOneTODO}/>

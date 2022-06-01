@@ -28,9 +28,15 @@ mongoose
 // function to add a new user to the backend
 async function addUser(user) {
     try {
-        const userToAdd = new userModel(user);
-        const savedUser = await userToAdd.save();
-        return savedUser;
+        const userExists = getUserbyUsername(user);
+        if (userExists) {
+            //this means the suers is already int he database, not a new user
+            return false;
+        } else {
+            const userToAdd = new userModel(user);
+            const savedUser = await userToAdd.save();
+            return savedUser;
+        }
 
     } catch (error) {
         console.log(error);
@@ -40,9 +46,8 @@ async function addUser(user) {
 
 //returns a user based on the provided username
 async function getUserbyUsername(user){
-    const name = user.params["name"];
     try {
-        userModel.findOne({name: name}, function (err, docs) {
+        userModel.findOne({name: user["name"]}, function (err, docs) {
             if (err) {
                 console.log(err);
                 return false;
@@ -53,6 +58,15 @@ async function getUserbyUsername(user){
     } catch (error) {
         console.log(error);
         return false;
+    }
+}
+
+async function findUserById(id) {
+    try {
+        return await userModel.findById(id);
+    } catch (error) {
+        console.log(error);
+        return undefined;
     }
 }
 
@@ -143,14 +157,7 @@ async function changeCategory(id, todo_id, new_category){
 
 
 // User Services
-async function findUserById(id) {
-    try {
-        return await userModel.findById(id);
-    } catch (error) {
-        console.log(error);
-        return undefined;
-    }
-}
+
 
 
 async function deleteUser(id) {

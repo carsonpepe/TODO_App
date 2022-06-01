@@ -98,7 +98,8 @@ function NewTodo(props){
     }
 
     function submitNewTodo() {
-        props.handleSubmit(newTodo);
+        props.addTodoItems(newTodo);
+        props.updateTodos(newTodo);
         setNewTodo({title: '', description: '', date: '', category: ''});
     }
 
