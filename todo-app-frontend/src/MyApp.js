@@ -11,7 +11,7 @@ import axios from 'axios';
 
 var data = JSON.stringify({
     "collection": "users",
-    "database": "DODOpro",
+    "database": "test",
     "dataSource": "DODOpro",
     "projection": {
         "_id": 1
@@ -24,8 +24,8 @@ var config = {
     headers: {
         'Content-Type': 'application/json',
         'Access-Control-Request-Headers': '*',
-        'Access-Control-Allow-Origin': 'http://localhost:3000',
-        'api-key': 'ybbpxSiR2NAB8bMdsRoSsLfdthTzhAA71YE80YCdwauVfw8Y6K0rGgRU0HQ3EANg'
+        /* 'Access-Control-Allow-Origin': 'http://localhost:3000', */
+        'api-key': 'PJahpeZEdssPw3bhrJSLEmOaT6GoXMCLhQCSnakJI6MDq8cb5vMcVFDK0Mun5PP4'
     },
     data : data
 };
