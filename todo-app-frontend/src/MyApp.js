@@ -24,7 +24,7 @@ var config = {
     headers: {
         'Content-Type': 'application/json',
         'Access-Control-Request-Headers': '*',
-        'Acess-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Origin': 'http://localhost:3000',
         'api-key': 'ybbpxSiR2NAB8bMdsRoSsLfdthTzhAA71YE80YCdwauVfw8Y6K0rGgRU0HQ3EANg'
     },
     data : data
