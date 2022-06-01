@@ -39,7 +39,7 @@ async function addUser(user) {
         }
 
     } catch (error) {
-        console.log(error);
+        console.log("1" + error);
         return false;
     }
 }
@@ -50,14 +50,15 @@ async function getUserbyUsername(user){
     try {
         userModel.find({name: user["name"]}, function (err, docs) {
             if (err) {
-                console.log(err);
+                console.log("2" + err);
                 return false;
             } else {
                 return docs;
             }
         })
-    } catch (error) {
-        console.log(error);
+    } 
+    catch (error) {
+        console.log("3"+ error);
         return false;
     }
 }
