@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
 import Credentials from './Credentials/Credentials';
 import Login from './Credentials/Login/Login';
@@ -8,6 +7,36 @@ import Home from './Home/Home';
 
 import './MyApp.css';
 
+import axios from 'axios';
+
+var data = JSON.stringify({
+    "collection": "users",
+    "database": "DODOpro",
+    "dataSource": "DODOpro",
+    "projection": {
+        "_id": 1
+    }
+});
+            
+var config = {
+    method: 'post',
+    url: 'https://data.mongodb-api.com/app/data-wbrjr/endpoint/data/beta/action/findOne',
+    headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Request-Headers': '*',
+        'Access-Control-Allow-Origin': 'http://localhost:3000',
+        'api-key': 'ybbpxSiR2NAB8bMdsRoSsLfdthTzhAA71YE80YCdwauVfw8Y6K0rGgRU0HQ3EANg'
+    },
+    data : data
+};
+            
+axios(config)
+    .then(function (response) {
+        console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
 
 const API_BASE_URL = "https://dodo-pro-backend.herokuapp.com";
 //const API_BASE_URL= "https://data.mongodb-api.com/app/data-wbrjr/endpoint/data/v1";
