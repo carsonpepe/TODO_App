@@ -9,7 +9,7 @@ import './MyApp.css';
 
 import axios from 'axios';
 
-var data = JSON.stringify({
+/* var data = JSON.stringify({
     "collection": "users",
     "database": "test",
     "dataSource": "DODOpro",
@@ -24,7 +24,6 @@ var config = {
     headers: {
         'Content-Type': 'application/json',
         'Access-Control-Request-Headers': '*',
-        /* 'Access-Control-Allow-Origin': 'http://localhost:3000', */
         'api-key': 'PJahpeZEdssPw3bhrJSLEmOaT6GoXMCLhQCSnakJI6MDq8cb5vMcVFDK0Mun5PP4'
     },
     data : data
@@ -36,7 +35,7 @@ axios(config)
     })
     .catch(function (error) {
         console.log(error);
-    });
+    }); */
 
 const API_BASE_URL = "https://dodo-pro-backend.herokuapp.com";
 //const API_BASE_URL= "https://data.mongodb-api.com/app/data-wbrjr/endpoint/data/v1";
