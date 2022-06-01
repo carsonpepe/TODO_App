@@ -48,7 +48,7 @@ app.post('/users', async (req, res) => {
     if (savedUser) res.status(201).send(savedUser);
     else {
         console.log(savedUser)
-        res.status(500).send(savedUser).end();
+        res.status(501).send(savedUser).end();
     }
 });
 
