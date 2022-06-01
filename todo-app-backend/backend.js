@@ -46,7 +46,10 @@ app.post('/users', async (req, res) => {
     const userToAdd = req.body;
     const savedUser = await services.addUser(userToAdd);
     if (savedUser) res.status(201).send(savedUser);
-    else res.status(500).end();
+    else {
+        console.log(savedUser)
+        res.status(500).end();
+    }
 });
 
 app.patch("/users/:id", async (req, res) => {
