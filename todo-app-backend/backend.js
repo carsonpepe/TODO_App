@@ -8,6 +8,11 @@ const port = 5000;
 
 const cors = require('cors');
 
+app.all('/', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "https://dodo-pro.herokuapp.com/");
+    next()
+});
+
 app.use(cors());
 app.use(express.json());
 
