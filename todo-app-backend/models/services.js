@@ -5,8 +5,9 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
+/*
 mongoose.set("debug", true);
-
+*/
 mongoose
     .connect(
         "mongodb+srv://" +
@@ -17,7 +18,9 @@ mongoose
         process.env.MONGO_DB +
         "." +
         process.env.MONGO_CLUSTER +
-        "/?retryWrites=true&w=majority",
+        "/" +
+        "DODOpro" +
+        "?retryWrites=true&w=majority",
         {
             useNewUrlParser: true,
             useUnifiedTopology: true,
@@ -28,18 +31,21 @@ mongoose
 // function to add a new user to the backend
 async function addUser(user) {
     try {
-        /* const userExists = getUserbyUsername(user);
+        const userExists = getUserbyUsername(user);
         if (userExists) {
             //this means the suers is already int he database, not a new user
             return false;
-        } else {
+        } 
+        else {
             const userToAdd = new userModel(user);
             const savedUser = await userToAdd.save();
             return savedUser;
-        } */
+        }
+        /*
         const userToAdd = new userModel(user);
         const savedUser = await userToAdd.save();
         return savedUser;
+        */
 
     } catch (error) {
         console.log("1" + error);
