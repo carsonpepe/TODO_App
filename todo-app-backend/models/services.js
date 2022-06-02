@@ -33,7 +33,7 @@ async function addUser(user) {
     console.log('enter adduser function');
     try {
         const userExists = getUserbyUsername(user);
-        console.log('finished getuserbyusername successfully');
+        console.log('finished getuserbyusername successfully'+ userExists);
         if (userExists) {
             //this means the suers is already int he database, not a new user
             return false;
@@ -66,7 +66,7 @@ async function getUserbyUsername(user){
             } else {
                 return docs;
             }
-        })
+        });
     } 
     catch (error) {
         console.log("3"+ error);
