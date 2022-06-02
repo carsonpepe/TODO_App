@@ -65,7 +65,7 @@ async function getUserbyUsername(user){
                 console.log("2" + err);
                 return false;
             } else {
-                return await docs;
+                return docs;
             }
         });
     } 
