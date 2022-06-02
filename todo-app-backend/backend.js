@@ -10,6 +10,7 @@ const cors = require('cors');
 
 app.all('/', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "https://dodo-pro.herokuapp.com/");
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000/");
     next()
 });
 
