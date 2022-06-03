@@ -123,9 +123,13 @@ async function getUserSettings(id){
 
 async function findTodosByCategory(id, category_name) {
     const currentUser = findUserById(id);
-    currentUser.todoItems.find({category: category_name, completed: false});
-    const savedTodo = await currentUser.save();
-    return savedTodo;
+    if(currentUser){
+        currentUser.todoItems.find({category: category_name, completed: false});
+        const savedTodo = await currentUser.save();
+        return savedTodo;
+    }
+    else
+        return false
 }
 
 async function findTodosByCompleted(id, complete_val) {
