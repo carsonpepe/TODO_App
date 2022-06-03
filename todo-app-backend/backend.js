@@ -79,7 +79,7 @@ app.post('/users', async (req, res) => {
 //Endpoint for Getting TODOS from a user, query
 app.get('/users/:id/todoItems', async (req, res) => {
     console.log(req.params);
-    const id = req.params["id"].slice(1); // THIS LINE RETURNS NULL 
+    const id = req.params["id"]; // THIS LINE RETURNS NULL 
     if (!req.params) {
         console.log("No params passed");
     }
