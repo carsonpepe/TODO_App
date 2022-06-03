@@ -31,7 +31,7 @@ async function addUser(user) {
     console.log('enter adduser function');
     try {
         const userExists = await getUserbyUsername(user);
-        console.log('finished getuserbyusername successfully'+ userExists);
+        console.log('finished getuserByusername successfully'+ userExists);
         if (userExists) {
             //this means the suers is already int he database, not a new user
             console.log('user exists');
@@ -78,7 +78,7 @@ async function addCategory(id, category) {
 }
 
 //returns a user based on the provided username
-async function getUserbyUsername(user){
+async function getUserByUsername(user){
     console.log(user["name"]);
     try {
         userModel.find({name: user["name"]}, await function (err, docs) {
@@ -224,7 +224,7 @@ exports.addTodo = addTodo;
 exports.findUserById = findUserById;
 exports.addUser = addUser;
 exports.deleteUser = deleteUser;
-exports.getUserbyUsername = getUserbyUsername;
+exports.getUserByUsername = getUserByUsername;
 exports.findUserById = findUserById;
 exports.findTodosByCategory = findTodosByCategory;
 exports.markCompleted = markCompleted;
