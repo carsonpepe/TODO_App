@@ -26,7 +26,9 @@ app.get("/", (req, res) => {
 app.get('/users', async (req, res) => {
     const name = req.query.name;
     if (name != undefined){
-        const result = await services.getUserByUsername(name);
+        // const result = await services.getUserByUsername(name);
+        services.getUserByUsername(name).then(result => console.log(result));
+        result = 0;
         console.log(result);
         if (result)
             res.status(200).send(result);

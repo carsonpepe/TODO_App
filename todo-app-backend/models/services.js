@@ -88,6 +88,7 @@ async function getUserByUsername(username){
             } else {
                 console.log("find() didn't fail");
                 //console.log(docs);
+                console.log("docs hit");
                 return docs;
             }
         });
