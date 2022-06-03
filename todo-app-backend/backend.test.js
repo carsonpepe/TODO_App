@@ -1,5 +1,9 @@
 const services = require("./models/services");
 
+test("test query user by username", async() =>{
+    
+});
+
 test("test db add and query user", async() =>{
     const newUser = {
         username: "ppang",
