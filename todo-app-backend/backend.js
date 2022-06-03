@@ -24,6 +24,7 @@ app.get("/", (req, res) => {
 
 // used when login
 app.get('/users', async (req, res) => {
+    const userModel = require("./user");
     const name = req.query.name;
     if (name != undefined){
         try {
