@@ -109,7 +109,7 @@ function MyApp(){
     async function makeGetCallDatedTodos(){
         try {
             console.log("makeGetCallDatedTodos1");
-            const response = await axios.get(API_BASE_URL + `/users/:${currentPage.userID}/todoItems?date!=false`);
+            const response = await axios.get(API_BASE_URL + `/users/:${currentPage.userID}/todoItems?startDate!=false`);
             console.log("fmakeGetCallDatedTodos2");
         } catch (error) {
             console.log(error);

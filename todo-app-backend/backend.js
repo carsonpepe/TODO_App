@@ -37,7 +37,7 @@ app.get('/users', async (req, res) => {
 
 //endpoint to get a user value by ID
 app.get('/users/:id', async (req, res) => {
-    const id = req.params['id'];
+    const id = req.params._id;
     console.log("calling findUserById");
     let result = await services.findUserById(id);
     if (result === undefined || result.length == 0)
@@ -48,10 +48,9 @@ app.get('/users/:id', async (req, res) => {
     }
 });
 
-//endpoint that adds a user
+//endpoint that adds a todo
 app.post("users/:id/todoItems", async (req, res) => {
-    
-    const id = req.params['id'];
+    const id = req.params._id;
     const todoData = req.body;
     const tdi = await services.addTodo(id, todoData);
     if (tdi) res.status(200).send(tdi);
@@ -79,30 +78,63 @@ app.post('/users', async (req, res) => {
 
 //Endpoint for Getting TODOS from a user, query
 app.get('/users/:id/todoItems', async (req, res) => {
-    const id = req.params['id'];
-    console.log("about to getTodos()");
-    //const query = req.query ?? why commented??
-    // was trying to revert it back to original
-    // if you're trying to test it i'll leave alone
-    let result = await services.getTodos(id, req.query);
+    const id = req.params._id;
+    const completed = req.query.completed;
+    const categories = req.query.categories;
+    if (completed === undefined && categories === undefined) {
+        try {
+            console.log("about to getTodos()");
+            const result = await services.getTodos(id);
+            res.status(200).send(result);
+        } catch (error){
+            console.log("Mongoose error: " + error);
+            res.status(500).send("An error ocurred in the server.");
+        }
+    } else if (completed === undefined){
+        try {
+            const result = await services.findTodosByCategory(id, categories);
+            res.status(200).send(result);
+        } catch (error){
+            console.log("Mongoose error: " + error);
+            res.status(500).send("An error ocurred in the server.");
+        }
+    } else {
+        try {
+            const result = await services.findTodosByCompleted(id, completed);
+            res.status(200).send(result);
+        } catch (error){
+            console.log("Mongoose error: " + error);
+            res.status(500).send("An error ocurred in the server.");
+        }
+        
+    }
+
+/*     let result = await services.getTodos(id);
     if (result === undefined || result.length == 0)
         res.status(404).send('Resource not found.');
     else {
         console.log("successfully got getTodos()");
         res.status(200).send(result);
-    }
+    } */
 });
 //just query for whole settings object, should always get whole thing at once
 app.get('/users/:id/settings', async (req, res) => {
     console.log("entered backend.js get settings")
     const id = req.params['id'];
     /* let user = await services.findUserById(id); */
-    let result = await services.getUserSettings(id);
-    if (result === undefined)
+    try {
+        const result = await services.getUserSettings(id);
+        res.status(200).send(result);
+    } catch (error){
+        console.log("Mongoose error: " + error);
+        res.status(500).send("An error ocurred in the server.");
+    }
+    
+/*     if (result === undefined)
         res.status(404).send('Resource not found.');
     else {
         res.status(200).send(result);
-    }
+    } */
 });
 
 app.delete('/users/:id', async (req, res) => {

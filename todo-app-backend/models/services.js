@@ -104,11 +104,10 @@ async function findUserById(id) {
 
 // theoretical function to replace all get-todos based on whatever props given
 //magic todo get
-async function getTodos(id, query){
+async function getTodos(id){
     const currentUser = await findUserById(id);
-    console.log("query = ", query)
-    foundTODOs = await currentUser.todoItems.find(query);
-    return foundTODOs
+    foundTODOs = currentUser.todoItems;
+    return foundTODOs;
 }
 
 async function getUserSettings(id){
@@ -126,7 +125,7 @@ async function findTodosByCategory(id, category_name) {
 
 async function findTodosByCompleted(id, complete_val) {
     const currentUser = findUserById(id);
-    currentUser.todoItems.find({completed: true});
+    currentUser.todoItems.find({completed: complete_val});
     const savedTodos = await currentUser.save();
     return savedTodos;
 }
