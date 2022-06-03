@@ -5,12 +5,14 @@ import './Credentials.css';
 const LOGIN_PAGE_STATE = 1;
 const SIGN_UP_PAGE_STATE = 2;
 
-function Credentials(){
+function Credentials(props){
 
     function handleButtonPress(event){
         const {value, name} = event.currentTarget;
         props.handlePageView({pageState: value, userID: name});
     }
+
+    console.log("running credentials");
 
     return (
         <div className='credentials'>
@@ -18,10 +20,10 @@ function Credentials(){
             <form className='form-style-9'>
                 <ul>
                     <li>
-                        <button className='button-login' name="login" onClick={handleButtonPress}>Login</button> 
+                        <button className='button-login' name="login" value={LOGIN_PAGE_STATE} onClick={handleButtonPress}>Login</button> 
                     </li>
                     <li>
-                        <button className='button-signUp' name="signup" onClick={handleButtonPress}>Sign Up</button> 
+                        <button className='button-signUp' name="signup" value={SIGN_UP_PAGE_STATE} onClick={handleButtonPress}>Sign Up</button> 
                     </li>
                 </ul>
             </form>

@@ -264,6 +264,7 @@ function MyApp(){
     }
 
     function changeCurrentPage(currentPageState) {
+        console.log("trying to change current page");
         setCurrentPage(currentPageState);
     }
 
