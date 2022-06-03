@@ -5,9 +5,9 @@ name: Frontend Node CI/CD
 
 on:
   push:
-    branches: [main]
+    branches: [main:ci-cd-test]
   pull_request:
-    branches: [main]
+    branches: [main:ci-cd-test]
 
 defaults:
   run:
