@@ -9,34 +9,6 @@ import './MyApp.css';
 
 import axios from 'axios';
 
-/* var data = JSON.stringify({
-    "collection": "users",
-    "database": "test",
-    "dataSource": "DODOpro",
-    "projection": {
-        "_id": 1
-    }
-});
-            
-var config = {
-    method: 'post',
-    url: 'https://data.mongodb-api.com/app/data-wbrjr/endpoint/data/beta/action/findOne',
-    headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Request-Headers': '*',
-        'api-key': 'PJahpeZEdssPw3bhrJSLEmOaT6GoXMCLhQCSnakJI6MDq8cb5vMcVFDK0Mun5PP4'
-    },
-    data : data
-};
-            
-axios(config)
-    .then(function (response) {
-        console.log(JSON.stringify(response.data));
-    })
-    .catch(function (error) {
-        console.log(error);
-    }); */
-
 const API_BASE_URL = "https://dodo-pro-backend.herokuapp.com";
 //const API_BASE_URL= "https://data.mongodb-api.com/app/data-wbrjr/endpoint/data/v1";
 
