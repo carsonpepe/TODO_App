@@ -5,8 +5,9 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
+/*
 mongoose.set("debug", true);
-
+*/
 mongoose
     .connect(
         "mongodb+srv://" +
@@ -17,7 +18,9 @@ mongoose
         process.env.MONGO_DB +
         "." +
         process.env.MONGO_CLUSTER +
-        "/?retryWrites=true&w=majority",
+        "/" +
+        "DODOpro" +
+        "?retryWrites=true&w=majority",
         {
             useNewUrlParser: true,
             useUnifiedTopology: true,
@@ -27,19 +30,25 @@ mongoose
 
 // function to add a new user to the backend
 async function addUser(user) {
+    console.log('enter adduser function');
     try {
-        /* const userExists = getUserbyUsername(user);
+        const userExists = getUserbyUsername(user);
+        console.log('finished getuserbyusername successfully'+ userExists);
         if (userExists) {
             //this means the suers is already int he database, not a new user
+            console.log('user exists');
             return false;
-        } else {
+        } 
+        else {
             const userToAdd = new userModel(user);
             const savedUser = await userToAdd.save();
             return savedUser;
-        } */
+        }
+        /*
         const userToAdd = new userModel(user);
         const savedUser = await userToAdd.save();
         return savedUser;
+        */
 
     } catch (error) {
         console.log("1" + error);
@@ -58,7 +67,7 @@ async function getUserbyUsername(user){
             } else {
                 return docs;
             }
-        })
+        });
     } 
     catch (error) {
         console.log("3"+ error);
@@ -173,3 +182,14 @@ exports.addTodo = addTodo;
 exports.findUserById = findUserById;
 exports.addUser = addUser;
 exports.deleteUser = deleteUser;
+exports.getUserbyUsername = getUserbyUsername;
+exports.findUserById = findUserById;
+exports.findTodosByCategory = findTodosByCategory;
+exports.markCompleted = markCompleted;
+exports.markUncomplete = markUncomplete;
+exports.removeCompleted = removeCompleted;
+exports.changeDescription = changeDescription;
+exports.changeTitle = changeTitle;
+exports.turnNotificationsOn = turnNotificationsOn;
+exports.turnNotificationsOff = turnNotificationsOff;
+exports.changeCategory = changeCategory;

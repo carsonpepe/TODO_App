@@ -8,6 +8,12 @@ const port = 5000;
 
 const cors = require('cors');
 
+app.all('/', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "https://dodo-pro.herokuapp.com/");
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000/");
+    next()
+});
+
 app.use(cors());
 app.use(express.json());
 
@@ -79,7 +85,7 @@ app.post('/users', async (req, res) => {
     //console.log("app.post");
     const userToAdd = req.body;
     const savedUser = await services.addUser(userToAdd);
-    if (savedUser) res.status(201).send(savedUser);
+    if (savedUser) res.status(201).end();
     else {
         console.log(userToAdd);
         console.log(savedUser);
