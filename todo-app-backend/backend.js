@@ -26,13 +26,22 @@ app.get("/", (req, res) => {
 app.get('/users', async (req, res) => {
     const name = req.query.name;
     if (name != undefined){
-        const result = await services.getUserByUsername(name);
-        console.log(result);
-        if (result)
-            res.status(200).send(result);
-        else {
-            res.status(405).send('Resource not found.');
-        }
+        // const result = await services.getUserByUsername(name);
+        services.getUserByUsername(name).then(result => {
+            console.log(result);
+            if (result)
+                res.status(200).send(result);
+            else {
+                res.status(405).send('Resource not found.');
+            }
+        });
+
+        // console.log(result);
+        // if (result)
+        //     res.status(200).send(result);
+        // else {
+        //     res.status(405).send('Resource not found.');
+        // }
     }
 });
 
