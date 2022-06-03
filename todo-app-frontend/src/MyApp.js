@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import axios from 'axios';
 import './MyApp.css';
 
@@ -262,16 +262,6 @@ function MyApp(){
             }
         });
     }
-
-    useEffect(() => {
-        
-
-        fetchAllTODO().then(result => {
-            if(result){
-                setTodos(result);
-            }
-        });
-    });
 
     function changeCurrentPage(currentPageState) {
         setCurrentPage(currentPageState);
