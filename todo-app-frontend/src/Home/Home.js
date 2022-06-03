@@ -10,6 +10,8 @@ import './Home.css';
 const PLANNER_VIEW_TYPE = 2;
 
 function Home(props) {
+    const [todos, setTodos] = useState([]);
+    const [categories, setCategories] = useState([]);
     const [centerView, setView] = useState(
         {
             viewType: PLANNER_VIEW_TYPE,
@@ -24,15 +26,15 @@ function Home(props) {
     }
 
     useEffect(() => {
-        props.fetchAllTODO().then(result => {
+        props.fetchAllTodo().then(result => {
             if(result){
-                props.setTodos(result);
+                setTodos(result);
             }
         });
 
         props.fetchAllCategories().then(result => {
             if(result){
-                props.setCategories(result);
+                setCategories(result);
             }
         });
 
@@ -59,7 +61,8 @@ function Home(props) {
                         getCompletedTodos={props.getCompletedTodos}/>
                 </div>
                 <div key="rightbar" className="col-md-4">
-                    <Rightbar fetchAllTODO={props.fetchAllTODO} deleteTODO={props.removeOneTODO}/>
+{/*                     //<Rightbar fetchAllTodo={props.fetchAllTodo} deleteTODO={props.removeOneTODO}/>*/}
+                    <Rightbar allTodos={todos} deleteTODO={props.removeOneTODO}/>
                 </div>
             </div>
         </div>

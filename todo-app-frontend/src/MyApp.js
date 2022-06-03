@@ -42,7 +42,7 @@ function MyApp(){
                 handlePageView={changeCurrentPage} 
                 removeOneTODO={removeOneTODO} 
                 updateListCategories={addNewCategory} 
-                fetchAllTODO={fetchAllTODO}
+                fetchAllTodo={fetchAllTodo}
                 setTodos={setTodos}
                 fetchAllCategories={fetchAllCategories}
                 setCategories={setCategories}
@@ -56,7 +56,7 @@ function MyApp(){
         }   
     }
 
-    async function fetchAllTODO(){
+    async function fetchAllTodo(){
         try {
             console.log("fetchAllTODO1");
             console.log(currentPage._id)
