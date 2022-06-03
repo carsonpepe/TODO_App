@@ -62,7 +62,6 @@ app.post("users/:id/todoItems", async (req, res) => {
 });
 
 app.post('/users', async (req, res) => {
-    //console.log("app.post");
     const userToAdd = req.body;
     const savedUser = await services.addUser(userToAdd);
     if (savedUser) {
