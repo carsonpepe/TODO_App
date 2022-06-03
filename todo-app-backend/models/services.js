@@ -107,6 +107,9 @@ async function findUserById(id) {
 async function getTodos(id){
     const currentUser = await findUserById(id);
     foundTODOs = currentUser.todoItems;
+    if (!foundTodos) {
+        return [];
+    }
     return foundTODOs;
 }
 

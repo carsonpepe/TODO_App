@@ -59,7 +59,7 @@ function Home(props) {
                         getCompletedTodos={props.getCompletedTodos}/>
                 </div>
                 <div key="rightbar" className="col-md-4">
-                    <Rightbar todoData={props.todos} deleteTODO={props.removeOneTODO}/>
+                    <Rightbar fetchAllTODO={props.fetchAllTODO} deleteTODO={props.removeOneTODO}/>
                 </div>
             </div>
         </div>
