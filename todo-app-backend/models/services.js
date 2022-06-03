@@ -74,6 +74,7 @@ async function getUserbyUsername(user){
                 console.log("2" + err);
                 return false;
             } else {
+                console.log("found existing user");
                 return docs;
             }
         });
