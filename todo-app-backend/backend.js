@@ -24,25 +24,14 @@ app.get("/", (req, res) => {
 
 // used when login
 app.get('/users', async (req, res) => {
-    const userModel = require("./user");
     const name = req.query.name;
     if (name != undefined){
-        try {
-            userModel.findOne({"name": username}, await function (err, docs) {
-                if (err) {
-                    console.log("2" + err);
-                    res.status(405).send('Resource not found.');
-                } else {
-                    console.log("find() didn't fail");
-                    //console.log(docs);
-                    console.log("docs hit");
-                    res.status(200).send(docs);
-                }
-            });
-        } 
-        catch (error) {
-            console.log("3"+ error);
-            res.status(404).send('Error trying to findOne()');
+        const result = await services.getUserByUsername(name);
+        console.log(result);
+        if (result)
+            res.status(200).send(result);
+        else {
+            res.status(405).send('Resource not found.');
         }
     }
 });
