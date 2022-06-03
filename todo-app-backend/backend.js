@@ -79,7 +79,7 @@ app.get('/users/:id/todoItems', async (req, res) => {
     //const query = req.query ?? why commented??
     // was trying to revert it back to original
     // if you're trying to test it i'll leave alone
-    let result = await services.getTodos(id, query);
+    let result = await services.getTodos(id, req.query);
     if (result === undefined || result.length == 0)
         res.status(404).send('Resource not found.');
     else {
