@@ -44,12 +44,6 @@ async function addUser(user) {
             const savedUser = await userToAdd.save();
             return savedUser;
         }
-        
-        /*
-        const userToAdd = new userModel(user);
-        const savedUser = await userToAdd.save();
-        return savedUser;
-        */
 
     } catch (error) {
         console.log("1" + error);
