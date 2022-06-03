@@ -30,7 +30,7 @@ mongoose
 async function addUser(user) {
     console.log('enter adduser function');
     try {
-        const userExists = await getUserbyUsername(user);
+        const userExists = await getUserbyUsername(user.name);
         console.log('finished getuserByusername successfully'+ userExists);
         if (userExists) {
             //this means the suers is already int he database, not a new user
@@ -78,10 +78,10 @@ async function addCategory(id, category) {
 }
 
 //returns a user based on the provided username
-async function getUserByUsername(user){
-    console.log(user["name"]);
+async function getUserByUsername(username){
+    console.log(username);
     try {
-        userModel.find({name: user["name"]}, await function (err, docs) {
+        userModel.find({name: username}, await function (err, docs) {
             if (err) {
                 console.log("2" + err);
                 return false;
