@@ -98,12 +98,27 @@ async function addTodo(id, todoItem) {
 
     return await todoModel.find({})
 } */
+async function getTodos(id, query){
+    const currentUser = findUserById(id);
+    console.log("103 query = ", query)
+    currentUser.todoItems.find(query);
+    
+}
+
+
 
 async function findTodosByCategory(id, category_name) {
     const currentUser = findUserById(id);
-    currentUser.find({category: category_name});
+    currentUser.todoItems.find({category: category_name, completed: false});
     const savedTodo = await currentUser.save();
     return savedTodo;
+}
+
+async function findTodosByCompleted(id, complete_val) {
+    const currentUser = findUserById(id);
+    currentUser.todoItems.find({completed: true});
+    const savedTodos = await currentUser.save();
+    return savedTodos;
 }
 
 async function markCompleted(id, todo_id){

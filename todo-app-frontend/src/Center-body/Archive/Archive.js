@@ -2,7 +2,7 @@ import React from "react"
 import './Archive.css'
 import moment from 'moment'
 
-function Archive(){
+function Archive(props){
 
     function getCompleted(){
         const completed = [
@@ -22,6 +22,7 @@ function Archive(){
         return completed;
     }
     const completed = getCompleted();
+    //const completedTodos = props.getCompletedTodos();
 
     return (
         

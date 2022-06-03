@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react'
+import CenterBody from './Center-body/CenterBody';
+import Header from './Header/Header';
+import Leftbar from './Leftbar/Leftbar';
+import Rightbar from './Rightbar/Rightbar';
+import {useLocation} from 'react-router-dom';
+import axios from 'axios';
+import './MyApp.css';
 
 import Credentials from './Credentials/Credentials';
 import Login from './Credentials/Login/Login';
 import SignUp from './Credentials/Sign-up/SignUp';
 import Home from './Home/Home';
-
-import './MyApp.css';
-
-import axios from 'axios';
 
 const API_BASE_URL = "https://dodo-pro-backend.herokuapp.com";
 //const API_BASE_URL= "https://data.mongodb-api.com/app/data-wbrjr/endpoint/data/v1";
@@ -24,6 +27,10 @@ const API_USER = 'user';
 
 
 function MyApp(){
+
+    const location = useLocation();
+    let username = location.state;
+    
 
     const [todos, setTodos] = useState([]);
     const [categories, setCategories] = useState([]);
@@ -55,7 +62,8 @@ function MyApp(){
                 setCategories={setCategories}
                 addTodoItem={addTodoItem}
                 getDatedTodos={makeGetCallDatedTodos}
-                getSettings={makeGetCallSettings}/>
+                getSettings={makeGetCallSettings}
+                getCompletedTodos={makeGetCallCompletedTodos}/>
             );
         }else {
             return <Credentials handlePageView={changeCurrentPage}/>;
@@ -105,6 +113,15 @@ function MyApp(){
     async function makeGetCallDatedTodos(){
         try {
             const response = await axios.get(API_BASE_URL + `/users/:${currentPage.userID}/todoItems?date!=false`);
+        } catch (error) {
+            console.log(error);
+            return false;
+        }
+    }
+
+    async function makeGetCallCompletedTodos(){
+        try{
+            const response = await axios.get(API_BASE_URL + `/users/:${currentPage.userID}/todoItems?completed=true`);
         } catch (error) {
             console.log(error);
             return false;
@@ -248,6 +265,7 @@ function MyApp(){
         })
     }
 
+
     function addNewCategory(category){
         makePostCallCategory(category).then(result => {
             if(result && result.status === 201){
@@ -257,6 +275,15 @@ function MyApp(){
         });
     }
 
+    useEffect(() => {
+        
+
+        fetchAllTODO().then(result => {
+            if(result){
+                setTodos(result);
+            }
+        });
+    });
 
     function changeCurrentPage(currentPageState) {
         setCurrentPage(currentPageState);

@@ -36,6 +36,7 @@ function NewTodo(props){
     }
 
     let categories = getCats();
+    //let categories = props.getAllCategories()
 
     let dropdown = categories,
         MakeItem = function(X) {
@@ -48,7 +49,8 @@ function NewTodo(props){
             _id: "",
             title: "",
             description: "",
-            date: "",
+            startDate: "",
+            endDate: "",
             category: "",
             completed: false,
             notifToggle: false,
@@ -63,7 +65,8 @@ function NewTodo(props){
                 {
                     title: value, 
                     description: newTodo['description'], 
-                    date: newTodo['date'], 
+                    startDate: newTodo['startDate'], 
+                    endDate: newTodo['endDate'],
                     category: newTodo['category'],
                 }
             );
@@ -72,16 +75,18 @@ function NewTodo(props){
                 {
                     title: newTodo['title'], 
                     description: value, 
-                    date: newTodo['date'], 
+                    startDate: newTodo['startDate'], 
+                    endDate: newTodo['startData'],
                     category: newTodo['category'],
                 }
             );
-        } else if (name === "date") {
+        } else if (name === "startDate") {
             setNewTodo(
                 {
                     title: newTodo['title'], 
                     description: newTodo['description'], 
-                    date: value, 
+                    startDate: value, 
+                    endDate: value,
                     category: newTodo['category'],
                 }
             );
@@ -90,7 +95,8 @@ function NewTodo(props){
                 {
                     title: newTodo['title'], 
                     description: newTodo['description'], 
-                    date: newTodo['date'], 
+                    startDate: newTodo['startDate'], 
+                    endDate: newTodo['endDate'],
                     category: value,
                 }
             );
@@ -100,7 +106,7 @@ function NewTodo(props){
     function submitNewTodo() {
         props.addTodoItems(newTodo);
         props.updateTodos(newTodo);
-        setNewTodo({title: '', description: '', date: '', category: ''});
+        setNewTodo({title: '', description: '', startDate: '', endDate: '', category: ''});
     }
 
     return (
@@ -141,7 +147,7 @@ function NewTodo(props){
                             type="date"
                             name="date"
                             id="date"
-                            value={newTodo.date}
+                            value={newTodo.startDate}
                             onChange={handleChange} 
                         />
                         <select className='field-style field-split align-right'>

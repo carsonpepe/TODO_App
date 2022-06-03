@@ -26,11 +26,11 @@ function CenterBody(props){
         if(currentState == SETTINGS_VIEW){
             return <Settings getSettings={props.getSettings}/>;
         }else if(currentState == ADD_VIEW){
-            return <NewTodo categoryData={props.categoryData} addTodoItem={props.addTodoItem}/>;
+            return <NewTodo categoryData={props.getAllCategories} addTodoItem={props.addTodoItem}/>;
         }else if(currentState == PLANNER_VIEW){
             return <Planner getDatedTodos={props.getDatedTodos}/>;
         }else if(currentState == ARCHIVE_VIEW) {
-            return <Archive tododata={props.todoData}/>;
+            return <Archive getCompletedTodos={props.getCompletedTodos}/>;
         }else if(currentState == CATEGORY_VIEW){
             return <Categories categoryName={currentCat} todoData={props.todoData} />;
         }else if(currentState == ADD_CATEGORY_VIEW){
@@ -38,8 +38,6 @@ function CenterBody(props){
         }else {
             return <Planner tododata={props.todoData}/>;
         }
-
-         
     }
 
     return (

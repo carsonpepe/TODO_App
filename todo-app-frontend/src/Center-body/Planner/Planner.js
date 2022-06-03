@@ -1,7 +1,7 @@
 import React, {Fragment, useMemo} from "react"
 import './Planner.css';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import moment from 'moment'
+import moment from 'moment';
 import 'moment-timezone'
 import PropTypes from 'prop-types'
 import {Calendar, Views, DateLocalizer, momentLocalizer} from 'react-big-calendar'
@@ -28,30 +28,30 @@ function Planner({
             {
                 title: "Buy 2% milk",
                 category: null,
-                // start: new Date(2022, 5, 13, 0, 0, 0),
+                // startDate: new Date(2022, 5, 13, 0, 0, 0),
                 // end: new Date(2016, 5, 20, 0, 0, 0),
-                start: moment('2022/05/03').toDate(),
+                startDate: moment('2022/05/03').toDate(),
                 end: moment('2022/05/03').toDate(),
                 complete: false
             },
             {
                 title: "Finish sprint 1 [csc307]",
                 category: "School",
-                start: moment('2022/05/11').toDate(),
+                startDate: moment('2022/05/11').toDate(),
                 end: moment('2022/05/12').toDate(),
                 complete: false
             },
             {
                 title: "Buy salad",
                 category: "Groceries",
-                start: moment('2022/05/03 11:30').toDate(),
+                startDate: moment('2022/05/03 11:30').toDate(),
                 end: moment('2022/05/03 12:45').toDate(),
                 complete: false
             },
             {
                 title: "Surf at Pismo",
                 category: "Workout",
-                start: moment('2022/05/07').toDate(),
+                startDate: moment('2022/05/07').toDate(),
                 end:moment('2022/05/08').toDate(),
                 complete: false
             },
@@ -59,8 +59,8 @@ function Planner({
 
         return todos;
     }
-    //const todos = getTodos();
-    const todos = props.getDatedTodos();
+    const todos = getTodos();
+    //const todos = props.getDatedTodos();
 
     const {components, views} = useMemo(
         () => ({

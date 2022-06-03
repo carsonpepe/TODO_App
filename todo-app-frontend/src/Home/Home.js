@@ -54,7 +54,9 @@ function Home(props) {
                         addTodoItem={props.addTodoItem}
                         getDatedTodos={props.getDatedTodos}
                         getSettings={props.getSettings}
-                        addNewCategory={props.addNewCategory}/>
+                        addNewCategory={props.addNewCategory}
+                        getAllCategories={props.fetchAllCategorires}
+                        getCompletedTodos={props.getCompletedTodos}/>
                 </div>
                 <div key="rightbar" className="col-md-4">
                     <Rightbar todoData={props.todos} deleteTODO={props.removeOneTODO}/>

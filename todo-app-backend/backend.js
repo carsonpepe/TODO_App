@@ -21,6 +21,8 @@ app.get("/", (req, res) => {
     res.send("Hello World!");
 });
 
+
+// used when signing in
 app.get('/users', async (req, res) => {
     const name = req.query.name;
     if (name != undefined){
@@ -42,6 +44,14 @@ app.get('/users/:id', async (req, res) => {
     else {
         res.status(200).send(result);
     }
+});
+
+app.get('/users/:id/todoItems', async (req, res) => {
+    const id = req.params['id'];
+    const startDate = req.query.startDate;
+    const completed = req.query.completed;
+    let result = services.findTodosByCompleted(id, completed);
+
 });
 
 app.get('/users/:id/todoItems', async (req, res) => {
@@ -85,7 +95,7 @@ app.post('/users', async (req, res) => {
     //console.log("app.post");
     const userToAdd = req.body;
     const savedUser = await services.addUser(userToAdd);
-    if (savedUser) res.status(201).end();
+    if (savedUser) res.status(201).send(savedUser);
     else {
         console.log(userToAdd);
         console.log(savedUser);
