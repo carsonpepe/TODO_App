@@ -42,7 +42,7 @@ async function addUser(user) {
         else {
             const userToAdd = new userModel(user);
             const savedUser = await userToAdd.save();
-            return savedUser;
+            return userToAdd;
         }
 
     } catch (error) {
@@ -51,15 +51,30 @@ async function addUser(user) {
     }
 }
 
+// Todo Services
+async function addTodo(id, todoItem) {
+    try {
+        const currentUser = findUserById(id);
+        const newTodo = new todoModel(todoItem);
+        currentUser.todoItems.push(newTodo);
+        const savedTodo = await currentUser.save();
+        return savedTodo;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+}
+
 //returns a user based on the provided username
 async function getUserbyUsername(user){
     console.log(user["name"]);
     try {
-        userModel.find({name: user["name"]}, function (err, docs) {
+        userModel.find({name: user["name"]}, await function (err, docs) {
             if (err) {
                 console.log("2" + err);
                 return false;
             } else {
+                console.log("found existing user");
                 return docs;
             }
         });
@@ -79,32 +94,27 @@ async function findUserById(id) {
     }
 }
 
-// Todo Services
-async function addTodo(id, todoItem) {
-    try {
-        const currentUser = findUserById(id);
-        const newTodo = new todoModel(todoItem);
-        currentUser.todoItems.push(newTodo);
-        const savedTodo = await currentUser.save()
-        return savedTodo;
-    } catch (error) {
-        console.log(error);
-        return false;
-    }
-}
+
 
 /* async function findTodosByCategory(id, category) {
     const currentUser = findUserById(id);
 
     return await todoModel.find({})
 } */
+
+// theoretical function to replace all get-todos based on whatever props given
+//magic todo get
 async function getTodos(id, query){
-    const currentUser = findUserById(id);
-    console.log("103 query = ", query)
-    currentUser.todoItems.find(query);
-    
+    const currentUser = await findUserById(id);
+    console.log("query = ", querygetUsersettings)
+    foundTODOs = await currentUser.todoItems.find(query);
+    return foundTODOs
 }
 
+async function getUserSettings(id){
+    const currentUser = await findUserById(id);
+    return currentUser.settings;
+}
 
 
 async function findTodosByCategory(id, category_name) {
@@ -203,3 +213,6 @@ exports.changeTitle = changeTitle;
 exports.turnNotificationsOn = turnNotificationsOn;
 exports.turnNotificationsOff = turnNotificationsOff;
 exports.changeCategory = changeCategory;
+exports.getUserSettings = getUserSettings;
+exports.getTodos = getTodos;
+exports.findTodosByCompleted = findTodosByCompleted;

@@ -58,8 +58,8 @@ function Rightbar(props){
 
         return todos;
     }
-    //const todos = getTodos();
-    const todos = props.todoData;
+    const todos = getTodos();
+    //const todos = props.todoData;
 
     return (
         

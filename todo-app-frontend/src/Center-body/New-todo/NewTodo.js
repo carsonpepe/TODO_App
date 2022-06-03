@@ -46,15 +46,14 @@ function NewTodo(props){
 
     const [newTodo, setNewTodo] = useState(
         {
-            _id: "",
             title: "",
             description: "",
             startDate: "",
             endDate: "",
             category: "",
             completed: false,
-            notifToggle: false,
-            notifTimes: [],
+            notificationToggle: false,
+            notificationTimes: [],
         }
     );
 
@@ -68,45 +67,66 @@ function NewTodo(props){
                     startDate: newTodo['startDate'], 
                     endDate: newTodo['endDate'],
                     category: newTodo['category'],
+                    completed: newTodo['completed'],
+                    notificationToggle: newTodo['notificationToggle'],
+                    notificationTimes: newTodo['notificationTimes'],
                 }
             );
         } else if (name === "description") {
             setNewTodo(
                 {
-                    title: newTodo['title'], 
-                    description: value, 
+                    title: value, 
+                    description: newTodo['description'], 
                     startDate: newTodo['startDate'], 
-                    endDate: newTodo['startData'],
+                    endDate: newTodo['endDate'],
                     category: newTodo['category'],
+                    completed: newTodo['completed'],
+                    notificationToggle: newTodo['notificationToggle'],
+                    notificationTimes: newTodo['notificationTimes'],
                 }
             );
         } else if (name === "startDate") {
             setNewTodo(
                 {
-                    title: newTodo['title'], 
+                    title: value, 
                     description: newTodo['description'], 
-                    startDate: value, 
-                    endDate: value,
+                    startDate: newTodo['startDate'], 
+                    endDate: newTodo['endDate'],
                     category: newTodo['category'],
+                    completed: newTodo['completed'],
+                    notificationToggle: newTodo['notificationToggle'],
+                    notificationTimes: newTodo['notificationTimes'],
                 }
             );
         } else {
             setNewTodo(
                 {
-                    title: newTodo['title'], 
+                    title: value, 
                     description: newTodo['description'], 
                     startDate: newTodo['startDate'], 
                     endDate: newTodo['endDate'],
-                    category: value,
+                    category: newTodo['category'],
+                    completed: newTodo['completed'],
+                    notificationToggle: newTodo['notificationToggle'],
+                    notificationTimes: newTodo['notificationTimes'],
                 }
             );
         }
     }
 
     function submitNewTodo() {
-        props.addTodoItems(newTodo);
-        props.updateTodos(newTodo);
-        setNewTodo({title: '', description: '', startDate: '', endDate: '', category: ''});
+        props.addTodoItem(newTodo);
+        setNewTodo(
+            {
+                title: "", 
+                description: "", 
+                startDate: "", 
+                endDate: "",
+                category: "",
+                completed: false,
+                notificationToggle: false,
+                notificationTimes: [],
+        });
     }
 
     return (

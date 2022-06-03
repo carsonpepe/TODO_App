@@ -38,7 +38,10 @@ const TodoSchema = new mongoose.Schema({
     },
     // Date type doesn't save normally. If date is modified...
     // --> "doc.markModified('pathToDate');" THEN save
-    notificationTimes: [String],
+    notificationTimes: {
+        type: [String],
+        defualt: [],
+    },
 });
 
 module.exports = TodoSchema;

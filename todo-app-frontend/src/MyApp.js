@@ -182,9 +182,14 @@ function MyApp(){
     function submitNewUser(newUser){
         makePostCallUSER(newUser).then(result => {
             if (result.status === 201) {
+                if (result.data) {
+                    console.log("submit user data exists");
+                } else {
+                    console.log("no data retuned");
+                }
                 const _id = result.data._id;
                 const name = result.data.name;
-                console.log(name);
+                console.log(result.data);
                 setCurrentPage(
                     {
                         pageState: HOME_PAGE_STATE,
@@ -193,6 +198,21 @@ function MyApp(){
                 )
             } else {
                 console.log(result.status);
+            }
+        })
+    }
+
+    function addTodoItem(todoItem) {
+        makePostCallTODO(todoItem).then(result => {
+            if (result.status === 200) {
+                const _id = result.data._id;
+                const title = result.data.title;
+                console.log(_id);
+                console.log(title);
+                /* return result.data; */
+            } else {
+                console.log(result);
+                return false;
             }
         })
     }
@@ -214,16 +234,7 @@ function MyApp(){
         })
     }
 
-    function addTodoItem(todoItem) {
-        makePostCallTODO(todoItem).then(result => {
-            if (result && result.status === 200) {
-                return result.data;
-            } else {
-                console.log(result);
-                return false;
-            }
-        })
-    }
+
 
     function removeOneTODO(index){
         const rm_todo = todos.filter((todo, i) => {
@@ -264,7 +275,6 @@ function MyApp(){
     }
 
     function changeCurrentPage(currentPageState) {
-        console.log("trying to change current page");
         setCurrentPage(currentPageState);
     }
 

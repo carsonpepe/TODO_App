@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './Settings.css';
 
 function Settings(props){
-    const [settings, changeSettings] = useEffect(
+    const [settings, changeSettings] = useState(
         {
             deletionPeriod: "",
             theme: false,
@@ -14,10 +14,10 @@ function Settings(props){
     useEffect(() => {
         props.getSettings().then(result => {
             if(result){
-                changeSettings(result);
+                changeSettings(result.body);
             }
         });
-    }, [] );
+    }, [] ); 
 
     return (
         

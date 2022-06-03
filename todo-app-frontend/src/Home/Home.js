@@ -53,7 +53,7 @@ function Home(props) {
                         updateCategories={props.updateListCategories} 
                         addTodoItem={props.addTodoItem}
                         getDatedTodos={props.getDatedTodos}
-                        getSettings={props.getSettings}
+                        getSettings={props.makePostCallSettings}
                         addNewCategory={props.addNewCategory}
                         getAllCategories={props.fetchAllCategorires}
                         getCompletedTodos={props.getCompletedTodos}/>

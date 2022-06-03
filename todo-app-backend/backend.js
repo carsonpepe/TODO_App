@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require("mongoose");
 
-const services = require("./models/services")
+const services = require("./models/services");
 
 const app = express();
 const port = 5000;
@@ -22,7 +22,7 @@ app.get("/", (req, res) => {
 });
 
 
-// used when signing in
+// used when login
 app.get('/users', async (req, res) => {
     const name = req.query.name;
     if (name != undefined){
@@ -35,8 +35,8 @@ app.get('/users', async (req, res) => {
     }
 });
 
-
-app.get('/users/:id', async (req, res) => {
+//endpoint to get a user value by ID
+app.get('/users/:_id', async (req, res) => {
     const id = req.params['id'];
     let result = services.findUserById(id);
     if (result === undefined || result.length == 0)
@@ -46,38 +46,65 @@ app.get('/users/:id', async (req, res) => {
     }
 });
 
-app.get('/users/:id/todoItems', async (req, res) => {
+//endpoint that adds a user
+app.post("users/:_id/todoItems", async (req, res) => {
+    
     const id = req.params['id'];
-    const startDate = req.query.startDate;
-    const completed = req.query.completed;
-    let result = services.findTodosByCompleted(id, completed);
-
+    const todoData = req.body;
+    const tdi = await services.addTodo(id, todoData);
+    if (tdi) res.status(200).send(tdi);
+    else {
+        console.log(tdi);
+        console.log(req.body);
+        res.status(500).end();
+    }
 });
 
-app.get('/users/:id/todoItems', async (req, res) => {
-    // NOT DONE
-    const id = req.params['id'];
-    let result = services.findUserById(id);
+app.post('/users', async (req, res) => {
+    //console.log("app.post");
+    const userToAdd = req.body;
+    const savedUser = await services.addUser(userToAdd);
+    if (savedUser) {
+        console.log(savedUser._id)
+        res.status(201).send(savedUser);
+    }
+    else {
+        console.log(userToAdd);
+        console.log(savedUser);
+        res.status(500).end();
+    }
+});
+
+//Endpoint for Getting TODOS from a user, query
+app.get('/users/:_id/todoItems', async (req, res) => {
+    const id = req.params['_id'];
+
+    //const query = req.query ?? why commented??
+    // was trying to revert it back to original
+    // if you're trying to test it i'll leave alone
+    let result = await services.getTodos(id, req.query);
     if (result === undefined || result.length == 0)
+        res.status(404).send('Resource not found.');
+    else {
+        
+        res.status(200).send(result);
+    }
+});
+//just query for whole settings object, should always get whole thing at once
+app.get('/users/:_id/settings', async (req, res) => {
+    console.log("entered backend.js get settings")
+    const id = req.params['id'];
+    /* let user = await services.findUserById(id); */
+    let result = await services.getUserSettings(id);
+    if (result === undefined)
         res.status(404).send('Resource not found.');
     else {
         res.status(200).send(result);
     }
 });
 
-app.get('/users/:id/settings', async (req, res) => {
-    // NOT DONE
-    const id = req.params['id'];
-    let result = services.findUserById(id);
-    if (result === undefined || result.length == 0)
-        res.status(404).send('Resource not found.');
-    else {
-        res.status(200).send(result);
-    }
-});
-
-app.delete('/users/:id', async (req, res) => {
-    const id = req.params['id']; //or req.params.id
+app.delete('/users/:_id', async (req, res) => {
+    const id = req.params['_id']; //or req.params.id
     if (deleteUserById(id)) res.status(204).end();
     else res.status(404).send("Resource not found.");
 });
@@ -91,17 +118,6 @@ async function deleteUserById(id) {
     }
 }
 
-app.post('/users', async (req, res) => {
-    //console.log("app.post");
-    const userToAdd = req.body;
-    const savedUser = await services.addUser(userToAdd);
-    if (savedUser) res.status(201).send(savedUser);
-    else {
-        console.log(userToAdd);
-        console.log(savedUser);
-        res.status(500).end();
-    }
-});
 
 app.patch("/users/:id", async (req, res) => {
     const id = req.params["id"];
@@ -112,6 +128,8 @@ app.patch("/users/:id", async (req, res) => {
     else if (result === 500)
         res.status(500).send("An error ocurred in the server.");
 });
+
+
 
 async function updateUser(id, updatedUser) {
     try {
