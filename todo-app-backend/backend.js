@@ -38,11 +38,13 @@ app.get('/users', async (req, res) => {
 //endpoint to get a user value by ID
 app.get('/users/:id', async (req, res) => {
     const id = req.params['id'];
-    let result = services.findUserById(id);
+    console.log("calling findUserById");
+    let result = await services.findUserById(id);
     if (result === undefined || result.length == 0)
         res.status(404).send('Resource not found.');
     else {
         res.status(200).send(result);
+        console.log("successfully findUserByID");
     }
 });
 
@@ -78,7 +80,7 @@ app.post('/users', async (req, res) => {
 //Endpoint for Getting TODOS from a user, query
 app.get('/users/:id/todoItems', async (req, res) => {
     const id = req.params['id'];
-
+    console.log("about to getTodos()");
     //const query = req.query ?? why commented??
     // was trying to revert it back to original
     // if you're trying to test it i'll leave alone
@@ -86,7 +88,7 @@ app.get('/users/:id/todoItems', async (req, res) => {
     if (result === undefined || result.length == 0)
         res.status(404).send('Resource not found.');
     else {
-        
+        console.log("successfully got getTodos()");
         res.status(200).send(result);
     }
 });

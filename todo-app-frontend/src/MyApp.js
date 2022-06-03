@@ -60,7 +60,9 @@ function MyApp(){
 
     async function fetchAllTODO(){
         try {
+            console.log("fetchAllTODO1");
             const response = await axios.get(API_BASE_URL + `/users/:${currentPage.userID}/todoItems`);
+            console.log("fetchAllTODO2");
             return response;
         } catch (error){
             console.log(error);
@@ -70,7 +72,9 @@ function MyApp(){
 
     async function fetchAllCategories(){
         try {
+            console.log("fetchAllCategories1");
             const response = await axios.get(API_BASE_URL + `/users/:${currentPage.userID}/categories`);
+            console.log("fetchAllCategories2");
             return response;
         } catch (error){
             console.log(error);
@@ -80,7 +84,9 @@ function MyApp(){
 
     async function makeGetCallSettings(){
         try {
+            console.log("makeGetCallSettings1");
             const response = await axios.get(API_BASE_URL + `/users/:${currentPage.userID}/settings`);
+            console.log("makeGetCallSettings2");
             return response;
         } catch (error) {
             console.log(error);
@@ -90,7 +96,9 @@ function MyApp(){
 
     async function makeGetCallUSER(username){ 
         try {
+            console.log("makeGetCallUSER1");
             const response = await axios.get(API_BASE_URL + `/users?name=${username}`);
+            console.log("makeGetCallUSER2");
             return response;
         } catch (error) {
             console.log(error);
@@ -100,7 +108,9 @@ function MyApp(){
 
     async function makeGetCallDatedTodos(){
         try {
+            console.log("makeGetCallDatedTodos1");
             const response = await axios.get(API_BASE_URL + `/users/:${currentPage.userID}/todoItems?date!=false`);
+            console.log("fmakeGetCallDatedTodos2");
         } catch (error) {
             console.log(error);
             return false;
@@ -109,7 +119,9 @@ function MyApp(){
 
     async function makeGetCallCompletedTodos(){
         try{
+            console.log("makeGetCallCompletedTodos1");
             const response = await axios.get(API_BASE_URL + `/users/:${currentPage.userID}/todoItems?completed=true`);
+            console.log("makeGetCallCompletedTodos2");
         } catch (error) {
             console.log(error);
             return false;
@@ -118,7 +130,9 @@ function MyApp(){
 
     async function makePostCallUSER(user){
         try {
+            console.log("makePostCallUSER1");
             const response = await axios.post(API_BASE_URL + "/users", user);
+            console.log("makePostCallUSER2");
             return response;
         } catch (error){
             console.log(error);
@@ -128,7 +142,9 @@ function MyApp(){
 
     async function makePostCallTODO(todo){
         try {
+            console.log("makePostCallTODO1");
             const response = await axios.post(API_BASE_URL + `/users/:${currentPage.userID}/todoItems`, todo);
+            console.log("makePostCallTODO2");
             return response;
         } catch (error){
             console.log(error);
@@ -137,7 +153,9 @@ function MyApp(){
     }
     async function makePostCallCategory(category){
         try {
+            console.log("makePostCallCategory1");
             const response = await axios.post(API_BASE_URL + `/users/:${currentPage.userID}/categories`, category);
+            console.log("makePostCallCategory2");
             return response;
         } catch (error){
             console.log(error);
@@ -178,13 +196,12 @@ function MyApp(){
             return false;
         }
     }
-
+    
     function submitNewUser(newUser){
         makePostCallUSER(newUser).then(result => {
             if (result.status === 201) {
                 if (result.data) {
                     console.log("submit user data exists");
-                    conso
                 } else {
                     console.log("no data retuned");
                 }
