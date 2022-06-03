@@ -3,7 +3,6 @@ import React, {useEffect, useState} from 'react';
 
 import './Login.css'
 
-const HOME_PAGE_STATE = 3;
 
 function Login(props) {
     const [user, setUser] = useState(

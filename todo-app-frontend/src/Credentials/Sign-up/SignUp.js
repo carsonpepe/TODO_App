@@ -1,9 +1,6 @@
-import React, {useEffect, useState} from 'react';
-//import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import React, {useState} from 'react';
 
 import './SignUp.css';
-
-const HOME_PAGE_STATE = 3;
 
 function SignUp(props) {
     const [newUser, setNewUser] = useState(

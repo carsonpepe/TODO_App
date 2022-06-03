@@ -1,8 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import CenterBody from './Center-body/CenterBody';
-import Header from './Header/Header';
-import Leftbar from './Leftbar/Leftbar';
-import Rightbar from './Rightbar/Rightbar';
 import axios from 'axios';
 import './MyApp.css';
 
@@ -12,9 +8,6 @@ import SignUp from './Credentials/Sign-up/SignUp';
 import Home from './Home/Home';
 
 const API_BASE_URL = "https://dodo-pro-backend.herokuapp.com";
-//const API_BASE_URL= "https://data.mongodb-api.com/app/data-wbrjr/endpoint/data/v1";
-
-const PLANNER_VIEW_TYPE = 2;
 
 const CREDENTIALS_PAGE_STATE = 0;
 const LOGIN_PAGE_STATE = 1;
