@@ -15,11 +15,9 @@ mongoose
         ":" + 
         process.env.MONGO_PWD +
         "@" + 
-        process.env.MONGO_DB +
-        "." +
         process.env.MONGO_CLUSTER +
         "/" +
-        "DODOpro" +
+        process.env.MONGO_DB +
         "?retryWrites=true&w=majority",
         {
             useNewUrlParser: true,
