@@ -63,6 +63,20 @@ async function addTodo(id, todoItem) {
     }
 }
 
+// Category Services
+async function addCategory(id, category) {
+    try {
+        const currentUser = findUserById(id);
+        const newCategory = new todoModel(category);
+        currentUser.categories.push(newCategory);
+        const savedTodo = await currentUser.save();
+        return savedTodo;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+}
+
 //returns a user based on the provided username
 async function getUserbyUsername(user){
     console.log(user["name"]);
@@ -225,3 +239,4 @@ exports.getUserSettings = getUserSettings;
 exports.getTodos = getTodos;
 exports.findTodosByCompleted = findTodosByCompleted;
 exports.getUserCategories = getUserCategories;
+exports.addCategory = addCategory;

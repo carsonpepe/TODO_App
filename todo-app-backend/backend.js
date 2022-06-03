@@ -30,7 +30,7 @@ app.get('/users', async (req, res) => {
         if (result === undefined || result.length == 0)
             res.status(404).send('Resource not found.');
         else {
-            res.send(result);
+            res.status(200).send(result);
         }
     }
 });
@@ -48,19 +48,6 @@ app.get('/users/:id', async (req, res) => {
     }
 });
 
-//endpoint that adds a todo
-app.post("users/:id/todoItems", async (req, res) => {
-    const id = req.params["id"];
-    const todoData = req.body;
-    const tdi = await services.addTodo(id, todoData);
-    if (tdi) res.status(200).send(tdi);
-    else {
-        console.log(tdi);
-        console.log(req.body);
-        res.status(500).end();
-    }
-});
-
 app.post('/users', async (req, res) => {
     //console.log("app.post");
     const userToAdd = req.body;
@@ -74,6 +61,38 @@ app.post('/users', async (req, res) => {
         console.log(savedUser);
         res.status(500).end();
     }
+});
+
+//endpoint that adds a todo
+app.post("users/:id/todoItems", async (req, res) => {
+    const id = req.params["id"];
+    const todoData = req.body;
+    try {
+        const tdi = await services.addTodo(id, todoData);
+        if (tdi) res.status(200).send(tdi);
+        else {
+            console.log(tdi);
+            console.log(req.body);
+            res.status(500).end();
+        }
+    } catch (error) {
+        console.log("Mongoose error: " + error);
+        res.status(500).send("An error ocurred in the server.");
+    }
+
+});
+
+app.post("users/:id/categories", async (req, res) => {
+    const id = req.params["id"];
+    const categoryData = req.body;
+    try {
+        const result = await services.addCategory(id, categoryData);
+        res.status(200).send(result);
+    } catch (error) {
+        console.log("Mongoose error: " + error);
+        res.status(500).send("An error ocurred in the server.");
+    }  
+
 });
 
 //Endpoint for Getting TODOS from a user, query
