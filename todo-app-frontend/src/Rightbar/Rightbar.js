@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './Rightbar.css';
 import moment from 'moment';
 
@@ -59,7 +59,15 @@ function Rightbar(props){
         return todos;
     }
     //const todos = getTodos();
-    const todos = props.fetchAllTODO();
+    useEffect(() => {
+        //todos = props.todos;
+        if (props.todos === undefined) {
+
+
+        }
+    }, [] );
+    const todos = props.todos;
+
 
     return (
         
@@ -71,17 +79,17 @@ function Rightbar(props){
             <div key="subheader_general" className="rightbar_subheader">
                 <p>General List</p>
             </div>
-            <RightbarUnplanned todoList={todos}/>
+            <RightbarUnplanned todoList={props.todos}/>
             <hr></hr>
             <div key="subheader_planned" className="rightbar_subheader">
                 <p>Planned List</p>
             </div>
-            <RightbarPlanned todoList={todos}/>
+            <RightbarPlanned todoList={props.todos}/>
             <hr></hr>
             <div key="subheader_completed" className="rightbar_subheader">
                 <p>Completed List</p>
             </div>
-            <RightbarCompleted todoList={todos}/>
+            <RightbarCompleted todoList={props.todos}/>
         </div>
         
     );

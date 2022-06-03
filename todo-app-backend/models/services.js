@@ -15,11 +15,9 @@ mongoose
         ":" + 
         process.env.MONGO_PWD +
         "@" + 
-        process.env.MONGO_DB +
-        "." +
         process.env.MONGO_CLUSTER +
         "/" +
-        "DODOpro" +
+        process.env.MONGO_DB +
         "?retryWrites=true&w=majority",
         {
             useNewUrlParser: true,
@@ -32,8 +30,8 @@ mongoose
 async function addUser(user) {
     console.log('enter adduser function');
     try {
-        const userExists = await getUserbyUsername(user);
-        console.log('finished getuserbyusername successfully'+ userExists);
+        const userExists = await getUserbyUsername(user.name);
+        console.log('finished getuserByusername successfully'+ userExists);
         if (userExists) {
             //this means the suers is already int he database, not a new user
             console.log('user exists');
@@ -65,16 +63,32 @@ async function addTodo(id, todoItem) {
     }
 }
 
-//returns a user based on the provided username
-async function getUserbyUsername(user){
-    console.log(user["name"]);
+// Category Services
+async function addCategory(id, category) {
     try {
-        userModel.find({name: user["name"]}, await function (err, docs) {
+        const currentUser = findUserById(id);
+        const newCategory = new todoModel(category);
+        currentUser.categories.push(newCategory);
+        const savedTodo = await currentUser.save();
+        return savedTodo;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+}
+
+//returns a user based on the provided username
+async function getUserByUsername(username){
+    console.log(username);
+    try {
+        userModel.findOne({"name": username}, await function (err, docs) {
             if (err) {
                 console.log("2" + err);
                 return false;
             } else {
-                console.log("found existing user");
+                console.log("find() didn't fail");
+                //console.log(docs);
+                console.log("docs hit");
                 return docs;
             }
         });
@@ -122,6 +136,10 @@ async function getUserSettings(id){
     return currentUser.settings;
 }
 
+async function getUserCategories(id){
+    const currentUser = await findUserById(id);
+    return currentUser.categories;
+}
 
 async function findTodosByCategory(id, category_name) {
     const currentUser = findUserById(id);
@@ -208,7 +226,7 @@ exports.addTodo = addTodo;
 exports.findUserById = findUserById;
 exports.addUser = addUser;
 exports.deleteUser = deleteUser;
-exports.getUserbyUsername = getUserbyUsername;
+exports.getUserByUsername = getUserByUsername;
 exports.findUserById = findUserById;
 exports.findTodosByCategory = findTodosByCategory;
 exports.markCompleted = markCompleted;
@@ -222,3 +240,5 @@ exports.changeCategory = changeCategory;
 exports.getUserSettings = getUserSettings;
 exports.getTodos = getTodos;
 exports.findTodosByCompleted = findTodosByCompleted;
+exports.getUserCategories = getUserCategories;
+exports.addCategory = addCategory;

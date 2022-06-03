@@ -1,0 +1,37 @@
+https://docs.google.com/document/d/1jjHcvLf2HDmUanxNBUo_em6uthJjhqt4PNlAMEfH2Js/edit
+Group name: TODO Pro
+
+Product Vision:
+For busy individuals Who have a lot of things to do The TODO Pro is an interactive TODO list That easy to manage and clearly displays your TODO items. Unlike Microsoft TODO and Apple Reminders Our Product will not harvest your data and sell it to the highest bidder.
+User Stories:
+
+Carson Pepe:
+As a user, I would like to be able to click a checkbox on a TODO item and see it grayed out
+As a user, when I check off an item as “done”, I would like to see it under a different section on the UI titled “Completed”
+As a user, I’d like to be able to look at different lengths of timelines for my TODO items based on their dates
+
+Zack Soucek:
+As a user, I would like to be able to login to my TODO lists from any computer - 
+As a user, I would like to be able to have multiple different lists with separate TODOS -
+As a user, I would like to be able to share Lists between users -
+As an Executive I would prefer if we use someone else's password/authentication for security purposes - 
+As an Executive, I Would like to have a ton of ads to make money -
+
+
+Sean Tomer: 
+As a user, I would like to edit my entries
+As a user, I would like to change the order of the list
+As a user, I would like to have items contain sub-items to break up challenging tasks into pieces 
+
+
+
+
+Philip Pang:
+As a user, I would like TODO Pro to send me notifications/reminders
+As a user, I would like TODO Pro to have different views: Chronological (mashup categories), Categories: (mashup time), Show/hide Archive
+As a user I would like to be able to quickly reuse and find an old to-do item
+
+Nathan Orloff:
+As a user, I would like to color TODO items based on category.
+As a user, I would like to be able to delete items from the TODO list and see the item disappear from the list
+As a user, I would like to be able to set a due date for a TODO item, and display the due date with the item. 

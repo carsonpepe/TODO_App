@@ -24,13 +24,25 @@ app.get("/", (req, res) => {
 
 // used when login
 app.get('/users', async (req, res) => {
+    const userModel = require("./user");
     const name = req.query.name;
     if (name != undefined){
-        const result = await services.getUserByUsername(name);
-        if (result === undefined || result.length == 0)
-            res.status(404).send('Resource not found.');
-        else {
-            res.send(result);
+        try {
+            userModel.findOne({"name": username}, await function (err, docs) {
+                if (err) {
+                    console.log("2" + err);
+                    res.status(405).send('Resource not found.');
+                } else {
+                    console.log("find() didn't fail");
+                    //console.log(docs);
+                    console.log("docs hit");
+                    res.status(200).send(docs);
+                }
+            });
+        } 
+        catch (error) {
+            console.log("3"+ error);
+            res.status(404).send('Error trying to findOne()');
         }
     }
 });
@@ -45,19 +57,6 @@ app.get('/users/:id', async (req, res) => {
     else {
         res.status(200).send(result);
         console.log("successfully findUserByID");
-    }
-});
-
-//endpoint that adds a todo
-app.post("users/:id/todoItems", async (req, res) => {
-    const id = req.params["id"];
-    const todoData = req.body;
-    const tdi = await services.addTodo(id, todoData);
-    if (tdi) res.status(200).send(tdi);
-    else {
-        console.log(tdi);
-        console.log(req.body);
-        res.status(500).end();
     }
 });
 
@@ -76,11 +75,44 @@ app.post('/users', async (req, res) => {
     }
 });
 
+//endpoint that adds a todo
+app.post("users/:id/todoItems", async (req, res) => {
+    const id = req.params["id"];
+    const todoData = req.body;
+    try {
+        const tdi = await services.addTodo(id, todoData);
+        if (tdi) res.status(200).send(tdi);
+        else {
+            console.log(tdi);
+            console.log(req.body);
+            res.status(500).end();
+        }
+    } catch (error) {
+        console.log("Mongoose error: " + error);
+        res.status(500).send("An error ocurred in the server.");
+    }
+
+});
+
+app.post("users/:id/categories", async (req, res) => {
+    const id = req.params["id"];
+    const categoryData = req.body;
+    try {
+        const result = await services.addCategory(id, categoryData);
+        res.status(200).send(result);
+    } catch (error) {
+        console.log("Mongoose error: " + error);
+        res.status(500).send("An error ocurred in the server.");
+    }  
+
+});
+
 //Endpoint for Getting TODOS from a user, query
 app.get('/users/:id/todoItems', async (req, res) => {
-    const id = req.params["id"]; // THIS LINE RETURNS NULL???????????????????????????????????????????
-    for (param in params) {
-        console.log(param);
+    console.log(req.params);
+    const id = req.params["id"]; // THIS LINE RETURNS NULL 
+    if (!req.params) {
+        console.log("No params passed");
     }
     console.log(id);
     const completed = req.query.completed;
@@ -139,6 +171,19 @@ app.get('/users/:id/settings', async (req, res) => {
     else {
         res.status(200).send(result);
     } */
+});
+
+app.get('/users/:id/categories', async (req, res) => {
+    console.log("entered backend.js get categories")
+    const id = req.params['id'];
+    /* let user = await services.findUserById(id); */
+    try {
+        const result = await services.getUserCategories(id);
+        res.status(200).send(result);
+    } catch (error){
+        console.log("Mongoose error: " + error);
+        res.status(500).send("An error ocurred in the server.");
+    }
 });
 
 app.delete('/users/:id', async (req, res) => {
