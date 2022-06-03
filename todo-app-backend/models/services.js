@@ -81,12 +81,13 @@ async function addCategory(id, category) {
 async function getUserByUsername(username){
     console.log(username);
     try {
-        userModel.find({name: username}, await function (err, docs) {
+        userModel.find({"name": username}, await function (err, docs) {
             if (err) {
                 console.log("2" + err);
                 return false;
             } else {
-                console.log("found existing user");
+                console.log("find() didn't fail");
+                console.log(docs);
                 return docs;
             }
         });
