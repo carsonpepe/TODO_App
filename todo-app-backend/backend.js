@@ -36,7 +36,7 @@ app.get('/users', async (req, res) => {
 });
 
 //endpoint to get a user value by ID
-app.get('/users/:_id', async (req, res) => {
+app.get('/users/:id', async (req, res) => {
     const id = req.params['id'];
     let result = services.findUserById(id);
     if (result === undefined || result.length == 0)
@@ -47,7 +47,7 @@ app.get('/users/:_id', async (req, res) => {
 });
 
 //endpoint that adds a user
-app.post("users/:_id/todoItems", async (req, res) => {
+app.post("users/:id/todoItems", async (req, res) => {
     
     const id = req.params['id'];
     const todoData = req.body;
@@ -76,8 +76,8 @@ app.post('/users', async (req, res) => {
 });
 
 //Endpoint for Getting TODOS from a user, query
-app.get('/users/:_id/todoItems', async (req, res) => {
-    const id = req.params['_id'];
+app.get('/users/:id/todoItems', async (req, res) => {
+    const id = req.params['id'];
 
     //const query = req.query ?? why commented??
     // was trying to revert it back to original
@@ -91,7 +91,7 @@ app.get('/users/:_id/todoItems', async (req, res) => {
     }
 });
 //just query for whole settings object, should always get whole thing at once
-app.get('/users/:_id/settings', async (req, res) => {
+app.get('/users/:id/settings', async (req, res) => {
     console.log("entered backend.js get settings")
     const id = req.params['id'];
     /* let user = await services.findUserById(id); */
@@ -103,8 +103,8 @@ app.get('/users/:_id/settings', async (req, res) => {
     }
 });
 
-app.delete('/users/:_id', async (req, res) => {
-    const id = req.params['_id']; //or req.params.id
+app.delete('/users/:id', async (req, res) => {
+    const id = req.params['id']; //or req.params.id
     if (deleteUserById(id)) res.status(204).end();
     else res.status(404).send("Resource not found.");
 });

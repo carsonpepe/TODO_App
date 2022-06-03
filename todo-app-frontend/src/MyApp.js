@@ -147,7 +147,7 @@ function MyApp(){
 
     async function makeDeleteCallTODO(todo){
         try{
-            const todoID = todo["_id"];
+            const todoID = todo["id"];
             const response = await axios.delete(API_BASE_URL + `/users/:${currentPage.userID}/todoItems?=${todoID}`);
             return response;
         }
@@ -158,7 +158,7 @@ function MyApp(){
     }
     async function makeDeleteCallCategories(category){
         try{
-            const categoryID = category["_id"];
+            const categoryID = category["id"];
             const response = await axios.delete(API_BASE_URL + `/users/:${currentPage.userID}/categories?=${categoryID}`);
             return response;
         }
@@ -184,12 +184,13 @@ function MyApp(){
             if (result.status === 201) {
                 if (result.data) {
                     console.log("submit user data exists");
+                    conso
                 } else {
                     console.log("no data retuned");
                 }
                 const _id = result.data._id;
                 const name = result.data.name;
-                console.log(result.data);
+                console.log(_id);
                 setCurrentPage(
                     {
                         pageState: HOME_PAGE_STATE,

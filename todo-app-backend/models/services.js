@@ -106,7 +106,7 @@ async function findUserById(id) {
 //magic todo get
 async function getTodos(id, query){
     const currentUser = await findUserById(id);
-    console.log("query = ", querygetUsersettings)
+    console.log("query = ", query)
     foundTODOs = await currentUser.todoItems.find(query);
     return foundTODOs
 }
