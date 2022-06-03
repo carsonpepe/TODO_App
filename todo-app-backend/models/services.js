@@ -109,12 +109,12 @@ async function getTodos(id){
     console.log(id);
     const currentUser = await findUserById(id);
     console.log(currentUser._id);
-    foundTODOs = currentUser.todoItems;
+    foundTodos = currentUser.todoItems;
     if (!foundTodos) {
         console.log(foundTodos);
         return [];
     }
-    return foundTODOs;
+    return foundTodos;
 }
 
 async function getUserSettings(id){
