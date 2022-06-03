@@ -48,6 +48,20 @@ async function addUser(user) {
     }
 }
 
+// Todo Services
+async function addTodo(id, todoItem) {
+    try {
+        const currentUser = findUserById(id);
+        const newTodo = new todoModel(todoItem);
+        currentUser.todoItems.push(newTodo);
+        const savedTodo = await currentUser.save();
+        return savedTodo;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+}
+
 //returns a user based on the provided username
 async function getUserbyUsername(user){
     console.log(user["name"]);
@@ -76,19 +90,7 @@ async function findUserById(id) {
     }
 }
 
-// Todo Services
-async function addTodo(id, todoItem) {
-    try {
-        const currentUser = findUserById(id);
-        const newTodo = new todoModel(todoItem);
-        currentUser.todoItems.push(newTodo);
-        const savedTodo = await currentUser.save()
-        return savedTodo;
-    } catch (error) {
-        console.log(error);
-        return false;
-    }
-}
+
 
 /* async function findTodosByCategory(id, category) {
     const currentUser = findUserById(id);
@@ -96,9 +98,23 @@ async function addTodo(id, todoItem) {
     return await todoModel.find({})
 } */
 
+// theoretical function to replace all get-todos based on whatever props given
+//magic todo get
+async function getTodos(id, query){
+    const currentUser = await findUserById(id);
+    console.log("query = ", querygetUsersettings)
+    foundTODOs = await currentUser.todoItems.find(query);
+    return foundTODOs
+}
+
+async function getUserSettings(id){
+    const currentUser = await findUserById(id);
+    return currentUser.settings;
+}
+
 async function findTodosByCategory(id, category_name) {
     const currentUser = findUserById(id);
-    currentUser.find({category: category_name});
+    currentUser.find({category: category_name, completed:false});
     const savedTodo = await currentUser.save();
     return savedTodo;
 }
@@ -185,3 +201,5 @@ exports.changeTitle = changeTitle;
 exports.turnNotificationsOn = turnNotificationsOn;
 exports.turnNotificationsOff = turnNotificationsOff;
 exports.changeCategory = changeCategory;
+exports.getUserSettings = getUserSettings;
+exports.getTodos = getTodos;

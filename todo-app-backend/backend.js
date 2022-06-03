@@ -21,6 +21,8 @@ app.get("/", (req, res) => {
     res.send("Hello World!");
 });
 
+
+//used when login
 app.get('/users', async (req, res) => {
     const name = req.query.name;
     if (name != undefined){
@@ -44,22 +46,54 @@ app.get('/users/:id', async (req, res) => {
     }
 });
 
-app.get('/users/:id/todoItems', async (req, res) => {
-    // NOT DONE
+//endpoint that adds a user
+app.post("users/:id/todoItems", async (req, res) => {
+    
     const id = req.params['id'];
-    let result = services.findUserById(id);
-    if (result === undefined || result.length == 0)
-        res.status(404).send('Resource not found.');
+    const todoData = req.body;
+    const tdi = await services.addTodo(id, todoData);
+    if (tdi) res.status(200).send(tdi);
     else {
-        res.status(200).send(result);
+        console.log(tdi);
+        console.log(req.body);
+        res.status(500).end();
     }
 });
 
-app.get('/users/:id/settings', async (req, res) => {
-    // NOT DONE
+app.post('/users', async (req, res) => {
+    //console.log("app.post");
+    const userToAdd = req.body;
+    const savedUser = await services.addUser(userToAdd);
+    if (savedUser) res.status(201).end();
+    else {
+        console.log(userToAdd);
+        console.log(savedUser);
+        res.status(500).end();
+    }
+});
+
+//Endpoint for Getting TODOS from a user, query
+app.get('/users/:id/todoItems', async (req, res) => {
     const id = req.params['id'];
-    let result = services.findUserById(id);
+
+    //const query = req.query ?? why commented??
+    // was trying to revert it back to original
+    // if you're trying to test it i'll leave alone
+    let result = await services.getTodos(id, query);
     if (result === undefined || result.length == 0)
+        res.status(404).send('Resource not found.');
+    else {
+        
+        res.status(200).send(result);
+    }
+});
+//just query for whole settings object, should always get whole thing at once
+app.get('/users/:id/settings', async (req, res) => {
+    console.log("entered backend.js get settings")
+    const id = req.params['id'];
+    /* let user = await services.findUserById(id); */
+    let result = await services.getUserSettings(id);
+    if (result === undefined)
         res.status(404).send('Resource not found.');
     else {
         res.status(200).send(result);
@@ -81,17 +115,7 @@ async function deleteUserById(id) {
     }
 }
 
-app.post('/users', async (req, res) => {
-    //console.log("app.post");
-    const userToAdd = req.body;
-    const savedUser = await services.addUser(userToAdd);
-    if (savedUser) res.status(201).end();
-    else {
-        console.log(userToAdd);
-        console.log(savedUser);
-        res.status(500).end();
-    }
-});
+
 
 app.patch("/users/:id", async (req, res) => {
     const id = req.params["id"];

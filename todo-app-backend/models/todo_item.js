@@ -11,12 +11,17 @@ const TodoSchema = new mongoose.Schema({
         required: false,
         trim: true,
     },
-    date: {
+    startDate: {
         // Date type doesn't save normally. If date is modified...
         // --> "doc.markModified('pathToDate');" THEN save
-        type: Date, 
+        type: String, 
         required: false,
-        default: false,
+        default: '',
+    },
+    endDate: {
+        type: String,
+        required: false,
+        default: '',
     },
     category: {
         type: String,
@@ -33,7 +38,10 @@ const TodoSchema = new mongoose.Schema({
     },
     // Date type doesn't save normally. If date is modified...
     // --> "doc.markModified('pathToDate');" THEN save
-    notificationTimes: [Date],
+    notificationTimes: {
+        type: [String],
+        defualt: [],
+    },
 });
 
 module.exports = TodoSchema;
