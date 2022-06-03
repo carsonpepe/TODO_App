@@ -3,6 +3,7 @@ import CenterBody from './Center-body/CenterBody';
 import Header from './Header/Header'
 import Leftbar from './Leftbar/Leftbar';
 import Rightbar from './Rightbar/Rightbar';
+import {useLocation} from 'react-router-dom';
 import axios from 'axios';
 import './MyApp.css'
 
@@ -13,6 +14,11 @@ const API_USER = 'user';
 
 
 function MyApp(){
+
+    const location = useLocation();
+    let username = location.state;
+    
+    
 
     const [todos, setTodos] = useState([]);
     const [categories, setCategories] = useState([]);
@@ -139,6 +145,8 @@ function MyApp(){
     }
 
     useEffect(() => {
+        
+
         fetchAllTODO().then(result => {
             if(result){
                 setTodos(result);

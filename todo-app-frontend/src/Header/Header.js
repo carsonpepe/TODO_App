@@ -3,11 +3,14 @@ import './Header.css'
 import add from '../resources/images/add.png'
 import settings from '../resources/images/settings.png'
 import logo from '../resources/images/dodo.jpg'
+import { useNavigate } from 'react-router-dom'
 
 const SETTINGS_VIEW_TYPE = 0;
 const ADD_VIEW_TYPE = 1;
 
 function Header(props){
+
+    const navigate = useNavigate();
 
     const [centerView, setView] = useState(
         {
@@ -24,6 +27,10 @@ function Header(props){
         props.handleCenterView(centerView);
         
     }
+    
+    function logout(){
+        navigate('/');
+    }
 
     return (
         <div className="header">
@@ -37,7 +44,7 @@ function Header(props){
                     <input type="image" src={settings} alt="settings" width="35" height="35" value={SETTINGS_VIEW_TYPE} name={null} onClick={handleButtonPress}></input>
                 </div>
                 <div>
-                    <button className="logout button-59_">Logout</button>
+                    <button className="logout button-59_" onClick={logout}>Logout</button>
                 </div>
              
 
