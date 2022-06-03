@@ -142,6 +142,19 @@ app.get('/users/:id/settings', async (req, res) => {
     } */
 });
 
+app.get('/users/:id/categories', async (req, res) => {
+    console.log("entered backend.js get categories")
+    const id = req.params['id'];
+    /* let user = await services.findUserById(id); */
+    try {
+        const result = await services.getUserCategories(id);
+        res.status(200).send(result);
+    } catch (error){
+        console.log("Mongoose error: " + error);
+        res.status(500).send("An error ocurred in the server.");
+    }
+});
+
 app.delete('/users/:id', async (req, res) => {
     const id = req.params['id']; //or req.params.id
     if (deleteUserById(id)) res.status(204).end();

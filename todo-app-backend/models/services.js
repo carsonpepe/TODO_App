@@ -120,6 +120,10 @@ async function getUserSettings(id){
     return currentUser.settings;
 }
 
+async function getUserCategories(id){
+    const currentUser = await findUserById(id);
+    return currentUser.categories;
+}
 
 async function findTodosByCategory(id, category_name) {
     const currentUser = findUserById(id);
@@ -220,3 +224,4 @@ exports.changeCategory = changeCategory;
 exports.getUserSettings = getUserSettings;
 exports.getTodos = getTodos;
 exports.findTodosByCompleted = findTodosByCompleted;
+exports.getUserCategories = getUserCategories;
