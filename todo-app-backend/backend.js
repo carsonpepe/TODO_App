@@ -37,7 +37,7 @@ app.get('/users', async (req, res) => {
 
 //endpoint to get a user value by ID
 app.get('/users/:id', async (req, res) => {
-    const id = req.params._id;
+    const id = req.params["id"];
     console.log("calling findUserById");
     let result = await services.findUserById(id);
     if (result === undefined || result.length == 0)
@@ -50,7 +50,7 @@ app.get('/users/:id', async (req, res) => {
 
 //endpoint that adds a todo
 app.post("users/:id/todoItems", async (req, res) => {
-    const id = req.params._id;
+    const id = req.params["id"];
     const todoData = req.body;
     const tdi = await services.addTodo(id, todoData);
     if (tdi) res.status(200).send(tdi);
@@ -78,7 +78,10 @@ app.post('/users', async (req, res) => {
 
 //Endpoint for Getting TODOS from a user, query
 app.get('/users/:id/todoItems', async (req, res) => {
-    const id = req.params._id;
+    const id = req.params["id"]; // THIS LINE RETURNS NULL???????????????????????????????????????????
+    for (param in params) {
+        console.log(param);
+    }
     console.log(id);
     const completed = req.query.completed;
     const categories = req.query.categories;

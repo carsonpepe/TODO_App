@@ -7,7 +7,6 @@ test("test query user by username", async() =>{
 test("test db add and query user", async() =>{
     const newUser = {
         username: "ppang",
-        password: "wefodijfwe",
     }
     let result = await services.findTodosByCategory(    );
     expect(result[0].title).toBe("");

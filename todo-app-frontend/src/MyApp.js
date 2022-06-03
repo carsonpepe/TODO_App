@@ -25,7 +25,7 @@ function MyApp(){
     const [currentPage, setCurrentPage] = useState(
         {
             pageState: CREDENTIALS_PAGE_STATE,
-            userID: "",
+            _id: "",
         }
     );
 
@@ -59,7 +59,8 @@ function MyApp(){
     async function fetchAllTODO(){
         try {
             console.log("fetchAllTODO1");
-            const response = await axios.get(API_BASE_URL + `/users/:${currentPage.userID}/todoItems`);
+            console.log(currentPage._id)
+            const response = await axios.get(API_BASE_URL + `/users/:${currentPage._id}/todoItems`);
             console.log("fetchAllTODO2");
             return response;
         } catch (error){
@@ -71,7 +72,7 @@ function MyApp(){
     async function fetchAllCategories(){
         try {
             console.log("fetchAllCategories1");
-            const response = await axios.get(API_BASE_URL + `/users/:${currentPage.userID}/categories`);
+            const response = await axios.get(API_BASE_URL + `/users/:${currentPage._id}/categories`);
             console.log("fetchAllCategories2");
             return response;
         } catch (error){
@@ -83,7 +84,7 @@ function MyApp(){
     async function makeGetCallSettings(){
         try {
             console.log("makeGetCallSettings1");
-            const response = await axios.get(API_BASE_URL + `/users/:${currentPage.userID}/settings`);
+            const response = await axios.get(API_BASE_URL + `/users/:${currentPage._id}/settings`);
             console.log("makeGetCallSettings2");
             return response;
         } catch (error) {
@@ -107,7 +108,7 @@ function MyApp(){
     async function makeGetCallDatedTodos(){
         try {
             console.log("makeGetCallDatedTodos1");
-            const response = await axios.get(API_BASE_URL + `/users/:${currentPage.userID}/todoItems?startDate!=false`);
+            const response = await axios.get(API_BASE_URL + `/users/:${currentPage._id}/todoItems?startDate!=false`);
             console.log("fmakeGetCallDatedTodos2");
         } catch (error) {
             console.log(error);
@@ -118,7 +119,7 @@ function MyApp(){
     async function makeGetCallCompletedTodos(){
         try{
             console.log("makeGetCallCompletedTodos1");
-            const response = await axios.get(API_BASE_URL + `/users/:${currentPage.userID}/todoItems?completed=true`);
+            const response = await axios.get(API_BASE_URL + `/users/:${currentPage._id}/todoItems?completed=true`);
             console.log("makeGetCallCompletedTodos2");
         } catch (error) {
             console.log(error);
@@ -141,7 +142,7 @@ function MyApp(){
     async function makePostCallTODO(todo){
         try {
             console.log("makePostCallTODO1");
-            const response = await axios.post(API_BASE_URL + `/users/:${currentPage.userID}/todoItems`, todo);
+            const response = await axios.post(API_BASE_URL + `/users/:${currentPage._id}/todoItems`, todo);
             console.log("makePostCallTODO2");
             return response;
         } catch (error){
@@ -152,7 +153,7 @@ function MyApp(){
     async function makePostCallCategory(category){
         try {
             console.log("makePostCallCategory1");
-            const response = await axios.post(API_BASE_URL + `/users/:${currentPage.userID}/categories`, category);
+            const response = await axios.post(API_BASE_URL + `/users/:${currentPage._id}/categories`, category);
             console.log("makePostCallCategory2");
             return response;
         } catch (error){
@@ -164,7 +165,7 @@ function MyApp(){
     async function makeDeleteCallTODO(todo){
         try{
             const todoID = todo["id"];
-            const response = await axios.delete(API_BASE_URL + `/users/:${currentPage.userID}/todoItems?=${todoID}`);
+            const response = await axios.delete(API_BASE_URL + `/users/:${currentPage._id}/todoItems?=${todoID}`);
             return response;
         }
         catch (error) {
@@ -175,7 +176,7 @@ function MyApp(){
     async function makeDeleteCallCategories(category){
         try{
             const categoryID = category["id"];
-            const response = await axios.delete(API_BASE_URL + `/users/:${currentPage.userID}/categories?=${categoryID}`);
+            const response = await axios.delete(API_BASE_URL + `/users/:${currentPage._id}/categories?=${categoryID}`);
             return response;
         }
         catch (error) {
@@ -186,7 +187,7 @@ function MyApp(){
 
     async function makeGetCallArchives(){
         try{
-            const response = await axios.get(API_BASE_URL + `/users/:${currentPage.userID}/todoItems/completed?=true`);
+            const response = await axios.get(API_BASE_URL + `/users/:${currentPage._id}/todoItems/completed?=true`);
             return response;
         }
         catch (error) {
@@ -209,7 +210,7 @@ function MyApp(){
                 setCurrentPage(
                     {
                         pageState: HOME_PAGE_STATE,
-                        userID: _id,
+                        _id: _id,
                     }
                 )
             } else {
@@ -241,7 +242,7 @@ function MyApp(){
                 setCurrentPage(
                     {
                         pageState: HOME_PAGE_STATE,
-                        userID: _id,
+                        _id: _id,
                     }
                 );
             } else {
