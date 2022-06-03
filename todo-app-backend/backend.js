@@ -28,8 +28,7 @@ app.get('/users', async (req, res) => {
     if (name != undefined){
         const result = await services.getUserByUsername(name);
         console.log(result);
-        console.log(result.length);
-        if (result === undefined || result.length == 0)
+        if (result === undefined)
             res.status(405).send('Resource not found.');
         else {
             res.status(200).send(result);
