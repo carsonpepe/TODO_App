@@ -26,14 +26,22 @@ app.get("/", (req, res) => {
 app.get('/users', async (req, res) => {
     const name = req.query.name;
     if (name != undefined){
-        // const result = await services.getUserByUsername(name);
-        services.getUserByUsername(name).then(result => console.log(result));
-        result = 0;
-        console.log(result);
-        if (result)
-            res.status(200).send(result);
-        else {
-            res.status(405).send('Resource not found.');
+        try {
+            userModel.findOne({"name": username}, await function (err, docs) {
+                if (err) {
+                    console.log("2" + err);
+                    res.status(405).send('Resource not found.');
+                } else {
+                    console.log("find() didn't fail");
+                    //console.log(docs);
+                    console.log("docs hit");
+                    res.status(200).send(docs);
+                }
+            });
+        } 
+        catch (error) {
+            console.log("3"+ error);
+            res.status(404).send('Error trying to findOne()');
         }
     }
 });
