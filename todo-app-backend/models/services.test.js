@@ -1,4 +1,4 @@
-const services = require("./models/services");
+const services = require("./services");
 
 test("test query user by username", async() =>{
     
