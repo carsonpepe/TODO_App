@@ -5,9 +5,9 @@ name: Backend Node CI/CD
 
 on:
   push:
-    branches: [main, ci-cd-test]
+    branches: [main]
   pull_request:
-    branches: [main, ci-cd-test]
+    branches: [main]
 
 defaults:
   run:
