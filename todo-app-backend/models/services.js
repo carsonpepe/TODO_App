@@ -87,6 +87,7 @@ async function getUserbyUsername(user){
 
 async function findUserById(id) {
     try {
+        
         return await userModel.findById(id);
     } catch (error) {
         console.log(error);
@@ -105,9 +106,12 @@ async function findUserById(id) {
 // theoretical function to replace all get-todos based on whatever props given
 //magic todo get
 async function getTodos(id){
+    console.log(id);
     const currentUser = await findUserById(id);
+    console.log(currentUser._id);
     foundTODOs = currentUser.todoItems;
     if (!foundTodos) {
+        console.log(foundTodos);
         return [];
     }
     return foundTODOs;
