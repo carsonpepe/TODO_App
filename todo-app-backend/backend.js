@@ -79,6 +79,7 @@ app.post('/users', async (req, res) => {
 //Endpoint for Getting TODOS from a user, query
 app.get('/users/:id/todoItems', async (req, res) => {
     const id = req.params._id;
+    console.log(id);
     const completed = req.query.completed;
     const categories = req.query.categories;
     if (completed === undefined && categories === undefined) {

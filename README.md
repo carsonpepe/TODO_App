@@ -1,6 +1,26 @@
 # TODO_App
 CSC 307 Group Project - TODO App
-Developers: Carson Pepe, Zack Soucek, ...
+Developers: Carson Pepe, Zack Soucek, Sean Tomer, Nathan Orloff, Philip pang
+
+**Project Blurb:**
+This app is a small TODO list web application, that has multiple views for different displays of information
+It will display your todos in both a unified list as well as filterable calendar modes bsed on categories. 
+Notifications are also built into the TODO item spec, and would be able to be enabled in a full version.
+
+As it is, the app does not do a whole lot, but it is not version 1.0 for a reason
+
+**UI Prototype:**
+https://www.figma.com/file/LNOiPhYxFD7oHrYkMiMiZU/DODO-Pro?node-id=5%3A3
+Date Updated: Apr 27, 2022
+
+**Dev Environment setup below**
+
+**Diagrams**
+https://app.diagrams.net/?state=%7B%22ids%22:%5B%221U0_lHX7q4Oe3fkJfzarrw3nbaRAWpvQ8%22%5D,%22action%22:%22open%22,%22userId%22:%22107898074962629828158%22,%22resourceKeys%22:%7B%7D%7D
+
+https://app.diagrams.net/#G11gmUhTwxRj_cHQ84JnJtbaG7myRYFvEI
+(both availible in /docs/)
+
 Code Linter: ESLint
 Code Styler: Prettier
 Variable Casing: lowerCamelCase

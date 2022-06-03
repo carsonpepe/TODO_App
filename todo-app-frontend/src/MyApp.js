@@ -39,8 +39,6 @@ function MyApp(){
             return <SignUp submitNewUser={submitNewUser}/>;
         }else if(currentPageState == HOME_PAGE_STATE) {
             return (<Home 
-                categories={categories} 
-                todos={todos} 
                 handlePageView={changeCurrentPage} 
                 removeOneTODO={removeOneTODO} 
                 updateListCategories={addNewCategory} 
