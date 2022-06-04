@@ -1,18 +1,20 @@
 import React from "react";
-
 import './Credentials.css';
+import {
+    useNavigate
+} from "react-router-dom";
 
-const LOGIN_PAGE_STATE = 1;
-const SIGN_UP_PAGE_STATE = 2;
+export default function Credentials(){
+    const navigate = useNavigate();
 
-function Credentials(props){
-
-    function handleButtonPress(event){
-        const {value, name} = event.currentTarget;
-        props.handlePageView({pageState: value, userID: name});
+    function nav(event){
+        const { name } = event.target;
+        if (name === 'login'){
+            navigate("/login")
+        }else{
+            navigate("/signup")
+        }
     }
-
-    console.log("running credentials");
 
     return (
         <div className='credentials'>
@@ -20,15 +22,13 @@ function Credentials(props){
             <form className='form-style-9'>
                 <ul>
                     <li>
-                        <button className='button-login' name="login" value={LOGIN_PAGE_STATE} onClick={handleButtonPress}>Login</button> 
+                        <button className='button-login' name="login" onClick={nav}>Login</button> 
                     </li>
                     <li>
-                        <button className='button-signUp' name="signup" value={SIGN_UP_PAGE_STATE} onClick={handleButtonPress}>Sign Up</button> 
+                        <button className='button-signUp' name="signup" onClick={nav}>Sign Up</button> 
                     </li>
                 </ul>
             </form>
         </div>
     );
 }
-
-export default Credentials;

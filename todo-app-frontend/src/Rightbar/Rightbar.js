@@ -1,73 +1,64 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import './Rightbar.css';
 import moment from 'moment';
 
 function Rightbar(props){
 
-    function getTodos(){
-        const todos = [
-            {
-                description: "Buy 2% milk",
-                category: null,
-                date: moment('2022/05/03'),
-                complete: false
-            },
-            {
-                description: "Deadlift 400lbs",
-                category: "Workout",
-                date: null,
-                complete: false
-            },
-            {
-                description: "Finish sprint 1 [csc307]",
-                category: "School",
-                date: moment('2022/05/11'),
-                complete: false
-            },
-            {
-                description: "Buy salad",
-                category: "Groceries",
-                date: moment('2022/05/03'),
-                complete: false
-            },
-            {
-                description: "Go swimming",
-                category: null,
-                date: null,
-                complete: true
-            },
-            {
-                description: "Tri-Tip Challenge",
-                category: "Workout",
-                date: null,
-                complete: false
-            },
-            {
-                description: "Go running",
-                category: null,
-                date: null,
-                complete: false
-            },
-            {
-                description: "Surf at Pismo",
-                category: "Workout",
-                date: moment('2022/05/07'),
-                complete: true
-            },
-        ];
+    // function getTodos(){
+    //     const todos = [
+    //         {
+    //             description: "Buy 2% milk",
+    //             category: null,
+    //             date: moment('2022/05/03'),
+    //             complete: false
+    //         },
+    //         {
+    //             description: "Deadlift 400lbs",
+    //             category: "Workout",
+    //             date: null,
+    //             complete: false
+    //         },
+    //         {
+    //             description: "Finish sprint 1 [csc307]",
+    //             category: "School",
+    //             date: moment('2022/05/11'),
+    //             complete: false
+    //         },
+    //         {
+    //             description: "Buy salad",
+    //             category: "Groceries",
+    //             date: moment('2022/05/03'),
+    //             complete: false
+    //         },
+    //         {
+    //             description: "Go swimming",
+    //             category: null,
+    //             date: null,
+    //             complete: true
+    //         },
+    //         {
+    //             description: "Tri-Tip Challenge",
+    //             category: "Workout",
+    //             date: null,
+    //             complete: false
+    //         },
+    //         {
+    //             description: "Go running",
+    //             category: null,
+    //             date: null,
+    //             complete: false
+    //         },
+    //         {
+    //             description: "Surf at Pismo",
+    //             category: "Workout",
+    //             date: moment('2022/05/07'),
+    //             complete: true
+    //         },
+    //     ];
 
-        return todos;
-    }
-    //const todos = getTodos();
-    useEffect(() => {
-        //todos = props.todos;
-        if (props.todos === undefined) {
-
-
-        }
-    }, [] );
-    const todos = props.todos;
-
+    //     return todos;
+    // }
+    const todos = props.todoData;
 
     return (
         
@@ -79,17 +70,17 @@ function Rightbar(props){
             <div key="subheader_general" className="rightbar_subheader">
                 <p>General List</p>
             </div>
-            <RightbarUnplanned todoList={props.todos}/>
+            <RightbarUnplanned todoList={todos}/>
             <hr></hr>
             <div key="subheader_planned" className="rightbar_subheader">
                 <p>Planned List</p>
             </div>
-            <RightbarPlanned todoList={props.todos}/>
+            <RightbarPlanned todoList={todos}/>
             <hr></hr>
             <div key="subheader_completed" className="rightbar_subheader">
                 <p>Completed List</p>
             </div>
-            <RightbarCompleted todoList={props.todos}/>
+            <RightbarCompleted todoList={todos}/>
         </div>
         
     );
