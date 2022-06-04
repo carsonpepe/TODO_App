@@ -9,19 +9,28 @@ Notifications are also built into the TODO item spec, and would be able to be en
 
 As it is, the app does not do a whole lot, but it is not version 1.0 for a reason
 
-**UI Prototype:**
+# UI Prototype
 https://www.figma.com/file/LNOiPhYxFD7oHrYkMiMiZU/DODO-Pro?node-id=5%3A3
 Date Updated: Apr 27, 2022
 
-**Dev Environment setup below**
-
-**Diagrams**
-https://app.diagrams.net/?state=%7B%22ids%22:%5B%221U0_lHX7q4Oe3fkJfzarrw3nbaRAWpvQ8%22%5D,%22action%22:%22open%22,%22userId%22:%22107898074962629828158%22,%22resourceKeys%22:%7B%7D%7D
+# Development Diagrams
+![DODO Pro UML](/docs/DODO_Pro-UML.png)
 Date Updated: Apr 29, 2022
 
-https://app.diagrams.net/#G11gmUhTwxRj_cHQ84JnJtbaG7myRYFvEI
+![DODO Pro ClassDiagram](/docs/DODO_Pro-ClassDiagram.png)
 Date Updated: May 4th, 2022
 (both availible in /docs/)
+
+# CI Server For Project
+![backend Node.js CI](https://github.com/carsonpepe/TODO_App/actions/workflows/backend%20Node.yml/badge.svg)
+![frontend Node.js CI](https://github.com/carsonpepe/TODO_App/actions/workflows/frontend%20Node.yml/badge.svg)
+---
+https://github.com/carsonpepe/TODO_App/actions
+# Heroku Deployment
+- https://dodo-pro-backend.herokuapp.com/
+- https://dodo-pro.herokuapp.com/
+
+**Dev Environment setup below**
 
 Code Linter: ESLint
 Code Styler: Prettier
