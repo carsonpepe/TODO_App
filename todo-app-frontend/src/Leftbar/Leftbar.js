@@ -7,35 +7,45 @@ const ARCHIVE_VIEW = 3;
 const ADD_CATEGORY_VIEW = 5;
 
 function Leftbar(props){
+    const [centerView, setView] = useState(
+        {
+            viewType: null,
+            categoryType: null,
+        }
+     );
+
      
-    function getCats(){
-        /*make api call hear and give adata to categories*/
-        const cats = [
-            {
-                name: "Groceries",
-                color: "blue"
-            },
-            {
-                name: "Workout",
-                color: "red"
-            },
-            {
-                name: "School",
-                color: "green"
-            },
-            {
-                name: "Job",
-                color: "pink"
-            },
-        ];
-        return cats;
-    }
-    const categories = getCats();
-    //const categories = props.categoryData;
+    // function getCats(){
+    //     /*make api call hear and give adata to categories*/
+    //     const cats = [
+    //         {
+    //             name: "Groceries",
+    //             color: "blue"
+    //         },
+    //         {
+    //             name: "Workout",
+    //             color: "red"
+    //         },
+    //         {
+    //             name: "School",
+    //             color: "green"
+    //         },
+    //         {
+    //             name: "Job",
+    //             color: "pink"
+    //         },
+    //     ];
+    //     return cats;
+    // }
+    // const categories = getCats();
+    const categories = props.categoryData;
 
     function handleButtonPress(event){
         const {value, name} = event.currentTarget;
-        props.handleCenterView({viewType: value, categoryType: name});
+        setView(
+            {viewType: value, categoryType: name}
+        );
+        props.handleCenterView(centerView);
         
     }
 

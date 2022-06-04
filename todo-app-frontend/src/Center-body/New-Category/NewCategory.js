@@ -30,7 +30,7 @@ function NewCategory(props){
     }
 
     function submitNewCat() {
-        props.addNewCategory(newCat);
+        props.handleSubmit(newCat);
         setNewCat({name: '', color: ''});
     }
 

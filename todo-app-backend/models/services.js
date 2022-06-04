@@ -6,9 +6,9 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-/*
+
 mongoose.set("debug", true);
-*/
+
 mongoose
     .connect(
         "mongodb+srv://" +
@@ -36,6 +36,7 @@ async function addUser(user) {
         if (userExists) {
             //this means the suers is already int he database, not a new user
             // console.log('user exists');
+
             return false;
         }
         else {
@@ -100,6 +101,7 @@ async function addCategory(id, category) {
 //     }
 // }
 
+
 async function findUserByName(username){
     return await userModel.find({"name": username});
 }
@@ -127,15 +129,6 @@ async function findUserById(id) {
     }
 }
 
-
-
-/* async function findTodosByCategory(id, category) {
-    const currentUser = findUserById(id);
-
-    return await todoModel.find({})
-} */
-
-// theoretical function to replace all get-todos based on whatever props given
 //magic todo get
 async function getTodos(id){
     console.log(id);
@@ -149,6 +142,19 @@ async function getTodos(id){
     return foundTodos;
 }
 
+async function getCategories(id){
+    console.log(id);
+    const currentUser = await findUserById(id);
+    console.log(currentUser._id);
+    foundCategories = currentUser.categories;
+    if (!foundCategories) {
+        console.log(foundCategories);
+        return [];
+    }
+    return foundCategories;
+    
+}
+
 async function getUserSettings(id){
     const currentUser = await findUserById(id);
     return currentUser.settings;
@@ -158,6 +164,7 @@ async function getUserCategories(id){
     const currentUser = await findUserById(id);
     return currentUser.categories;
 }
+
 
 async function findTodosByCategory(id, category_name) {
     const currentUser = findUserById(id);
@@ -186,6 +193,7 @@ async function markUncomplete(id, todo_id){
     const savedTodo = await currentUser.save();
     return savedTodo;
 }
+
 
 // async function removeCompleted(id){
 //     const currentUser = findUserById(id);
@@ -259,4 +267,5 @@ exports.getUserSettings = getUserSettings;
 exports.getTodos = getTodos;
 exports.findTodosByCompleted = findTodosByCompleted;
 exports.getUserCategories = getUserCategories;
+exports.getCategories = getCategories;
 exports.addCategory = addCategory;

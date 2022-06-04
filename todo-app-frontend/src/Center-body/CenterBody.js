@@ -1,6 +1,5 @@
-import React from 'react';
-import './CenterBody.css';
-
+import React from 'react'
+import './CenterBody.css'
 import Settings from './Settings/Settings';
 import Planner from './Planner/Planner';
 import Categories from './Categories/Categories';
@@ -24,27 +23,33 @@ function CenterBody(props){
     function getView(currentState, currentCat){
         
         if(currentState == SETTINGS_VIEW){
-            return <Settings getSettings={props.getSettings}/>;
+            return <Settings/>;
         }else if(currentState == ADD_VIEW){
-            return <NewTodo categoryData={props.getAllCategories} addTodoItem={props.addTodoItem}/>;
+            return <NewTodo handleSubmit={props.updateTodos} categoryData={props.categoryData}/>;
         }else if(currentState == PLANNER_VIEW){
-            return <Planner getDatedTodos={props.getDatedTodos}/>;
+            return <Planner todoData={props.todoData}/>;
         }else if(currentState == ARCHIVE_VIEW) {
-            return <Archive getCompletedTodos={props.getCompletedTodos}/>;
+            return <Archive todoData={props.todoData}/>;
         }else if(currentState == CATEGORY_VIEW){
             return <Categories categoryName={currentCat} todoData={props.todoData} />;
         }else if(currentState == ADD_CATEGORY_VIEW){
-            return <NewCategory addNewCategory={props.addNewCategory}/>
+            return <NewCategory handleSubmit={props.updateCategories}/>
         }else {
-            return <Planner tododata={props.todoData}/>;
+            return <Planner todoData={props.todoData}/>;
         }
+
+         
     }
 
+
     return (
+ 
+        
         <div>
             {getView(state, categoryType)}
         </div>
-    )
+        
+    );
 
 }
 

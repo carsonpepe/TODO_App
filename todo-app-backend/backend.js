@@ -25,12 +25,20 @@ app.get("/", (req, res) => {
 // used when login
 app.get('/users', async (req, res) => {
     const name = req.query.name;
+    console.log(name);
     if (name != undefined){
-        const result = await services.getUserByUsername(name);
-        if (result === undefined || result.length == 0)
-            res.status(404).send('Resource not found.');
-        else {
-            res.send(result);
+        try{ 
+            const result = await services.getUserByUsername(name);
+            if (result.length == 0) {
+                res.status(403).send('User does not exist.')
+            }
+            else {
+                res.status(200).send(result);
+            }
+            
+        }
+        catch(error){
+            res.status(405).send('Resource not found.');
         }
     }
 });
@@ -48,24 +56,11 @@ app.get('/users/:id', async (req, res) => {
     }
 });
 
-//endpoint that adds a todo
-app.post("users/:id/todoItems", async (req, res) => {
-    const id = req.params["id"];
-    const todoData = req.body;
-    const tdi = await services.addTodo(id, todoData);
-    if (tdi) res.status(200).send(tdi);
-    else {
-        console.log(tdi);
-        console.log(req.body);
-        res.status(500).end();
-    }
-});
-
 app.post('/users', async (req, res) => {
     const userToAdd = req.body;
     const savedUser = await services.addUser(userToAdd);
     if (savedUser) {
-        console.log(savedUser._id)
+        console.log(savedUser._id);
         res.status(201).send(savedUser);
     }
     else {
@@ -75,11 +70,51 @@ app.post('/users', async (req, res) => {
     }
 });
 
+//endpoint that adds a todo
+app.post("users/:id/todoItems", async (req, res) => {
+    const id = req.params["id"];
+    const todoData = req.body;
+    try {
+        const tdi = await services.addTodo(id, todoData);
+        if (tdi) res.status(200).send(tdi);
+        else {
+            console.log(tdi);
+            console.log(req.body);
+            res.status(500).end();
+        }
+    } catch (error) {
+        console.log("Mongoose error: " + error);
+        res.status(500).send("An error ocurred in the server.");
+    }
+
+});
+
+app.post("users/:id/categories", async (req, res) => {
+    const id = req.params["id"];
+    const categoryData = req.body;
+    const result = await services.addCategory(id, categoryData);
+    if (result) {
+        console.log(savedUser._id);
+        res.status(201).send(savedUser);
+    } else {
+        res.status(500).end();
+    }
+    // try {
+    //     const result = await services.addCategory(id, categoryData);
+    //     res.status(200).send(result);
+    // } catch (error) {
+    //     console.log("Mongoose error: " + error);
+    //     res.status(500).send("An error ocurred in the server.");
+    // }  
+
+});
+
 //Endpoint for Getting TODOS from a user, query
 app.get('/users/:id/todoItems', async (req, res) => {
-    const id = req.params["id"]; // THIS LINE RETURNS NULL???????????????????????????????????????????
-    for (param in params) {
-        console.log(param);
+    console.log(req.params);
+    const id = req.params["id"]; // THIS LINE RETURNS NULL 
+    if (!req.params) {
+        console.log("No params passed");
     }
     console.log(id);
     const completed = req.query.completed;
@@ -111,15 +146,21 @@ app.get('/users/:id/todoItems', async (req, res) => {
         }
         
     }
-
-/*     let result = await services.getTodos(id);
-    if (result === undefined || result.length == 0)
-        res.status(404).send('Resource not found.');
-    else {
-        console.log("successfully got getTodos()");
-        res.status(200).send(result);
-    } */
 });
+
+app.get('/users/:id/categories', async (req, res) => {
+    console.log("entered get user categories endpoint");
+    const id = req.params["id"];
+    try {
+        console.log("about to getTodos()");
+        const result = await services.getCategories(id);
+        res.status(200).send(result);
+    } catch (error){
+        console.log("Mongoose error: " + error);
+        res.status(500).send("An error ocurred in the server.");
+    }
+});
+
 //just query for whole settings object, should always get whole thing at once
 app.get('/users/:id/settings', async (req, res) => {
     console.log("entered backend.js get settings")
@@ -139,6 +180,8 @@ app.get('/users/:id/settings', async (req, res) => {
         res.status(200).send(result);
     } */
 });
+
+
 
 app.delete('/users/:id', async (req, res) => {
     const id = req.params['id']; //or req.params.id
