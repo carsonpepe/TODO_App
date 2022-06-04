@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon backend.js",
-    "start": "node backend.js"
+    "start": "node backend.js",
+    "coverage": "Jest --collectCoverage --forceExit"
   },
   "author": "",
   "license": "ISC",
