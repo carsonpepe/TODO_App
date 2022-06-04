@@ -6,11 +6,12 @@
 .pnp.js
 
 # testing
-/coverage
+/todo-app-backend/coverage
 
 # production
 /build
-/google-tutorial/
+/google-tutorial
+
 # misc
 .DS_Store
 .env.local

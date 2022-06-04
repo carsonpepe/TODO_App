@@ -13,9 +13,9 @@ mongoose
     .connect(
         "mongodb+srv://" +
         process.env.MONGO_USER +
-        ":" + 
+        ":" +
         process.env.MONGO_PWD +
-        "@" + 
+        "@" +
         process.env.MONGO_CLUSTER +
         "/" +
         process.env.MONGO_DB +
@@ -34,8 +34,11 @@ async function addUser(user) {
         const userExists = await getUserByUsername(user.name);
         console.log('finished getuserByusername successfully'+ userExists);
         if (userExists) {
+            //this means the suers is already int he database, not a new user
+            // console.log('user exists');
+
             return false;
-        } 
+        }
         else {
             const userToAdd = new userModel(user);
             const savedUser = await userToAdd.save();
@@ -76,11 +79,34 @@ async function addCategory(id, category) {
     }
 }
 
+// returns a user based on the provided username
+// async function getUserByUsername(username){
+//     console.log(username);
+//     try {
+//         userModel.findOne({"name": username}, await function (err, docs) {
+//                 if (err) {
+//                     console.log("2" + err);
+//                     return false;
+//                 } else {
+//                     console.log("find() didn't fail");
+//                     //console.log(docs);
+//                     console.log("docs hit");
+//                     return docs;
+//                 }
+//             });
+//     }
+//     catch (error) {
+//         console.log("3"+ error);
+//         return false;
+//     }
+// }
+
 
 async function findUserByName(username){
     return await userModel.find({"name": username});
 }
 
+//use this in backend
 async function getUserByUsername(username){
     let result;
     if(username === undefined){
@@ -95,7 +121,7 @@ async function getUserByUsername(username){
 
 async function findUserById(id) {
     try {
-        
+
         return await userModel.findById(id);
     } catch (error) {
         console.log(error);
@@ -134,6 +160,10 @@ async function getUserSettings(id){
     return currentUser.settings;
 }
 
+async function getUserCategories(id){
+    const currentUser = await findUserById(id);
+    return currentUser.categories;
+}
 
 
 async function findTodosByCategory(id, category_name) {
@@ -163,7 +193,8 @@ async function markUncomplete(id, todo_id){
     const savedTodo = await currentUser.save();
     return savedTodo;
 }
-    
+
+
 // async function removeCompleted(id){
 //     const currentUser = findUserById(id);
 //     // return await currentUser.todoItems.deleteMany({completed: { $eq: true}});
@@ -235,5 +266,6 @@ exports.markUncomplete = markUncomplete;
 exports.getUserSettings = getUserSettings;
 exports.getTodos = getTodos;
 exports.findTodosByCompleted = findTodosByCompleted;
+exports.getUserCategories = getUserCategories;
 exports.getCategories = getCategories;
 exports.addCategory = addCategory;
