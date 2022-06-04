@@ -1,7 +1,8 @@
 const services = require("./services");
+const { findById } = require("./user");
 
 test("test query user by username", async() =>{
-    
+
 });
 
 test("test db query user", async() =>{
@@ -26,7 +27,6 @@ test("test db and add user", async() =>{
         username: "ppang",
     }
     let result = await services.addUser(newUser);
-    expect(result[0].title).toBe("");
     expect(result[0].description).toBe("");
     expect(result[0].date).toBe("");
     expect(result[0].category).toBe("");
@@ -49,11 +49,49 @@ test("test db add and query todo task", async() =>{
         category: "Workout",
         complete: true
     };
-    userobj = {name : "haleman"}
-    let usert3 = await services.addUser(userobj);    const user = new services.addTodo(todoObj);
-    let result = await services.addTodo(uesrt3._id, todoObj);
-    expect(result[0].title).toBe("");
+    const newUser = {
+        username: "ppang",
+    }
+    let userres = await services.addUser(newUser);
+    let result = await services.addTodo(userres._id, todoObj);
     expect(result[0].description).toBe("Surf at Pismo");
-    
+
 });
+
+test("getUserbyUsernameTests", async() =>{
+    const newUser = {
+        username: "zsou",
+    }
+    let result = await services.getUserbyUsername(newUser);
+    let res2 = await services.getUserbyUsername("name")
+    //TODO when the function works better
+
+    expect(repeatsult).toBe(false)
+
+});
+
+test("findbyIDtests", async() =>{
+    const newUser = {
+        username: "mmr",
+    }
+    let userres = await services.addUser(newUser);
+    expect(await services.findUserById(userres._id)).anything()
+    expect(await services.findUserById({nota : string})).toBeUndefined()
+
+})
+
+test("getTODoS", async() =>{
+
+    const newUser = {
+        username: "hmmmmmmmmmmmmmmm",
+    }
+    let userres = await services.addUser(newUser);
+    expect(await services.getTodos(userres._id)).anything()
+    expect(await services.getTodos({nota : string})).toBeUndefined()
+
+})
+
+
+
+
 
