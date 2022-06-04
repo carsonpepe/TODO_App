@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import '../Login/Login.css';
+import axios from 'axios';
 
 import {
     useNavigate
@@ -27,9 +28,46 @@ export default function Signup() {
         }
     }
 
+    async function getUserByName(name){
+        try {
+            const response = await axios.get("https://dodo-pro-backend.herokuapp.com/users?="+name);
+            return response.data;
+        } catch(error){
+            console.log(error);
+            return false;
+        }
+    }
+
+    async function makePostCallUser(user){
+        try {
+            const response = await axios.post("https://dodo-pro-backend.herokuapp.com/users", user);
+            return response;
+        } catch (error){
+            console.log(error);
+            return false;
+        }
+    }
+
     function loginUser() {
         //push user to database
-        navigate("/app", {state: user.name});
+        const user_obj = {
+            name: user.name,
+            todoItems: undefined,
+            notifications:undefined,
+            categories: undefined,
+            settings: undefined
+        }
+        
+            
+        makePostCallUser(user_obj).then(result => {
+            if(result.status === 201){
+                const data = result.data;
+                navigate("/app", {state: data});
+            }
+        });
+            
+        
+        
 
         setUser(
             {

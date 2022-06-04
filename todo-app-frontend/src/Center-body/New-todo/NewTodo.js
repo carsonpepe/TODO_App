@@ -35,7 +35,9 @@ function NewTodo(props){
         return names;
     }
 
-    let categories = getCats();
+    // let categories = getCats();
+    let categories = props.categoryData;
+    categories.push(null);
 
     let dropdown = categories,
         MakeItem = function(X) {
@@ -45,14 +47,13 @@ function NewTodo(props){
 
     const [newTodo, setNewTodo] = useState(
         {
-            _id: "",
             title: "",
             description: "",
-            date: "",
+            startDate: "",
+            endDate: "",
             category: "",
             completed: false,
-            notifToggle: false,
-            notifTimes: [],
+
         }
     );
 
@@ -63,7 +64,8 @@ function NewTodo(props){
                 {
                     title: value, 
                     description: newTodo['description'], 
-                    date: newTodo['date'], 
+                    startDate: newTodo['startDate'],
+                    endDate: newTodo['endDate'],
                     category: newTodo['category'],
                 }
             );
@@ -72,7 +74,8 @@ function NewTodo(props){
                 {
                     title: newTodo['title'], 
                     description: value, 
-                    date: newTodo['date'], 
+                    startDate: newTodo['startDate'],
+                    endDate: newTodo['endDate'],
                     category: newTodo['category'],
                 }
             );
@@ -81,7 +84,8 @@ function NewTodo(props){
                 {
                     title: newTodo['title'], 
                     description: newTodo['description'], 
-                    date: value, 
+                    startDate: value,
+                    endDate: value, 
                     category: newTodo['category'],
                 }
             );
@@ -90,7 +94,8 @@ function NewTodo(props){
                 {
                     title: newTodo['title'], 
                     description: newTodo['description'], 
-                    date: newTodo['date'], 
+                    startDate: newTodo['startDate'],
+                    endDate: newTodo['endDate'],
                     category: value,
                 }
             );
@@ -99,7 +104,7 @@ function NewTodo(props){
 
     function submitNewTodo() {
         props.handleSubmit(newTodo);
-        setNewTodo({title: '', description: '', date: '', category: ''});
+        setNewTodo({title: '', description: '', startDate: '', endDate: '', category: ''});
     }
 
     return (

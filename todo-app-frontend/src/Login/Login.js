@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import './Login.css';
+import axios from 'axios';
 
 import {
     Link,
@@ -28,9 +29,35 @@ export default function Login() {
         }
     }
 
+
+    async function getUserByName(name){
+        try {
+            const response = await axios.get("https://dodo-pro-backend.herokuapp.com/users/?name="+name);
+            return response;
+        } catch(error){
+            console.log(error);
+            return false;
+        }
+    }
+
     function loginUser() {
-        //see if name exists in database
-        navigate("/app", {state: user.name});
+        const user_obj = {
+            name: user.name,
+            todoItems: undefined,
+            notifications:undefined,
+            categories: undefined,
+            settings: undefined
+        }
+        getUserByName(user.name).then(result => {
+            console.log(result);
+            if(result.status === 200){
+                const data = result.data;
+                navigate("/app", {state: data});
+            }else {
+                console.log(result.status);
+                console.log("user not found");
+            }
+        });
 
         setUser(
             {

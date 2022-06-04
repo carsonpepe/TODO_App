@@ -9,14 +9,16 @@ import './MyApp.css'
 
 
 const PLANNER_VIEW_TYPE = 2;
-const API_BASE = 'base';
-const API_USER = 'user';
+const API_BASE = "https://dodo-pro-backend.herokuapp.com";
+
 
 
 function MyApp(){
 
     const location = useLocation();
-    let username = location.state;
+    let user = location.state;
+    console.log(user._id);
+
     
     
 
@@ -26,8 +28,8 @@ function MyApp(){
 
     async function fetchAllTODO(){
         try {
-            const response = await axios.get(/*api call to get all */);
-            return /** data */;
+            const response = await axios.get(API_BASE + `/users/${user._id}/todoItems`);
+            return response.data;
         } catch (error){
             console.log(error);
             return false;
@@ -36,8 +38,8 @@ function MyApp(){
 
     async function fetchAllCategories(){
         try {
-            const response = await axios.get(/*api call to get all */);
-            return /** data */;
+            const response = await axios.get(API_BASE + `/users/${user._id}/categories`);
+            return response.data;
         } catch (error){
             console.log(error);
             return false;
@@ -46,18 +48,20 @@ function MyApp(){
 
 
     async function makePostCallTODO(todo){
+        
         try {
-            const response = await axios.post(/*api call to post */"", todo);
-            return /** data */;
+            const response = await axios.post(API_BASE + `/users/${user._id}/todoItems`, todo);
+            return response.data;
         } catch (error){
             console.log(error);
             return false;
         }
     }
     async function makePostCallCategory(category){
+        console.log(category);
         try {
-            const response = await axios.post(/*api call to post */"", category);
-            return /** data */;
+            const response = await axios.post(API_BASE + `/users/${user._id}/categories`, category);
+            return response.data;
         } catch (error){
             console.log(error);
             return false;
@@ -127,6 +131,7 @@ function MyApp(){
     }
 
     function updateListTODO(todo){
+        console.log(todo);
         makePostCallTODO(todo).then(result => {
             if(result && result.status === 201){
                 todo = result.data;
@@ -148,12 +153,14 @@ function MyApp(){
         
 
         fetchAllTODO().then(result => {
+            console.log(result);
             if(result){
                 setTodos(result);
             }
         });
 
         fetchAllCategories().then(result => {
+            console.log(result);
             if(result){
                 setCategories(result);
             }

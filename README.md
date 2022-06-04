@@ -30,3 +30,15 @@ Instalation Instructions, using VScode:
 
 ### Database
 In /todo-app-backend folder, download .env file that contains MONGODB cridentials. (Find this file in our discord chat).   
+
+
+
+File          | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
+--------------|---------|----------|---------|---------|-----------------------------------
+All files     |   76.19 |       40 |      90 |   76.19 |
+ category.js  |     100 |      100 |     100 |     100 |
+ services.js  |   71.01 |       40 |      90 |   71.01 | 37,42,56-58,69-75,112-128,142-143 
+ settings.js  |     100 |      100 |     100 |     100 | 
+ todo_item.js |     100 |      100 |     100 |     100 | 
+ user.js      |     100 |      100 |     100 |     100 | 
+--------------|---------|----------|---------|---------|-----------------------------------
