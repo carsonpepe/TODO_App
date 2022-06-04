@@ -62,7 +62,7 @@ test("getUserbyUsernameTests", async() =>{
     const newUser = {
         username: "zsou",
     }
-    let result = await services.getUserbyUsername(newUser);
+    let result = await services.getUserByUsername(newUser);
     let res2 = await services.getUserbyUsername("name")
     //TODO when the function works better
 
@@ -114,6 +114,20 @@ test("categories", async() =>{
     expect(await services.findTodosByCompleted(userres._id)).anything()
     expect(await services.markUnComplete(userres._id, result2._id)).anything()
     expect(await services.findTodosByCompleted(userres._id)).anything()
+
+});
+
+test("add a category", async() =>{
+    const catobj = {
+        name: "Surf at Pismo",
+        color: "Red",
+    };
+    const newUser = {
+        username: "safljsadflkjsgjfgh",
+    }
+    let userres = await services.addUser(newUser);
+    let result = await services.addCategory(userres._id, catobj);
+    expect(result[0].name).toBe("Surf at Pismo");
 
 });
 

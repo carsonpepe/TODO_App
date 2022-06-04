@@ -30,11 +30,11 @@ mongoose
 async function addUser(user) {
     console.log('enter adduser function');
     try {
-        const userExists = await getUserbyUsername(user);
-        console.log('finished getuserbyusername successfully'+ userExists);
+        const userExists = await getUserByUsername(user.name);
+        console.log('finished getuserByusername successfully'+ userExists);
         if (userExists) {
             //this means the suers is already int he database, not a new user
-            console.log('user exists');
+            // console.log('user exists');
             return false;
         }
         else {
@@ -53,10 +53,7 @@ async function addUser(user) {
 async function addTodo(id, todoItem) {
     try {
         const currentUser = findUserById(id);
-        const newTodo = todoItem;
-        if(!currentUser.todoItems){
-            currentUser.todoItems = {};
-        }
+        const newTodo = new todoModel(todoItem);
         currentUser.todoItems.push(newTodo);
         const savedTodo = await currentUser.save();
         return savedTodo;
@@ -66,25 +63,59 @@ async function addTodo(id, todoItem) {
     }
 }
 
-//returns a user based on the provided username
-async function getUserbyUsername(user){
-    console.log(user["name"]);
+// Category Services
+async function addCategory(id, category) {
     try {
-        userModel.find({name: user["name"]}, await function (err, docs) {
-            if (err) {
-                console.log("2" + err);
-                return false;
-            } else {
-                console.log("found existing user");
-                return docs;
-            }
-        });
-    }
-    catch (error) {
-        console.log("3"+ error);
+        const currentUser = findUserById(id);
+        const newCategory = new todoModel(category);
+        currentUser.categories.push(newCategory);
+        const savedTodo = await currentUser.save();
+        return savedTodo;
+    } catch (error) {
+        console.log(error);
         return false;
     }
 }
+
+// returns a user based on the provided username
+// async function getUserByUsername(username){
+//     console.log(username);
+//     try {
+//         userModel.findOne({"name": username}, await function (err, docs) {
+//                 if (err) {
+//                     console.log("2" + err);
+//                     return false;
+//                 } else {
+//                     console.log("find() didn't fail");
+//                     //console.log(docs);
+//                     console.log("docs hit");
+//                     return docs;
+//                 }
+//             });
+//     }
+//     catch (error) {
+//         console.log("3"+ error);
+//         return false;
+//     }
+// }
+
+async function findUserByName(username){
+    return await userModel.find({"name": username});
+}
+
+//use this in backend
+async function getUserByUsername(username){
+    let result;
+    if(username === undefined){
+        result = undefined;
+    }
+    else if(username){
+        result = await findUserByName(username);
+        result = result[0];
+    }
+    return result;
+}
+
 
 async function findUserById(id) {
     try {
@@ -123,16 +154,16 @@ async function getUserSettings(id){
     return currentUser.settings;
 }
 
+async function getUserCategories(id){
+    const currentUser = await findUserById(id);
+    return currentUser.categories;
+}
 
 async function findTodosByCategory(id, category_name) {
     const currentUser = findUserById(id);
-    if(currentUser){
-        currentUser.todoItems.find({category: category_name, completed: false});
-        const savedTodo = await currentUser.save();
-        return savedTodo;
-    }
-    else
-        return false
+    currentUser.todoItems.find({category: category_name, completed: false});
+    const savedTodo = await currentUser.save();
+    return savedTodo;
 }
 
 async function findTodosByCompleted(id, complete_val) {
@@ -156,74 +187,76 @@ async function markUncomplete(id, todo_id){
     return savedTodo;
 }
 
-async function removeCompleted(id){
-    const currentUser = findUserById(id);
-    // return await currentUser.todoItems.deleteMany({completed: { $eq: true}});
-    currentUser.todoItems.deleteMany({completed: { $eq: true}});
-    const savedTodo = await currentUser.save();
-    return savedTodo;
-}
+// async function removeCompleted(id){
+//     const currentUser = findUserById(id);
+//     // return await currentUser.todoItems.deleteMany({completed: { $eq: true}});
+//     currentUser.todoItems.deleteMany({completed: { $eq: true}});
+//     const savedTodo = await currentUser.save();
+//     return savedTodo;
+// }
 
-async function changeDescription(id, todo_id, new_description){
-    const currentUser = findUserById(id);
-    currentUser.findByIdAndUpdate(todo_id, {description: new_description});
-    const savedTodo = await currentUser.save();
-    return savedTodo;
-}
+// async function changeDescription(id, todo_id, new_description){
+//     const currentUser = findUserById(id);
+//     currentUser.findByIdAndUpdate(todo_id, {description: new_description});
+//     const savedTodo = await currentUser.save();
+//     return savedTodo;
+// }
 
-async function changeTitle(id, todo_id, new_title){
-    const currentUser = findUserById(id);
-    currentUser.findByIdAndUpdate(todo_id, {title: new_title});
-    const savedTodo = await currentUser.save();
-    return savedTodo;
-}
+// async function changeTitle(id, todo_id, new_title){
+//     const currentUser = findUserById(id);
+//     currentUser.findByIdAndUpdate(todo_id, {title: new_title});
+//     const savedTodo = await currentUser.save();
+//     return savedTodo;
+// }
 
-async function turnNotificationsOn(id,todo_id){
-    const currentUser = findUserById(id);
-    currentUser.todoItems.findByIdAndUpdate(todo_id, {notificationToggle: true});
-    const savedTodo = await currentUser.save();
-    return savedTodo;
-}
+// async function turnNotificationsOn(id,todo_id){
+//     const currentUser = findUserById(id);
+//     currentUser.todoItems.findByIdAndUpdate(todo_id, {notificationToggle: true});
+//     const savedTodo = await currentUser.save();
+//     return savedTodo;
+// }
 
-async function turnNotificationsOff(id,todo_id){
-    const currentUser = findUserById(id);
-    currentUser.todoItems.findByIdAndUpdate(todo_id, {notificationToggle: false});
-    const savedTodo = await currentUser.save();
-    return savedTodo;
-}
+// async function turnNotificationsOff(id,todo_id){
+//     const currentUser = findUserById(id);
+//     currentUser.todoItems.findByIdAndUpdate(todo_id, {notificationToggle: false});
+//     const savedTodo = await currentUser.save();
+//     return savedTodo;
+// }
 
-async function changeCategory(id, todo_id, new_category){
-    // maybe a check to see if the category exists?
-    const currentUser = findUserById(id);
-    currentUser.findByIdAndUpdate(todo_id, {category: new_category});
-    const savedTodo = await currentUser.save();
-    return savedTodo;
-}
+// async function changeCategory(id, todo_id, new_category){
+//     // maybe a check to see if the category exists?
+//     const currentUser = findUserById(id);
+//     currentUser.findByIdAndUpdate(todo_id, {category: new_category});
+//     const savedTodo = await currentUser.save();
+//     return savedTodo;
+// }
 
 
 // User Services
 
 
 
-async function deleteUser(id) {
-    return await userModel.findByIdAndDelete(id);
-}
+// async function deleteUser(id) {
+//     return await userModel.findByIdAndDelete(id);
+// }
 
 exports.addTodo = addTodo;
 exports.findUserById = findUserById;
 exports.addUser = addUser;
-exports.deleteUser = deleteUser;
-exports.getUserbyUsername = getUserbyUsername;
+// exports.deleteUser = deleteUser;
+exports.getUserByUsername = getUserByUsername;
 exports.findUserById = findUserById;
 exports.findTodosByCategory = findTodosByCategory;
 exports.markCompleted = markCompleted;
 exports.markUncomplete = markUncomplete;
-exports.removeCompleted = removeCompleted;
-exports.changeDescription = changeDescription;
-exports.changeTitle = changeTitle;
-exports.turnNotificationsOn = turnNotificationsOn;
-exports.turnNotificationsOff = turnNotificationsOff;
-exports.changeCategory = changeCategory;
+// exports.removeCompleted = removeCompleted;
+// exports.changeDescription = changeDescription;
+// exports.changeTitle = changeTitle;
+// exports.turnNotificationsOn = turnNotificationsOn;
+// exports.turnNotificationsOff = turnNotificationsOff;
+// exports.changeCategory = changeCategory;
 exports.getUserSettings = getUserSettings;
 exports.getTodos = getTodos;
 exports.findTodosByCompleted = findTodosByCompleted;
+exports.getUserCategories = getUserCategories;
+exports.addCategory = addCategory;
