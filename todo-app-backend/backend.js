@@ -25,20 +25,8 @@ app.get("/", (req, res) => {
 // used when login
 app.get('/users', async (req, res) => {
     const name = req.query.name;
-    console.log(name)
+    console.log(name);
     if (name != undefined){
-        // const result = await services.getUserByUsername(name);
-        
-        
-        // services.getUserByUsername(name).then(result => {
-        //     console.log(result);
-        //     if (result)
-        //         res.status(200).send(result);
-        //     else {
-        //         res.status(405).send('Resource not found.');
-        //     }
-        // });
-
         try{ 
             const result = await services.getUserByUsername(name);
             if (result.length == 0) {
@@ -52,12 +40,6 @@ app.get('/users', async (req, res) => {
         catch(error){
             res.status(405).send('Resource not found.');
         }
-        // console.log(result);
-        // if (result)
-        //     res.status(200).send(result);
-        // else {
-        //     res.status(405).send('Resource not found.');
-        // }
     }
 });
 
@@ -75,7 +57,6 @@ app.get('/users/:id', async (req, res) => {
 });
 
 app.post('/users', async (req, res) => {
-    //console.log("app.post");
     const userToAdd = req.body;
     const savedUser = await services.addUser(userToAdd);
     if (savedUser) {
