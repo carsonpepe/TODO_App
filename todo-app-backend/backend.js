@@ -61,7 +61,7 @@ app.post('/users', async (req, res) => {
     const savedUser = await services.addUser(userToAdd);
     if (savedUser) {
         console.log(savedUser._id)
-        res.status(201).send(savedUser);
+        res.status(201).send(savedUser);1
     }
     else {
         console.log(userToAdd);

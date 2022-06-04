@@ -30,7 +30,7 @@ mongoose
 async function addUser(user) {
     console.log('enter adduser function');
     try {
-        const userExists = await getUserbyUsername(user.name);
+        const userExists = await getUserByUsername(user.name);
         console.log('finished getuserByusername successfully'+ userExists);
         if (userExists) {
             //this means the suers is already int he database, not a new user
