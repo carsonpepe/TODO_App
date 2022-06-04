@@ -11,6 +11,6 @@ const CategorySchema = new mongoose.Schema({
         default: "White",
         trim: true,
     },
-})
+});
 
 module.exports = CategorySchema;

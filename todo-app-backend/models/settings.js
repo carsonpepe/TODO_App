@@ -6,6 +6,6 @@ const SettingsSchema = new mongoose.Schema({
         type: Boolean,
         default: true,
     }
-})
+});
 
 module.exports = SettingsSchema;

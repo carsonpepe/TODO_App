@@ -35,8 +35,9 @@ function NewTodo(props){
         return names;
     }
 
-    let categories = getCats();
-    //let categories = props.getAllCategories()
+    // let categories = getCats();
+    let categories = props.categoryData;
+    categories.push(null);
 
     let dropdown = categories,
         MakeItem = function(X) {
@@ -52,8 +53,7 @@ function NewTodo(props){
             endDate: "",
             category: "",
             completed: false,
-            notificationToggle: false,
-            notificationTimes: [],
+
         }
     );
 
@@ -64,69 +64,47 @@ function NewTodo(props){
                 {
                     title: value, 
                     description: newTodo['description'], 
-                    startDate: newTodo['startDate'], 
+                    startDate: newTodo['startDate'],
                     endDate: newTodo['endDate'],
                     category: newTodo['category'],
-                    completed: newTodo['completed'],
-                    notificationToggle: newTodo['notificationToggle'],
-                    notificationTimes: newTodo['notificationTimes'],
                 }
             );
         } else if (name === "description") {
             setNewTodo(
                 {
-                    title: value, 
-                    description: newTodo['description'], 
-                    startDate: newTodo['startDate'], 
+                    title: newTodo['title'], 
+                    description: value, 
+                    startDate: newTodo['startDate'],
                     endDate: newTodo['endDate'],
                     category: newTodo['category'],
-                    completed: newTodo['completed'],
-                    notificationToggle: newTodo['notificationToggle'],
-                    notificationTimes: newTodo['notificationTimes'],
                 }
             );
-        } else if (name === "startDate") {
+        } else if (name === "date") {
             setNewTodo(
                 {
-                    title: value, 
+                    title: newTodo['title'], 
                     description: newTodo['description'], 
-                    startDate: newTodo['startDate'], 
-                    endDate: newTodo['endDate'],
+                    startDate: value,
+                    endDate: value, 
                     category: newTodo['category'],
-                    completed: newTodo['completed'],
-                    notificationToggle: newTodo['notificationToggle'],
-                    notificationTimes: newTodo['notificationTimes'],
                 }
             );
         } else {
             setNewTodo(
                 {
-                    title: value, 
+                    title: newTodo['title'], 
                     description: newTodo['description'], 
-                    startDate: newTodo['startDate'], 
+                    startDate: newTodo['startDate'],
                     endDate: newTodo['endDate'],
-                    category: newTodo['category'],
-                    completed: newTodo['completed'],
-                    notificationToggle: newTodo['notificationToggle'],
-                    notificationTimes: newTodo['notificationTimes'],
+                    category: value,
                 }
             );
         }
     }
 
     function submitNewTodo() {
-        props.addTodoItem(newTodo);
-        setNewTodo(
-            {
-                title: "", 
-                description: "", 
-                startDate: "", 
-                endDate: "",
-                category: "",
-                completed: false,
-                notificationToggle: false,
-                notificationTimes: [],
-        });
+        props.handleSubmit(newTodo);
+        setNewTodo({title: '', description: '', startDate: '', endDate: '', category: ''});
     }
 
     return (
@@ -167,7 +145,7 @@ function NewTodo(props){
                             type="date"
                             name="date"
                             id="date"
-                            value={newTodo.startDate}
+                            value={newTodo.date}
                             onChange={handleChange} 
                         />
                         <select className='field-style field-split align-right'>
@@ -185,4 +163,4 @@ function NewTodo(props){
     );
 }
 
-export default NewTodo;
+export default NewTodo

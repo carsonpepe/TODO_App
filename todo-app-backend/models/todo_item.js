@@ -12,8 +12,6 @@ const TodoSchema = new mongoose.Schema({
         trim: true,
     },
     startDate: {
-        // Date type doesn't save normally. If date is modified...
-        // --> "doc.markModified('pathToDate');" THEN save
         type: String, 
         required: false,
         default: '',
@@ -31,16 +29,6 @@ const TodoSchema = new mongoose.Schema({
     completed: {
         type: Boolean,
         default: false,
-    },
-    notificationToggle: {
-        type: Boolean,
-        default: false,
-    },
-    // Date type doesn't save normally. If date is modified...
-    // --> "doc.markModified('pathToDate');" THEN save
-    notificationTimes: {
-        type: [String],
-        defualt: [],
     },
 });
 

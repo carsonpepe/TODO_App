@@ -1,23 +1,9 @@
-import React, {useEffect, useState} from 'react';
-import './Settings.css';
+import React from 'react'
+import './Settings.css'
 
-function Settings(props){
-    const [settings, changeSettings] = useState(
-        {
-            deletionPeriod: "",
-            theme: false,
-        }
-    );
-    //const settings = props.getSettings();
-    const theme = settings["theme"];
+function Settings(){
 
-    useEffect(() => {
-        props.getSettings().then(result => {
-            if(result){
-                changeSettings(result.body);
-            }
-        });
-    }, [] ); 
+
 
     return (
         
@@ -25,7 +11,7 @@ function Settings(props){
             <div className="settings-content">
                 <p>Light/Dark Mode:</p>
                 <label class="switch">
-                    <input type="checkbox" value={settings.theme}/>
+                    <input type="checkbox"/>
                     <span class="slider round"></span>
                 </label>
             </div>

@@ -1,17 +1,19 @@
-import React, {useEffect, useState} from 'react';
-//import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import React, {useState} from "react";
+import './Login.css';
+import axios from 'axios';
 
-import './Login.css'
+import {
+    Link,
+    useNavigate
+} from "react-router-dom";
 
+export default function Login() {
 
-function Login(props) {
+    const navigate = useNavigate();
+
     const [user, setUser] = useState(
         {
             name: "",
-            todoItems: undefined,
-            notifications: undefined,
-            categories: undefined,
-            settings: undefined,
         }
     );
 
@@ -22,24 +24,46 @@ function Login(props) {
             setUser(
                 {
                     name: value,
-                    todoItems: user['todoItems'],
-                    notifications: user['notifications'],
-                    categories: user['categories'],
-                    settings: user['settings'],
                 }
             );
         }
     }
 
+
+    async function getUserByName(name){
+        try {
+            const response = await axios.get("https://dodo-pro-backend.herokuapp.com/users/?name="+name);
+            return response;
+        } catch(error){
+            console.log(error);
+            return false;
+        }
+    }
+
     function loginUser() {
-        props.userLogin(user);
+        const user_obj = {
+            name: user.name,
+            todoItems: undefined,
+            notifications:undefined,
+            categories: undefined,
+            settings: undefined
+        }
+        getUserByName(user.name).then(result => {
+            console.log(result);
+            if(result.status === 200){
+                const data = result.data;
+                navigate("/app", {state: data});
+            }else {
+                const data = {_id: "6299c7747c5a268e1e721e41"}
+                navigate("/app", {state: data});
+                // console.log(result.status);
+                // console.log("user not found");
+            }
+        });
+
         setUser(
             {
                 name: "",
-                todoItems: undefined,
-                notifications: undefined,
-                categories: undefined,
-                settings: undefined,
             }
         );
     }
@@ -69,5 +93,3 @@ function Login(props) {
         </div>
     );
 }
-
-export default Login;
