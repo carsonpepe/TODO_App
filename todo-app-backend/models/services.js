@@ -77,27 +77,45 @@ async function addCategory(id, category) {
     }
 }
 
-//returns a user based on the provided username
-async function getUserByUsername(username){
-    console.log(username);
-    try {
-        userModel.findOne({"name": username}, function (err, docs) {
-            if (err) {
-                console.log("2" + err);
-                return false;
-            } else {
-                console.log("find() didn't fail");
-                //console.log(docs);
-                console.log("docs hit");
-                return docs;
-            }
-        });
-    } 
-    catch (error) {
-        console.log("3"+ error);
-        return false;
-    }
+// returns a user based on the provided username
+// async function getUserByUsername(username){
+//     console.log(username);
+//     try {
+//         userModel.findOne({"name": username}, await function (err, docs) {
+//                 if (err) {
+//                     console.log("2" + err);
+//                     return false;
+//                 } else {
+//                     console.log("find() didn't fail");
+//                     //console.log(docs);
+//                     console.log("docs hit");
+//                     return docs;
+//                 }
+//             });
+//     } 
+//     catch (error) {
+//         console.log("3"+ error);
+//         return false;
+//     }
+// }
+
+async function findUserByName(username){
+    return await userModel.find({"name": username});
 }
+
+//use this in backend
+async function getUserByUsername(username){
+    let result;
+    if(username === undefined){
+        result = undefined;
+    }
+    else if(username){
+        result = await findUserByName(username);
+        result = result[0];
+    }
+    return result;
+}
+
 
 async function findUserById(id) {
     try {
