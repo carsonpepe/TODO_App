@@ -32,16 +32,6 @@ const TodoSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    notificationToggle: {
-        type: Boolean,
-        default: false,
-    },
-    // Date type doesn't save normally. If date is modified...
-    // --> "doc.markModified('pathToDate');" THEN save
-    notificationTimes: {
-        type: [String],
-        defualt: [],
-    },
 });
 
 module.exports = TodoSchema;
