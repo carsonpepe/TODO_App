@@ -7,7 +7,7 @@
     "test": "prettier --check .",
     "dev": "nodemon backend.js",
     "start": "node backend.js",
-    "coverage": "run jest --collectCoverage --forceExit"
+    "coverage": "npx jest --collectCoverage --forceExit"
   },
   "author": "",
   "license": "ISC",
