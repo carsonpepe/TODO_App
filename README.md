@@ -14,12 +14,7 @@ https://www.figma.com/file/LNOiPhYxFD7oHrYkMiMiZU/DODO-Pro?node-id=5%3A3
 Date Updated: Apr 27, 2022
 
 # Development Diagrams
-![DODO Pro UML](/docs/DODO_Pro-UML.png)
-Date Updated: Apr 29, 2022
-
-![DODO Pro ClassDiagram](/docs/DODO_Pro-ClassDiagram.png)
-Date Updated: May 4th, 2022
-(both availible in /docs/)
+- https://github.com/carsonpepe/TODO_App/wiki/
 
 # CI Server For Project
 ![backend Node.js CI](https://github.com/carsonpepe/TODO_App/actions/workflows/backend%20Node.yml/badge.svg)
