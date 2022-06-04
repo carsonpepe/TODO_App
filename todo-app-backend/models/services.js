@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const userModel = require("./user");
 const todoModel = require("./todo_item");
+const categoryModel = require("./category");
 const dotenv = require("dotenv");
 
 dotenv.config();
@@ -66,11 +67,11 @@ async function addTodo(id, todoItem) {
 // Category Services
 async function addCategory(id, category) {
     try {
-        const currentUser = findUserById(id);
-        const newCategory = new todoModel(category);
+        const currentUser = await findUserById(id);
+        const newCategory = new categoryModel(category);
         currentUser.categories.push(newCategory);
-        const savedTodo = await currentUser.save();
-        return savedTodo;
+        const saved = await currentUser.save();
+        return saved.categories;
     } catch (error) {
         console.log(error);
         return false;

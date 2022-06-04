@@ -60,8 +60,8 @@ app.post('/users', async (req, res) => {
     const userToAdd = req.body;
     const savedUser = await services.addUser(userToAdd);
     if (savedUser) {
-        console.log(savedUser._id)
-        res.status(201).send(savedUser);1
+        console.log(savedUser._id);
+        res.status(201).send(savedUser);
     }
     else {
         console.log(userToAdd);
@@ -92,13 +92,20 @@ app.post("users/:id/todoItems", async (req, res) => {
 app.post("users/:id/categories", async (req, res) => {
     const id = req.params["id"];
     const categoryData = req.body;
-    try {
-        const result = await services.addCategory(id, categoryData);
-        res.status(200).send(result);
-    } catch (error) {
-        console.log("Mongoose error: " + error);
-        res.status(500).send("An error ocurred in the server.");
-    }  
+    const result = await services.addCategory(id, categoryData);
+    if (result) {
+        console.log(savedUser._id);
+        res.status(201).send(savedUser);
+    } else {
+        res.status(500).end();
+    }
+    // try {
+    //     const result = await services.addCategory(id, categoryData);
+    //     res.status(200).send(result);
+    // } catch (error) {
+    //     console.log("Mongoose error: " + error);
+    //     res.status(500).send("An error ocurred in the server.");
+    // }  
 
 });
 
