@@ -6,9 +6,9 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-/*
+
 mongoose.set("debug", true);
-*/
+
 mongoose
     .connect(
         "mongodb+srv://" +
@@ -52,7 +52,7 @@ async function addUser(user) {
 
 // Todo Services
 async function addTodo(id, todoItem) {
-    userModel.update(
+    userModel.updateOne(
         { _id: id},
         { $push: { todoItems: todoItem} },
         done
