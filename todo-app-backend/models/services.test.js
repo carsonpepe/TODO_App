@@ -91,6 +91,32 @@ test("getTODoS", async() =>{
 
 })
 
+test("categories", async() =>{
+
+    const newUser = {
+        username: "hmmcxxxxxxxxxxxxxxxx",
+    }
+    const todoObj1 = {
+        description: "Surf at Pismo",
+        category: "Workout",
+        complete: true
+    };
+    const todoObj2 = {
+        description: "at Pismo",
+        complete: false
+    };
+    let userres = await services.addUser(newUser);
+    let result1 = await services.addTodo(userres._id, todoObj1);
+    let result2 = await services.addTodo(userres._id, todoObj2);
+    expect(await services.findTodosByCategory(userres._id, "Workout")).anything()
+    expect(await services.findTodosByCompleted(userres._id, true)).anything()
+    expect(await services.markCompleted(userres._id, result2._id)).anything()
+    expect(await services.findTodosByCompleted(userres._id)).anything()
+    expect(await services.markUnComplete(userres._id, result2._id)).anything()
+    expect(await services.findTodosByCompleted(userres._id)).anything()
+
+});
+
 
 
 
