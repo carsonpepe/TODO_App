@@ -52,16 +52,22 @@ async function addUser(user) {
 
 // Todo Services
 async function addTodo(id, todoItem) {
-    try {
-        const currentUser = findUserById(id);
-        const newTodo = new todoModel(todoItem);
-        currentUser.todoItems.push(newTodo);
-        const savedTodo = await currentUser.save();
-        return savedTodo;
-    } catch (error) {
-        console.log(error);
-        return false;
-    }
+    userModel.update(
+        { _id: id},
+        { $push: { todoItems: todoItem} },
+        done
+
+    );
+    // try {
+    //     const currentUser = findUserById(id);
+    //     const newTodo = new todoModel(todoItem);
+    //     currentUser.todoItems.push(newTodo);
+    //     const savedTodo = await currentUser.save();
+    //     return savedTodo;
+    // } catch (error) {
+    //     console.log(error);
+    //     return false;
+    // }
 }
 
 // Category Services
@@ -150,15 +156,25 @@ async function getTodos(id){
     return foundTodos;
 }
 
+async function getCategories(id){
+    console.log(id);
+    const currentUser = await findUserById(id);
+    console.log(currentUser._id);
+    foundCategories = currentUser.categories;
+    if (!foundCategories) {
+        console.log(foundCategories);
+        return [];
+    }
+    return foundCategories;
+    
+}
+
 async function getUserSettings(id){
     const currentUser = await findUserById(id);
     return currentUser.settings;
 }
 
-async function getUserCategories(id){
-    const currentUser = await findUserById(id);
-    return currentUser.categories;
-}
+
 
 async function findTodosByCategory(id, category_name) {
     const currentUser = findUserById(id);
@@ -259,5 +275,5 @@ exports.changeCategory = changeCategory;
 exports.getUserSettings = getUserSettings;
 exports.getTodos = getTodos;
 exports.findTodosByCompleted = findTodosByCompleted;
-exports.getUserCategories = getUserCategories;
+exports.getCategories = getCategories;
 exports.addCategory = addCategory;
