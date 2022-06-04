@@ -41,7 +41,13 @@ app.get('/users', async (req, res) => {
 
         try{ 
             const result = await services.getUserByUsername(name);
-            res.status(200).send(result);
+            if (result.length == 0) {
+                res.status(403).send('User does not exist.')
+            }
+            else {
+                res.status(200).send(result);
+            }
+            
         }
         catch(error){
             res.status(405).send('Resource not found.');
