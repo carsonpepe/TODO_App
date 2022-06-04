@@ -6,7 +6,7 @@
 .pnp.js
 
 # testing
-/todo-app-backend/coverage
+/todo-app-backend/coverage/*
 
 # production
 /build
