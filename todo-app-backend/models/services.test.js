@@ -131,6 +131,17 @@ test("add a category", async() =>{
 
 });
 
+test("getTODoS", async() =>{
+
+    const newUser = {
+        username: "hmmmmmmmmmmmmmmm",
+    }
+    let userres = await services.addUser(newUser);
+    expect(await services.getTodos(userres._id)).anything()
+    expect(await services.getTodos({nota : string})).toBeUndefined()
+
+})
+
 
 
 

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const userModel = require("./user");
 const todoModel = require("./todo_item");
+const categoryModel = require("./category");
 const dotenv = require("dotenv");
 
 dotenv.config();
@@ -66,13 +67,13 @@ async function addTodo(id, todoItem) {
 // Category Services
 async function addCategory(id, category) {
     try {
-        const currentUser = findUserById(id);
-        const newCategory = new todoModel(category);
+        const currentUser = await findUserById(id);
+        const newCategory = new categoryModel(category);
         currentUser.categories.push(newCategory);
-        const savedTodo = await currentUser.save();
-        return savedTodo;
+        const saved = await currentUser.save();
+        return saved.categories;
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         return false;
     }
 }
@@ -110,8 +111,7 @@ async function getUserByUsername(username){
         result = undefined;
     }
     else if(username){
-        result = await findUserByName(username);
-        result = result[0];
+        result = await findUserByName(username)[0];
     }
     return result;
 }
@@ -140,7 +140,7 @@ async function findUserById(id) {
 async function getTodos(id){
     console.log(id);
     const currentUser = await findUserById(id);
-    console.log(currentUser._id);
+    // console.log(currentUser._id);
     foundTodos = currentUser.todoItems;
     if (!foundTodos) {
         console.log(foundTodos);
@@ -232,7 +232,7 @@ async function markUncomplete(id, todo_id){
 // }
 
 
-// User Services
+// // User Services
 
 
 
